@@ -22,17 +22,17 @@
         </a>
 
         <div id="navbarBasicExample" class="navbar-menu">
-          <span v-if="loggedIn">
+          <span>
             <router-link to="/expences">Expences</router-link>
             <router-link to="/income">Income </router-link>
             <router-link to="/log">Log </router-link>
             <router-link to="/summary">Summary </router-link>
-            <a class="blue" v-on:click="signOut()">Sign Out</a>
+            <a class="green">Sign Out</a>
           </span>
 
-          <span v-else>
+          <span>
             <router-link to="/register">Register</router-link>
-            <router-link class="blue" to="/login">Login</router-link>
+            <router-link class="green" to="/login">Login</router-link>
           </span>
         </div>
       </div>
@@ -44,9 +44,7 @@
 export default {
   name: "Header",
   data() {
-    return {
-      loggedIn: true,
-    };
+    return {};
   },
 };
 </script>
@@ -55,10 +53,18 @@ export default {
 .navbar-brand {
   padding: 0.5em 5em;
   width: 100%;
-  background: lightgreen;
+  background: rgb(141, 235, 141);
   display: flex;
   justify-content: space-around;
   align-items: center;
+}
+
+.green {
+  background: rgb(186, 241, 186);
+}
+
+.green:hover {
+  background: rgb(141, 235, 141);
 }
 
 .navbar-menu {
@@ -66,9 +72,16 @@ export default {
 }
 
 .navbar-menu a {
-    color: darkgreen;
-    padding-left: 0.5em;
+  color: rgb(0, 100, 0);
+  padding: 0.8em;
+  border-radius: 0.8em;
+  margin-left: 0.5em;
 }
+
+.navbar-menu a:hover {
+  color: rgb(255, 255, 255);
+}
+
 img {
   width: 100px;
 }
