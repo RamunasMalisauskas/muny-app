@@ -1,20 +1,26 @@
 <template>
   <div id="app">
+    <Header />
     <div id="nav">
       <router-link to="/login">login</router-link> |
-      <router-link to="/register">register</router-link> | 
+      <router-link to="/register">register</router-link> |
 
-      <router-link to="/expences">expences</router-link> | 
-      <router-link to="/income">income</router-link> | 
-      <router-link to="/log">log</router-link> | 
-      <router-link to="/summary">summary</router-link> | 
-
-
+      <router-link to="/expences">expences</router-link> |
+      <router-link to="/income">income</router-link> |
+      <router-link to="/log">log</router-link> |
+      <router-link to="/summary">summary</router-link> |
     </div>
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
-<style>
+<script>
+import Header from "./components/Header";
 
-</style>
+export default {
+  name: "App",
+  components: { Header },
+};
+</script>
+
+<style></style>
