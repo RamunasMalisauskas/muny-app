@@ -1,6 +1,10 @@
 <template>
-  <div class="income">
-    <h3>this is income</h3>
+  <div id="income">
+    <div class="section">
+      <div class="container">
+        <h3>this is income</h3>
+      </div>
+    </div>
   </div>
 </template>
 

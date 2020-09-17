@@ -22,15 +22,15 @@
         </a>
 
         <div id="navbarBasicExample" class="navbar-menu">
-          <span>
+          <span v-if="logedIn">
             <router-link to="/expences">Expences</router-link>
             <router-link to="/income">Income </router-link>
             <router-link to="/log">Log </router-link>
             <router-link to="/summary">Summary </router-link>
-            <a class="green">Sign Out</a>
+            <a class="green" v-on:click="signOut()">Sign Out</a>
           </span>
 
-          <span>
+          <span v-else>
             <router-link to="/register">Register</router-link>
             <router-link class="green" to="/login">Login</router-link>
           </span>
@@ -41,10 +41,25 @@
 </template>
 
 <script>
+import firebase from "firebase/app";
+import "firebase/auth";
+
 export default {
   name: "Header",
   data() {
-    return {};
+    return {
+      logedIn: false,
+    };
+  },
+
+  methods: {
+    signOut() {
+      firebase.auth().signOut();
+    },
+  },
+
+  beforeMount() {
+    firebase.auth().onAuthStateChanged((user) => (this.loggedIn = !!user));
   },
 };
 </script>

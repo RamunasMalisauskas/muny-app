@@ -1,6 +1,10 @@
 <template>
-  <div class="expences">
-    <h3>this is expences</h3>
+  <div id="expences">
+    <div class="section">
+      <div class="container">
+        <h3>this is expences</h3>
+      </div>
+    </div>
   </div>
 </template>
 

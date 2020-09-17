@@ -1,6 +1,10 @@
 <template>
-  <div class="login">
-    <h3>this is login</h3>
+  <div id="login">
+    <div class="section">
+      <div class="container">
+        <h3>this is login</h3>
+      </div>
+    </div>
   </div>
 </template>
 

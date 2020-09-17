@@ -1,6 +1,10 @@
 <template>
-  <div class="log">
-    <h3>this is log</h3>
+  <div id="log">
+    <div class="section">
+      <div class="container">
+        <h3>this is log</h3>
+      </div>
+    </div>
   </div>
 </template>
 
