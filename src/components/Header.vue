@@ -15,13 +15,15 @@
           aria-label="menu"
           aria-expanded="false"
           data-target="navbarBasicExample"
+          v-on:click="burgerButton()"
+          :class="{ 'is-active': active }"
         >
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
         </a>
 
-        <div class="navbar-menu">
+        <div class="navbar-menu" :class="{ 'is-active': active }">
           <span v-if="logedIn">
             <router-link to="/expences">Expences</router-link>
             <router-link to="/income">Income </router-link>
@@ -49,11 +51,15 @@ export default {
   data() {
     return {
       logedIn: false,
+      active: false,
     };
   },
   methods: {
     signOut() {
       firebase.auth().signOut();
+    },
+    burgerButton() {
+      this.active = !this.active;
     },
   },
 
