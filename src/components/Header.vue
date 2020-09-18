@@ -3,10 +3,7 @@
     <nav class="navbar" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
         <a href="/">
-          <img
-            src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages.tech.co%2Fwp-content%2Fuploads%2F2015%2F07%2Ftech-02-acorns.png&f=1&nofb=1"
-            alt="logo"
-          />
+          <img src="../assets/muny-logo.svg" alt="logo" />
         </a>
 
         <a
@@ -96,8 +93,13 @@ export default {
   flex-grow: 0;
 }
 
-span {
-  /* display: flex; */
+.navbar-burger {
+  color: rgb(0, 100, 0);
+}
+
+.navbar-burger span {
+  height: 2px;
+  width: 50%;
 }
 
 .navbar-menu a {
@@ -117,7 +119,7 @@ img {
 
 .navbar-menu.is-active {
   position: absolute;
-  margin-top: 30em;
+  margin-top: 29.5em;
   background: rgb(186, 241, 186);
 }
 
