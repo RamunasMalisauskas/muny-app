@@ -21,13 +21,13 @@
           <span aria-hidden="true"></span>
         </a>
 
-        <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-menu">
           <span v-if="logedIn">
             <router-link to="/expences">Expences</router-link>
             <router-link to="/income">Income </router-link>
             <router-link to="/log">Log </router-link>
             <router-link to="/summary">Summary </router-link>
-            <a class="green" v-on:click="signOut()">Sign Out</a>
+            <a class="green">Sign Out</a>
           </span>
 
           <span v-else>
@@ -51,7 +51,6 @@ export default {
       logedIn: false,
     };
   },
-
   methods: {
     signOut() {
       firebase.auth().signOut();
@@ -59,7 +58,11 @@ export default {
   },
 
   beforeMount() {
-    firebase.auth().onAuthStateChanged((user) => (this.loggedIn = !!user));
+    firebase
+      .auth()
+      .onAuthStateChanged((user) =>
+        user ? (this.loggedIn = true) : (this.loggedIn = false)
+      );
   },
 };
 </script>
