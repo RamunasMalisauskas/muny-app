@@ -25,6 +25,9 @@ export default {
 
 <style scoped>
 .hero {
-  background: rgb(235, 233, 128);
+  background: rgb(35, 66, 45);
+}
+h2 {
+  color: rgb(40, 178, 75);
 }
 </style>

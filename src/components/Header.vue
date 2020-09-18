@@ -74,7 +74,7 @@ export default {
 .navbar-brand {
   padding: 0.5em 5em;
   width: 100%;
-  background: rgb(141, 235, 141);
+  background: rgb(40, 178, 75);
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -82,11 +82,11 @@ export default {
 }
 
 .green {
-  background: rgb(186, 241, 186);
+  background: rgb(141, 235, 141);
 }
 
 .green:hover {
-  background: rgb(141, 235, 141);
+  background: rgb(40, 178, 75);
 }
 
 .navbar-menu {
@@ -94,7 +94,7 @@ export default {
 }
 
 .navbar-burger {
-  color: rgb(0, 100, 0);
+  color: rgb(35, 66, 45);
 }
 
 .navbar-burger span {
@@ -103,14 +103,14 @@ export default {
 }
 
 .navbar-menu a {
-  color: rgb(0, 100, 0);
+  color: rgb(35, 66, 45);
   padding: 0.8em;
   border-radius: 0.8em;
   margin-left: 0.5em;
 }
 
 .navbar-menu a:hover {
-  color: rgb(255, 255, 255);
+  color: rgb(141, 235, 141);
 }
 
 img {
@@ -120,7 +120,7 @@ img {
 .navbar-menu.is-active {
   position: absolute;
   margin-top: 29.5em;
-  background: rgb(186, 241, 186);
+  background: rgb(141, 235, 141);
 }
 
 .navbar-menu.is-active a {

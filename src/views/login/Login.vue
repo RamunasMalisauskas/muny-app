@@ -52,7 +52,7 @@
           </div>
 
           <div class="control" :class="loading && `is-loading`">
-            <button class="button is-primary">Submit</button>
+            <button class="button">Submit</button>
           </div>
         </form>
       </div>
@@ -90,5 +90,21 @@ export default {
 <style scoped>
 form {
   margin-top: 1em;
+}
+
+label {
+  color: rgb(35, 66, 45);
+}
+
+button {
+  padding: 0.8em;
+  border-radius: 0.8em;
+  color: rgb(40, 178, 75);
+  background: rgb(35, 66, 45);
+}
+
+button:hover {
+  color: rgb(35, 66, 45);
+  background:  rgb(40, 178, 75);
 }
 </style>
