@@ -23,4 +23,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.hero {
+  background: rgb(235, 233, 128);
+}
+</style>
