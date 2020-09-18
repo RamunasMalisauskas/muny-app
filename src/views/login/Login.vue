@@ -6,19 +6,34 @@
 
         <form name="login">
           <div class="field">
-            <label class="label">Name</label>
+            <label class="label">Your Household Name</label>
             <div class="control">
-              <input class="input" type="text" placeholder="e.g Alex Smith" />
+              <input
+                class="input"
+                type="text"
+                placeholder="e.g 742 Evergreen Terrace"
+              />
             </div>
           </div>
 
           <div class="field">
-            <label class="label">Email</label>
+            <label class="label">Your User Name</label>
             <div class="control">
               <input
                 class="input"
-                type="email"
-                placeholder="e.g. alexsmith@gmail.com"
+                type="text"
+                placeholder="e.g John Jones"
+              />
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Your Password</label>
+            <div class="control">
+              <input
+                class="input"
+                type="password"
+                placeholder="****"
               />
             </div>
           </div>
@@ -38,7 +53,7 @@ export default {
 </script>
 
 <style scoped>
-h3 {
-  margin-bottom: 3em;
-}</style
->>
+form {
+  margin-top: 1em;
+}
+</style>
