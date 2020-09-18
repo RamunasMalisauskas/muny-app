@@ -50,7 +50,7 @@ export default {
   name: "Header",
   data() {
     return {
-      logedIn: false,
+      logedIn: true,
       active: false,
     };
   },
@@ -81,6 +81,7 @@ export default {
   display: flex;
   justify-content: space-around;
   align-items: center;
+  position: relative;
 }
 
 .green {
@@ -93,6 +94,10 @@ export default {
 
 .navbar-menu {
   flex-grow: 0;
+}
+
+span {
+  /* display: flex; */
 }
 
 .navbar-menu a {
@@ -108,5 +113,16 @@ export default {
 
 img {
   width: 100px;
+}
+
+.navbar-menu.is-active {
+  position: absolute;
+  margin-top: 30em;
+  background: rgb(186, 241, 186);
+}
+
+.navbar-menu.is-active a {
+  display: block;
+  padding: 1.5em 15em;
 }
 </style>
