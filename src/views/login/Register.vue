@@ -2,16 +2,109 @@
   <div id="register">
     <div class="section">
       <div class="container">
-        <h3>this is register</h3>
+        <Hero />
+
+        <Notification
+          v-if="error"
+          v-on:close="error = false"
+          class="blue"
+          :message="errorMessage"
+        />
+
+        <form name="login" v-on:submit.prevent="test">
+          <div class="field">
+            <label class="label">Your Household Name</label>
+            <div class="control">
+              <input
+                class="input"
+                type="text"
+                placeholder="e.g 742 Evergreen Terrace"
+                v-model="home"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Your User Name</label>
+            <div class="control">
+              <input
+                class="input"
+                type="text"
+                placeholder="e.g John Jones"
+                v-model="name"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Your Password</label>
+            <div class="control">
+              <input
+                class="input"
+                type="password"
+                placeholder="****"
+                v-model="password"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="control" :class="loading && `is-loading`">
+            <button class="button">Submit</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import Hero from "../../components/Hero";
+import Notification from "../../components/Notification";
+
 export default {
-  name: "Register",
+  name: "Login",
+  components: { Hero, Notification },
+
+  data() {
+    return {
+      home: "",
+      name: "",
+      password: "",
+      error: false,
+      errorMessage: "",
+      loading: false,
+    };
+  },
+
+  methods: {
+    test() {
+      console.log(this.name, this.home, this.password);
+    },
+  },
 };
 </script>
 
-<style scoped></style>>
+<style scoped>
+form {
+  margin-top: 1em;
+}
+
+label {
+  color: rgb(35, 66, 45);
+}
+
+button {
+  padding: 0.8em;
+  border-radius: 0.8em;
+  color: rgb(141, 235, 141);
+  background: rgb(35, 66, 45);
+}
+
+button:hover {
+  color: rgb(35, 66, 45);
+  background:  rgb(141, 235, 141);
+}
+</style>
