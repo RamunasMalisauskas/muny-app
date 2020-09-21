@@ -101,7 +101,7 @@ export default {
         .signInWithEmailAndPassword(this.email, this.password)
         .then(() => {
           console.log(this.email, this.password);
-          this.$router.push("/summary");
+          this.$router.push("/expences");
         })
         .catch(() => {
           this.loading = false;

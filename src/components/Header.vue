@@ -31,7 +31,7 @@
             <router-link to="/income">Income </router-link>
             <router-link to="/log">Log </router-link>
             <router-link to="/summary">Summary </router-link>
-            <a class="haze">Sign Out</a>
+            <a class="haze" @click="signOut()">Sign Out</a>
           </span>
 
           <span v-else>
@@ -56,15 +56,20 @@ export default {
       active: false,
     };
   },
+
+  // signout method
   methods: {
     signOut() {
       firebase.auth().signOut();
     },
+
+    // mobile active burger button toggle function
     burgerButton() {
       this.active = !this.active;
     },
   },
 
+// function to determined if the user is already logged in and this show two diferent headers with if-else
   beforeMount() {
     firebase.auth().onAuthStateChanged((user) => (this.loggedIn = !!user));
   },
@@ -151,6 +156,7 @@ img {
     min-width: 80px;
   }
 
+/* toggle the class of two diferernt images for mobile/desktop */
   .full {
     display: none;
   }
