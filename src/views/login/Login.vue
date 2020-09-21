@@ -100,8 +100,8 @@ export default {
         .auth()
         .signInWithEmailAndPassword(this.email, this.password)
         .then(() => {
-          
-          this.$router.push("/expenses");
+          // ?????????????? KODĖL META ERROR ???????????
+          // this.$router.push("/expenses");
         })
         .catch((error) => {
           this.loading = false;

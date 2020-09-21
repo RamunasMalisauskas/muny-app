@@ -33,7 +33,7 @@
               :to="link.url"
               >{{ link.name }}</router-link
             >
-            <a class="haze" @click="signOut()">Sign Out {{ this.userName }}</a>
+lo            <a class="haze" @click="logout()">Sign Out {{ this.userName }}</a>
           </span>
 
           <span v-else>
@@ -80,8 +80,11 @@ export default {
 
   // signout method
   methods: {
-    signOut() {
-      firebase.auth().signOut();
+    logout() {
+      firebase
+        .auth()
+        .signOut()
+        .then(() => (this.loggedIn = false));
     },
 
     // mobile active burger button toggle function
