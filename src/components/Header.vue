@@ -27,11 +27,13 @@
 
         <div class="navbar-menu" :class="{ 'is-active': active }">
           <span v-if="loggedIn">
-            <router-link to="/expences">Expences</router-link>
-            <router-link to="/income">Income </router-link>
-            <router-link to="/log">Log </router-link>
-            <router-link to="/summary">Summary </router-link>
-            <a class="haze" @click="signOut()">Sign Out {{ this.name }}</a>
+            <router-link
+              v-for="link in links"
+              :key="link.name"
+              :to="link.url"
+              >{{ link.name }}</router-link
+            >
+            <a class="haze" @click="signOut()">Sign Out {{ this.userName }}</a>
           </span>
 
           <span v-else>
@@ -52,11 +54,23 @@ export default {
   name: "Header",
   data() {
     return {
-      name: "",
+      userName: "",
       links: [
         {
-          name: "",
-          url: "",
+          name: "Expences",
+          url: "/expences",
+        },
+        {
+          name: "Income",
+          url: "/income",
+        },
+        {
+          name: "Log",
+          url: "/log",
+        },
+        {
+          name: "Summary",
+          url: "/summary",
         },
       ],
       loggedIn: false,
@@ -82,13 +96,9 @@ export default {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         this.loggedIn = true;
-        const userName = firebase.auth().currentUser.email;
-        // console.log(firebase.auth().currentUser)
-        this.name =
-          userName
-            .split("@")[0]
-            .slice(0, 1)
-            .toUpperCase() + userName.split("@")[0].slice(1);
+        const onlineName = firebase.auth().currentUser.email.split("@")[0];
+        this.userName =
+          onlineName.slice(0, 1).toUpperCase() + onlineName.slice(1);
       }
     });
   },
