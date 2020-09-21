@@ -73,6 +73,7 @@
 
 <script>
 import firebase from "firebase/app";
+import "firebase/firestore";
 import "firebase/auth";
 import Hero from "../../components/Hero";
 import Notification from "../../components/Notification";
@@ -99,6 +100,15 @@ export default {
       firebase
         .auth()
         .createUserWithEmailAndPassword(this.email, this.password)
+        .then(() => {
+          firebase
+            .firestore()
+            .collection("users")
+            .add({ home: this.home, name: this.name, email: this.email });
+        })
+        .then(() => {
+          console.log(`you have added ${this.home} ${this.name} ${this.email} to DB`)
+        }) 
         .then(() => {
           // console.log(this.home, this.name, this.email, this.password);
           this.$router.push("/summary");
