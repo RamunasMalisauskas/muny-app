@@ -63,7 +63,7 @@
           />
 
           <div class="control" :class="loading && `is-loading`">
-            <button class="button">Submit</button>
+            <button class="button">Login</button>
           </div>
         </form>
       </div>

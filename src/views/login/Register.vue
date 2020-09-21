@@ -11,7 +11,7 @@
           :message="errorMessage"
         />
 
-        <form name="login" v-on:submit.prevent="test">
+        <form name="login" v-on:submit.prevent="register">
           <div class="field">
             <label class="label">Your Household Name</label>
             <div class="control">
@@ -39,6 +39,17 @@
           </div>
 
           <div class="field">
+            <label class="label" for="email">Email</label>
+            <input
+              class="input"
+              type="email"
+              placeholder="youremail@email.lt"
+              v-model="email"
+              required
+            />
+          </div>
+
+          <div class="field">
             <label class="label">Your Password</label>
             <div class="control">
               <input
@@ -52,7 +63,7 @@
           </div>
 
           <div class="control" :class="loading && `is-loading`">
-            <button class="button">Submit</button>
+            <button class="button">Register</button>
           </div>
         </form>
       </div>
@@ -61,6 +72,8 @@
 </template>
 
 <script>
+import firebase from "firebase/app";
+import "firebase/auth";
 import Hero from "../../components/Hero";
 import Notification from "../../components/Notification";
 
@@ -72,6 +85,7 @@ export default {
     return {
       home: "",
       name: "",
+      email: "",
       password: "",
       error: false,
       errorMessage: "",
@@ -80,9 +94,26 @@ export default {
   },
 
   methods: {
-    test() {
-      console.log(this.name, this.home, this.password);
+    register() {
+      this.loading = true;
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(this.email, this.password)
+        .then(() => {
+          // console.log(this.home, this.name, this.email, this.password);
+          this.$router.push("/summary");
+        })
+        .catch(() => {
+          this.loading = false;
+          this.error = true;
+          this.errorMessage =
+            "there has been a problem with registry try again";
+        });
     },
+
+    // test() {
+    //   console.log(this.name, this.home, this.password);
+    // },
   },
 };
 </script>
@@ -93,18 +124,28 @@ form {
 }
 
 label {
-  color: rgb(35, 66, 45);
+  color: #ed185b;
 }
 
 button {
-  padding: 0.8em;
+  color: #fff;
+  background: #ed185b;
+  padding: 1.5em;
   border-radius: 0.8em;
-  color: rgb(141, 235, 141);
-  background: rgb(35, 66, 45);
+  margin-left: 0.5em;
 }
 
 button:hover {
-  color: rgb(35, 66, 45);
-  background:  rgb(141, 235, 141);
+  color: #ed185b;
+  border: 1px solid #ed185b;
+  background: #fff;
+}
+
+.input {
+  color: #ef735f;
+}
+
+.input:hover {
+  border-color: #f4bc53;
 }
 </style>

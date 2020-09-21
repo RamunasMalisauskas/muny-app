@@ -52,7 +52,7 @@ export default {
   name: "Header",
   data() {
     return {
-      logedIn: true,
+      logedIn: false,
       active: false,
     };
   },
