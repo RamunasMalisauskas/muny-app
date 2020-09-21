@@ -3,7 +3,12 @@
     <nav class="navbar" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
         <a href="/">
-          <img src="../assets/muny-logo.svg" alt="logo" />
+          <img class="full" src="../assets/muny-logo.svg" alt="logo" />
+          <img
+            class="mobile"
+            src="../assets/muny-logo-mobile.svg"
+            alt="mobile-logo"
+          />
         </a>
 
         <a
@@ -26,12 +31,12 @@
             <router-link to="/income">Income </router-link>
             <router-link to="/log">Log </router-link>
             <router-link to="/summary">Summary </router-link>
-            <a class="green">Sign Out</a>
+            <a class="haze">Sign Out</a>
           </span>
 
           <span v-else>
             <router-link to="/register">Register</router-link>
-            <router-link class="green" to="/login">Login</router-link>
+            <router-link class="haze" to="/login">Login</router-link>
           </span>
         </div>
       </div>
@@ -47,7 +52,7 @@ export default {
   name: "Header",
   data() {
     return {
-      logedIn: false,
+      logedIn: true,
       active: false,
     };
   },
@@ -74,19 +79,22 @@ export default {
 .navbar-brand {
   padding: 0.5em 5em;
   width: 100%;
-  background: rgb(40, 178, 75);
+  background: url("../assets/background.svg") no-repeat top center;
+  background-size: cover;
   display: flex;
   justify-content: space-around;
   align-items: center;
   position: relative;
 }
 
-.green {
-  background: rgb(141, 235, 141);
+.haze {
+  color: #ed185b;
+  background: #fff;
 }
 
-.green:hover {
-  background: rgb(40, 178, 75);
+.haze:hover {
+  color: #fff;
+  background: #ed185b;
 }
 
 .navbar-menu {
@@ -94,7 +102,7 @@ export default {
 }
 
 .navbar-burger {
-  color: rgb(35, 66, 45);
+  color: #ed185b;
 }
 
 .navbar-burger span {
@@ -102,29 +110,57 @@ export default {
   width: 50%;
 }
 
-.navbar-menu a {
-  color: rgb(35, 66, 45);
+a {
+  color: #fff;
   padding: 0.8em;
   border-radius: 0.8em;
   margin-left: 0.5em;
 }
 
-.navbar-menu a:hover {
-  color: rgb(141, 235, 141);
+a:hover {
+  color: #ed185b;
 }
 
 img {
-  width: 100px;
+  min-height: 90px;
+}
+
+.full {
+  display: block;
+}
+
+.mobile {
+  display: none;
 }
 
 .navbar-menu.is-active {
   position: absolute;
-  margin-top: 29.5em;
-  background: rgb(141, 235, 141);
+  margin-top: 36em;
+  background: #f0875e;
 }
 
 .navbar-menu.is-active a {
   display: block;
   padding: 1.5em 15em;
+}
+
+.navbar-menu {
+  padding: 2em;
+}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+
+  img {
+    min-width: 80px;
+  }
+
+  .full {
+    display: none;
+  }
+
+  .mobile {
+    display: block;
+  }
 }
 </style>

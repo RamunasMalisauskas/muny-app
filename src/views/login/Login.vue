@@ -81,6 +81,8 @@ export default {
 
   methods: {
     test() {
+      this.error = true;
+      this.errorMessage = "Notification";
       console.log(this.name, this.home, this.password);
     },
   },
@@ -93,18 +95,28 @@ form {
 }
 
 label {
-  color: rgb(35, 66, 45);
+  color: #ed185b;
 }
 
 button {
-  padding: 0.8em;
+  color: #ed185b;
+  background: #f4bc53;
+  padding: 1.5em;
   border-radius: 0.8em;
-  color: rgb(141, 235, 141);
-  background: rgb(35, 66, 45);
+  margin-left: 0.5em;
 }
 
 button:hover {
-  color: rgb(35, 66, 45);
-  background:  rgb(141, 235, 141);
+  color: #f4bc53;
+  border: 1px solid #f4bc53;
+  background: #fff;
+}
+
+.input {
+  color: #ef735f;
+}
+
+.input:hover {
+  border-color: #f4bc53;
 }
 </style>

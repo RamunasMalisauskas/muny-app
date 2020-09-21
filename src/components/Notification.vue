@@ -22,6 +22,9 @@ export default {
 
 <style scoped>
 #notification {
+  background: url("../assets/background.svg") no-repeat bottom center;
+  background-size: cover;
+
   margin: 30px 0;
   border-radius: 10px;
 }
