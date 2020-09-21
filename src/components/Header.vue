@@ -96,7 +96,7 @@ export default {
   beforeMount() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        this.loggedIn = true;
+        this.loggedIn = !!user;
         const onlineName = firebase.auth().currentUser.email.split("@")[0];
         this.userName =
           onlineName.slice(0, 1).toUpperCase() + onlineName.slice(1);

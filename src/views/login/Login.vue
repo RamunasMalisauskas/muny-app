@@ -6,19 +6,19 @@
 
         <form name="login" v-on:submit.prevent="login">
           <div class="field">
-            <label class="label">Your Household Name</label>
             <div class="control">
-              <input
-                class="input"
-                type="text"
-                placeholder="e.g 742 Evergreen Terrace"
-                v-model="home"
-                required
-              />
+              <label class="label">Your Household Name</label>
+              <div class="select is-rounded">
+                <select>
+                  <option v-for="home in homes" :key="home.name">{{
+                    home.name
+                  }}</option>
+                </select>
+              </div>
             </div>
           </div>
 
-          <div class="field"> 
+          <!-- <div class="field">
             <label class="label">Your User Name</label>
             <div class="control">
               <input
@@ -29,7 +29,7 @@
                 required
               />
             </div>
-          </div>
+          </div> -->
 
           <div class="field">
             <label class="label">Your Email</label>
@@ -73,6 +73,7 @@
 
 <script>
 import firebase from "firebase/app";
+import "firebase/firestore";
 import "firebase/auth";
 import Hero from "../../components/Hero";
 import Notification from "../../components/Notification";
@@ -83,8 +84,7 @@ export default {
 
   data() {
     return {
-      home: "",
-      name: "",
+      homes: [],
       email: "",
       password: "",
       error: false,
@@ -100,14 +100,12 @@ export default {
         .auth()
         .signInWithEmailAndPassword(this.email, this.password)
         .then(() => {
-          console.log(this.email, this.password);
           this.$router.push("/expences");
         })
-        .catch(() => {
+        .catch((error) => {
           this.loading = false;
           this.error = true;
-          this.errorMessage =
-            "oops... something went wrong, check you email and password";
+          this.errorMessage = "oops...  " + error.message;
         });
     },
 
@@ -116,6 +114,20 @@ export default {
     //   this.errorMessage = "Notification";
     //   console.log(this.name, this.home, this.password);
     // },
+  },
+
+  beforeMount() {
+    firebase
+      .firestore()
+      .collection("users")
+      .get()
+      .then((snapshop) =>
+        snapshop.docs.forEach((doc) => {
+          this.homes.push({
+            name: doc.data().name,
+          });
+        })
+      );
   },
 };
 </script>
