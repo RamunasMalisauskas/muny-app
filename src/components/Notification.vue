@@ -24,8 +24,9 @@ export default {
 #notification {
   background: url("../assets/background.svg") no-repeat bottom center;
   background-size: cover;
-
-  margin: 30px 0;
+  padding: 2em;
+  margin: 1em 0;
   border-radius: 10px;
+  color: #fff;
 }
 </style>

@@ -4,13 +4,6 @@
       <div class="container">
         <Hero />
 
-        <Notification
-          v-if="error"
-          v-on:close="error = false"
-          class="blue"
-          :message="errorMessage"
-        />
-
         <form name="login" v-on:submit.prevent="test">
           <div class="field">
             <label class="label">Your Household Name</label>
@@ -50,6 +43,13 @@
               />
             </div>
           </div>
+
+          <Notification
+            v-if="error"
+            v-on:close="error = false"
+            class="blue"
+            :message="errorMessage"
+          />
 
           <div class="control" :class="loading && `is-loading`">
             <button class="button">Submit</button>
@@ -99,16 +99,16 @@ label {
 }
 
 button {
-  color: #ed185b;
-  background: #f4bc53;
+  color: #fff;
+  background: #ed185b;
   padding: 1.5em;
   border-radius: 0.8em;
   margin-left: 0.5em;
 }
 
 button:hover {
-  color: #f4bc53;
-  border: 1px solid #f4bc53;
+  color: #ed185b;
+  border: 1px solid #ed185b;
   background: #fff;
 }
 
