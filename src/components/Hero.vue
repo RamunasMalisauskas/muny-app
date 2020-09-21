@@ -28,8 +28,8 @@ export default {
         background: url("../assets/background.svg") no-repeat center center;
         background-size: cover;
     }
-    
+
 h2 {
-  color: #ffffff;
+  color: #fff;
 }
 </style>

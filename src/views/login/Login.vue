@@ -4,7 +4,7 @@
       <div class="container">
         <Hero />
 
-        <form name="login" v-on:submit.prevent="test">
+        <form name="login" v-on:submit.prevent="login">
           <div class="field">
             <label class="label">Your Household Name</label>
             <div class="control">
@@ -32,6 +32,17 @@
           </div>
 
           <div class="field">
+            <label class="label" for="email">Email</label>
+            <input
+              class="input"
+              type="email"
+              placeholder="youremail@email.lt"
+              v-model="email"
+              required
+            />
+          </div>
+
+          <div class="field">
             <label class="label">Your Password</label>
             <div class="control">
               <input
@@ -46,7 +57,7 @@
 
           <Notification
             v-if="error"
-            v-on:close="error = false"
+            @close="error = false"
             class="blue"
             :message="errorMessage"
           />
@@ -61,6 +72,8 @@
 </template>
 
 <script>
+import firebase from "firebase/app";
+import "firebase/auth";
 import Hero from "../../components/Hero";
 import Notification from "../../components/Notification";
 
@@ -72,6 +85,7 @@ export default {
     return {
       home: "",
       name: "",
+      email: "",
       password: "",
       error: false,
       errorMessage: "",
@@ -80,11 +94,25 @@ export default {
   },
 
   methods: {
-    test() {
-      this.error = true;
-      this.errorMessage = "Notification";
-      console.log(this.name, this.home, this.password);
+    login() {
+      this.loading = true;
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(this.email, this.password)
+        .then(() => this.$router.push("/summary"))
+        .catch(() => {
+          this.loading = false;
+          this.error = true;
+          this.errorMessage =
+            "oops... something went wrong, check you email and password";
+        });
     },
+
+    // test() {
+    //   this.error = true;
+    //   this.errorMessage = "Notification";
+    //   console.log(this.name, this.home, this.password);
+    // },
   },
 };
 </script>
