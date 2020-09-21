@@ -26,7 +26,7 @@
         </a>
 
         <div class="navbar-menu" :class="{ 'is-active': active }">
-          <span v-if="logedIn">
+          <span v-if="loggedIn">
             <router-link to="/expences">Expences</router-link>
             <router-link to="/income">Income </router-link>
             <router-link to="/log">Log </router-link>
@@ -52,7 +52,7 @@ export default {
   name: "Header",
   data() {
     return {
-      logedIn: false,
+      loggedIn: false,
       active: false,
     };
   },
@@ -66,11 +66,7 @@ export default {
   },
 
   beforeMount() {
-    firebase
-      .auth()
-      .onAuthStateChanged((user) =>
-        user ? (this.loggedIn = true) : (this.loggedIn = false)
-      );
+    firebase.auth().onAuthStateChanged((user) => (this.loggedIn = !!user));
   },
 };
 </script>
