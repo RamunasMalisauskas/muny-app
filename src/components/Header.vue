@@ -31,7 +31,7 @@
             <router-link to="/income">Income </router-link>
             <router-link to="/log">Log </router-link>
             <router-link to="/summary">Summary </router-link>
-            <a class="haze" @click="signOut()">Sign Out</a>
+            <a class="haze" @click="signOut()">Sign Out {{ this.name }}</a>
           </span>
 
           <span v-else>
@@ -52,6 +52,13 @@ export default {
   name: "Header",
   data() {
     return {
+      name: "",
+      links: [
+        {
+          name: "",
+          url: "",
+        },
+      ],
       loggedIn: false,
       active: false,
     };
@@ -69,9 +76,21 @@ export default {
     },
   },
 
-// function to determined if the user is already logged in and this show two diferent headers with if-else
+  // function to determined if the user is already logged in and this show two diferent headers with if-else
+  // geting the name (first letter to uppercase) from the email of the user ant pushing it to name in data
   beforeMount() {
-    firebase.auth().onAuthStateChanged((user) => (this.loggedIn = !!user));
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.loggedIn = true;
+        const userName = firebase.auth().currentUser.email;
+        // console.log(firebase.auth().currentUser)
+        this.name =
+          userName
+            .split("@")[0]
+            .slice(0, 1)
+            .toUpperCase() + userName.split("@")[0].slice(1);
+      }
+    });
   },
 };
 </script>
@@ -156,7 +175,7 @@ img {
     min-width: 80px;
   }
 
-/* toggle the class of two diferernt images for mobile/desktop */
+  /* toggle the class of two diferernt images for mobile/desktop */
   .full {
     display: none;
   }

@@ -111,7 +111,7 @@ export default {
         }) 
         .then(() => {
           // console.log(this.home, this.name, this.email, this.password);
-          this.$router.push("/summary");
+          this.$router.push("/expences");
         })
         .catch(() => {
           this.loading = false;
