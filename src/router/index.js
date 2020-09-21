@@ -16,7 +16,7 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "login" */ "../views/login/Login.vue"),
     meta: {
-      anonymus: true,
+      requiresAnon: true,
     },
   },
   {
@@ -25,7 +25,7 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "register" */ "../views//login/Register.vue"),
     meta: {
-      anonymus: true,
+      requiresAnon: true,
     },
   },
   {
@@ -34,7 +34,7 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "expenses" */ "../views//app/Expenses.vue"),
     meta: {
-      autorisation: true,
+      requiresAuth: true,
     },
   },
   {
@@ -43,7 +43,7 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "income" */ "../views//app/Income.vue"),
     meta: {
-      autorisation: true,
+      requiresAuth: true,
     },
   },
   {
@@ -52,7 +52,7 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "log" */ "../views//app/Log.vue"),
     meta: {
-      autorisation: true,
+      requiresAuth: true,
     },
   },
   {
@@ -61,7 +61,7 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "summary" */ "../views//app/Summary.vue"),
     meta: {
-      autorisation: true,
+      requiresAuth: true,
     },
   },
 ];
@@ -72,12 +72,12 @@ const router = new VueRouter({
   routes,
 });
 
-// function for autorisation/anonimity check and  view access  
+// function for requiresAuth/anonimity check and access to pages
 router.beforeEach((to, from, next) => {
   firebase.auth().onAuthStateChanged((user) => {
-    if (!user && to.matched.some((route) => route.meta.autorisation)) {
+    if (!user && to.matched.some((route) => route.meta.requiresAuth)) {
       next({ path: "/login" });
-    } else if (user && to.matched.some((route) => route.meta.anonymus)) {
+    } else if (user && to.matched.some((route) => route.meta.requiresAnon)) {
       next({ path: "/expenses" });
     } else {
       next();

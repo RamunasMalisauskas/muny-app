@@ -25,7 +25,8 @@
             </div>
           </div>
 
-~~          <!-- <div class="field">
+          ~~
+          <!-- <div class="field">
             <label class="label">Your User Name</label>
             <div class="control">
               <input
@@ -106,12 +107,8 @@ export default {
             .collection("users")
             .add({ home: this.home, email: this.email });
         })
-        // .then(() => {
-        //   console.log(`you have added ${this.home} ${this.name} ${this.email} to DB`)
-        // })
         .then(() => {
-          // console.log(this.home, this.name, this.email, this.password);
-          this.$router.push("/expences");
+          this.$router.push("/expenses");
         })
         .catch(() => {
           this.loading = false;

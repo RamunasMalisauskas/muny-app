@@ -100,7 +100,8 @@ export default {
         .auth()
         .signInWithEmailAndPassword(this.email, this.password)
         .then(() => {
-          this.$router.push("/expences");
+          
+          this.$router.push("/expenses");
         })
         .catch((error) => {
           this.loading = false;

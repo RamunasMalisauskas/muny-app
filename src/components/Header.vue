@@ -142,14 +142,14 @@ export default {
 }
 
 a {
-  color: #fff;
+  color: #ed185b;
   padding: 0.8em;
   border-radius: 0.8em;
   margin-left: 0.5em;
 }
 
 a:hover {
-  color: #ed185b;
+  color: #fff;
 }
 
 img {
