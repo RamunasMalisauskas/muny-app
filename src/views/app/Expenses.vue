@@ -1,8 +1,8 @@
 <template>
-  <div id="expences">
+  <div id="expenses">
     <div class="section">
       <div class="container">
-        <h3>this is expences</h3>
+        <h3>this is expenses</h3>
       </div>
     </div>
   </div>
@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  name: "Expences",
+  name: "Expenses",
 };
 </script>
 

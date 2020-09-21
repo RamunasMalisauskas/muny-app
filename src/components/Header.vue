@@ -2,7 +2,7 @@
   <div id="Header">
     <nav class="navbar" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
-        <a href="/">
+        <a href="/expenses">
           <img class="full" src="../assets/muny-logo.svg" alt="logo" />
           <img
             class="mobile"
@@ -57,8 +57,8 @@ export default {
       userName: "",
       links: [
         {
-          name: "Expences",
-          url: "/expences",
+          name: "Expenses",
+          url: "/expenses",
         },
         {
           name: "Income",
@@ -92,6 +92,7 @@ export default {
 
   // function to determined if the user is already logged in and this show two diferent headers with if-else
   // geting the name (first letter to uppercase) from the email of the user ant pushing it to name in data
+  // %%%%%%%%%% look up how to get it from database %%%%%%%%%%%
   beforeMount() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {

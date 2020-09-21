@@ -29,10 +29,10 @@ const routes = [
     },
   },
   {
-    path: "/expences",
-    name: "Expences",
+    path: "/expenses",
+    name: "Expenses",
     component: () =>
-      import(/* webpackChunkName: "expences" */ "../views//app/Expences.vue"),
+      import(/* webpackChunkName: "expenses" */ "../views//app/Expenses.vue"),
     meta: {
       autorisation: true,
     },
@@ -78,7 +78,7 @@ router.beforeEach((to, from, next) => {
     if (!user && to.matched.some((route) => route.meta.autorisation)) {
       next({ path: "/login" });
     } else if (user && to.matched.some((route) => route.meta.anonymus)) {
-      next({ path: "/expences" });
+      next({ path: "/expenses" });
     } else {
       next();
     }

@@ -95,6 +95,8 @@ export default {
   },
 
   methods: {
+
+    // creating user in with auth and creating another DB for user || so that couple users can be added to the same home 
     register() {
       this.loading = true;
       firebase
@@ -106,9 +108,9 @@ export default {
             .collection("users")
             .add({ home: this.home, name: this.name, email: this.email });
         })
-        .then(() => {
-          console.log(`you have added ${this.home} ${this.name} ${this.email} to DB`)
-        }) 
+        // .then(() => {
+        //   console.log(`you have added ${this.home} ${this.name} ${this.email} to DB`)
+        // }) 
         .then(() => {
           // console.log(this.home, this.name, this.email, this.password);
           this.$router.push("/expences");

@@ -18,7 +18,7 @@
             </div>
           </div>
 
-          <div class="field">
+          <div class="field"> 
             <label class="label">Your User Name</label>
             <div class="control">
               <input
@@ -32,7 +32,7 @@
           </div>
 
           <div class="field">
-            <label class="label" for="email">Email</label>
+            <label class="label">Your Email</label>
             <input
               class="input"
               type="email"
