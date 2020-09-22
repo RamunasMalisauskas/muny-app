@@ -92,7 +92,8 @@ export default {
           firebase
             .firestore()
             .collection("users")
-            .add({ home: this.home, email: this.email });
+            .doc(firebase.auth().currentUser.uid)
+            .set({ home: this.home, email: this.email });
         })
         .then(() => {
           this.$router.push("/expenses");

@@ -136,15 +136,23 @@ export default {
 
   methods: {
     // test() {
-    //   console.log(firebase.firestore.FieldValue.serverTimestamp());
+    //   console.log(firebase.auth().currentUser.uid);
     // },
 
     minus() {
       this.loading = true;
+
+      const userId = firebase.auth().currentUser.uid;
+
+      // filer witch group to add to DB
       const filteredGroup =
         this.addGroup.length > 1 ? this.addGroup : this.selectedGroup;
+
+      // adds data based by your user ID
       firebase
         .firestore()
+        .collection("users")
+        .doc(userId)
         .collection("expenses")
         .add({
           group: filteredGroup,
@@ -154,8 +162,8 @@ export default {
           date: firebase.firestore.FieldValue.serverTimestamp(),
         })
         .then(() => {
+          console.log("added" + this.expensess + "to" + userId);
           this.loading = false;
-          console.log("added");
         })
         .catch((error) => {
           this.loading = false;
@@ -165,7 +173,14 @@ export default {
     },
   },
 
-  beforeMount() {},
+  beforeMount() {
+    console.log(
+      firebase
+        .firestore()
+        .collection("expenses")
+        .doc()
+    );
+  },
 };
 </script>
 

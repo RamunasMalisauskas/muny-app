@@ -99,7 +99,8 @@ export default {
     },
   },
 
-  // looks for all the avalibe houses in DB, pushes it to array and it's used as select option input
+  // looks for all the available houses in DB, pushes it to array and it's used as select option input
+  // NEVEIKIA
   beforeMount() {
     firebase
       .firestore()
