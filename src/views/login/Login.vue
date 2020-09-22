@@ -100,7 +100,6 @@ export default {
   },
 
   // looks for all the available houses in DB, pushes it to array and it's used as select option input
-  // NEVEIKIA
   beforeMount() {
     firebase
       .firestore()
@@ -109,7 +108,7 @@ export default {
       .then((snapshop) =>
         snapshop.docs.forEach((doc) => {
           this.homes.push({
-            name: doc.data().name,
+            name: doc.data().home,
           });
         })
       );

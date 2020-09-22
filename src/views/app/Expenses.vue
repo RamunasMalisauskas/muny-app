@@ -122,7 +122,7 @@ export default {
 
   data() {
     return {
-      groups: ["home", "car", "pet"],
+      groups: [],
       selectedGroup: "",
       addGroup: "",
       expenses: "",
@@ -162,7 +162,7 @@ export default {
           date: firebase.firestore.FieldValue.serverTimestamp(),
         })
         .then(() => {
-          console.log("added" + this.expensess + "to" + userId);
+          console.log("added " + this.expenses + " to " + userId);
           this.loading = false;
         })
         .catch((error) => {
@@ -174,12 +174,19 @@ export default {
   },
 
   beforeMount() {
-    console.log(
-      firebase
-        .firestore()
-        .collection("expenses")
-        .doc()
-    );
+    const userId = firebase.auth().currentUser.uid;
+
+    firebase
+      .firestore()
+      .collection("users")
+      .doc(userId)
+      .collection("expenses")
+      .get()
+      .then((snapshop) =>
+        snapshop.docs.forEach((item) => {
+          this.groups.push(item.data().group);
+        })
+      );
   },
 };
 </script>
