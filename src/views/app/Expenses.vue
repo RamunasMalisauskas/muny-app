@@ -11,7 +11,7 @@
         />
 
         <div class="container">
-          <form name="expenses">
+          <form name="expenses" v-on:submit.prevent="expenses">
             <div class="field">
               <label class="label">Where did you spend it?</label>
               <div class="columns">
@@ -19,9 +19,13 @@
                   <label class="label secondary">select here:</label>
                   <div class="control">
                     <div class="select">
-                      <select>
+                      <select v-model="group">
                         <option>Select dropdown</option>
-                        <option>With options</option>
+                        <option>home</option>
+                        <option>car</option>
+                        <option>travel</option>
+                        <option>food-out</option>
+                        <option>pets</option>
                       </select>
                     </div>
                   </div>
@@ -29,12 +33,13 @@
 
                 <div class="column">
                   <div class="field">
-                    <label class="label secondary">or here:</label>
+                    <label class="label secondary">or add here:</label>
                     <div class="control">
                       <input
                         class="input"
                         type="text"
                         placeholder="e.g. home"
+                        v-model="group"
                       />
                     </div>
                   </div>
@@ -45,7 +50,12 @@
             <div class="field">
               <label class="label">How much?</label>
               <div class="control">
-                <input class="input" type="number" placeholder="$" />
+                <input
+                  class="input"
+                  type="number"
+                  placeholder="$"
+                  v-model="amount"
+                />
               </div>
             </div>
 
@@ -53,14 +63,20 @@
               <div class="control moneyType columns">
                 <div class="column is-2">
                   <label class="radio">
-                    <input type="radio" name="moneyType" />
+                    <input type="radio" name="moneyType" value="Cash" v-model="moneyType" />
                     Cash
                   </label>
                 </div>
 
                 <div class="column">
                   <label class="radio">
-                    <input type="radio" name="moneyType" checked />
+                    <input
+                      type="radio"
+                      name="moneyType"
+                      value="Card"
+                      v-model="moneyType"
+                      checked
+                    />
                     Card
                   </label>
                 </div>
@@ -74,6 +90,7 @@
                   class="textarea"
                   placeholder="if needed"
                   rows="1"
+                  v-model="info"
                 ></textarea>
               </div>
             </div>
@@ -98,9 +115,20 @@ export default {
 
   data() {
     return {
+      group: "",
+      amount: "",
+      moneyType: "",
+      info: "",
       error: false,
       errorMessage: "",
+      loading: false,
     };
+  },
+
+  methods: {
+    expenses() {
+      console.log(this.group, this.amount, this.info, this.moneyType);
+    },
   },
 };
 </script>
