@@ -33,7 +33,7 @@
               :to="link.url"
               >{{ link.name }}</router-link
             >
-lo            <a class="haze" @click="logout()">Sign Out {{ this.userName }}</a>
+            <a class="haze" @click="logout()">Sign Out {{ this.userName }}</a>
           </span>
 
           <span v-else>

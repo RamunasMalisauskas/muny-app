@@ -7,7 +7,6 @@
         <Notification
           v-if="error"
           v-on:close="error = false"
-          class="blue"
           :message="errorMessage"
         />
 

@@ -8,7 +8,7 @@
           <div class="field">
             <div class="control">
               <label class="label">Your Household Name</label>
-              <div class="select is-rounded">
+              <div class="select">
                 <select>
                   <option v-for="home in homes" :key="home.name">{{
                     home.name
@@ -17,19 +17,6 @@
               </div>
             </div>
           </div>
-
-          <!-- <div class="field">
-            <label class="label">Your User Name</label>
-            <div class="control">
-              <input
-                class="input"
-                type="text"
-                placeholder="e.g John Jones"
-                v-model="name"
-                required
-              />
-            </div>
-          </div> -->
 
           <div class="field">
             <label class="label">Your Email</label>
@@ -58,7 +45,6 @@
           <Notification
             v-if="error"
             @close="error = false"
-            class="blue"
             :message="errorMessage"
           />
 
@@ -93,6 +79,7 @@ export default {
     };
   },
 
+  // simple firebase login method with eroor message (if) displayed  in Notificaion
   methods: {
     login() {
       this.loading = true;
@@ -109,14 +96,9 @@ export default {
           this.errorMessage = "oops...  " + error.message;
         });
     },
-
-    // test() {
-    //   this.error = true;
-    //   this.errorMessage = "Notification";
-    //   console.log(this.name, this.home, this.password);
-    // },
   },
 
+  // looks for all the avalibe houses in DB, pushes it to array and it's used as select option input
   beforeMount() {
     firebase
       .firestore()
