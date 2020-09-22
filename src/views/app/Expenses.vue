@@ -162,7 +162,9 @@ export default {
           date: firebase.firestore.FieldValue.serverTimestamp(),
         })
         .then(() => {
-          console.log("added " + this.expenses + " to " + userId);
+          console.log(filteredGroup, this.expenses, this.moneyType, this.info);
+          this.error = true;
+          this.errorMessage = `You have added ${this.expenses}eur to you expenses`;
           this.loading = false;
         })
         .catch((error) => {
