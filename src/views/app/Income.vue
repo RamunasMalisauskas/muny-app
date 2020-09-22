@@ -76,6 +76,9 @@
 </template>
 
 <script>
+import firebase from "firebase/app";
+import "firebase/firestore";
+import "firebase/auth";
 import Hero from "../../components/Hero";
 import Notification from "../../components/Notification";
 
@@ -95,7 +98,34 @@ export default {
 
   methods: {
     plus() {
-      console.log(this.income, this.info, this.moneyType);
+      // add spiner to button
+      this.loading = true;
+
+      // getting user ID
+      const userId = firebase.auth().currentUser.uid;
+
+      // adds data based by your user ID
+      firebase
+        .firestore()
+        .collection("users")
+        .doc(userId)
+        .collection("income")
+        .add({
+          income: this.income,
+          moneyType: this.moneyType,
+          info: this.info,
+          date: firebase.firestore.FieldValue.serverTimestamp(),
+        })
+        .then(() => {
+          this.error = true;
+          this.errorMessage = `You have added ${this.income}eur to you income database`;
+          this.loading = false;
+        })
+        .catch((error) => {
+          this.loading = false;
+          this.error = true;
+          this.errorMessage = "oops...  " + error.message;
+        });
     },
   },
 };

@@ -112,6 +112,7 @@
 <script>
 import firebase from "firebase/app";
 import "firebase/firestore";
+import "firebase/auth";
 import Hero from "../../components/Hero";
 import Notification from "../../components/Notification";
 
@@ -139,6 +140,7 @@ export default {
     // },
 
     minus() {
+      // add spiner to button
       this.loading = true;
 
       // getting user ID
@@ -162,9 +164,8 @@ export default {
           date: firebase.firestore.FieldValue.serverTimestamp(),
         })
         .then(() => {
-          console.log(filteredGroup, this.expenses, this.moneyType, this.info);
           this.error = true;
-          this.errorMessage = `You have added ${this.expenses}eur to you expenses`;
+          this.errorMessage = `You have added ${this.expenses}eur to you expenses database`;
           this.loading = false;
         })
         .catch((error) => {
