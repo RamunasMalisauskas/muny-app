@@ -132,7 +132,7 @@ export default {
 
   methods: {
     minus() {
-      console.log(this.group, this.amount, this.info, this.moneyType);
+      console.log(this.group, this.expenses, this.info, this.moneyType);
     },
   },
 };
