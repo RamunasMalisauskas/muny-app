@@ -14,7 +14,6 @@
                   <div class="control">
                     <div class="select">
                       <select v-model="selectedGroup">
-                        <option>Select dropdown</option>
                         <option v-for="group in groups" :key="group.id">{{
                           group
                         }}</option>
@@ -142,9 +141,10 @@ export default {
     minus() {
       this.loading = true;
 
+      // getting user ID
       const userId = firebase.auth().currentUser.uid;
 
-      // filer witch group to add to DB
+      // filer which group to be added to DB
       const filteredGroup =
         this.addGroup.length > 1 ? this.addGroup : this.selectedGroup;
 
@@ -174,8 +174,10 @@ export default {
   },
 
   beforeMount() {
+    // getting user ID
     const userId = firebase.auth().currentUser.uid;
 
+    // getting groups from user DB
     firebase
       .firestore()
       .collection("users")
@@ -186,7 +188,14 @@ export default {
         snapshop.docs.forEach((item) => {
           this.groups.push(item.data().group);
         })
-      );
+      )
+      // filter unique groups from DB data
+      .then(() => {
+        const uniqueGroups = this.groups.filter(
+          (x, i) => this.groups.indexOf(x) === i
+        );
+        this.groups = uniqueGroups;
+      });
   },
 };
 </script>
