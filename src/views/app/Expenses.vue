@@ -13,13 +13,11 @@
                   <label class="label secondary">select here:</label>
                   <div class="control">
                     <div class="select">
-                      <select v-model="group">
+                      <select v-model="selectedGroup">
                         <option>Select dropdown</option>
-                        <option>home</option>
-                        <option>car</option>
-                        <option>travel</option>
-                        <option>food-out</option>
-                        <option>pets</option>
+                        <option v-for="group in groups" :key="group.id">{{
+                          group
+                        }}</option>
                       </select>
                     </div>
                   </div>
@@ -33,7 +31,7 @@
                         class="input"
                         type="text"
                         placeholder="e.g. home"
-                        v-model="group"
+                        v-model="addGroup"
                       />
                     </div>
                   </div>
@@ -120,7 +118,9 @@ export default {
 
   data() {
     return {
-      group: "",
+      groups: ["home", "car", "pet"],
+      selectedGroup: "",
+      addGroup: "",
       expenses: "",
       moneyType: "",
       info: "",
@@ -132,7 +132,7 @@ export default {
 
   methods: {
     minus() {
-      console.log(this.group, this.expenses, this.info, this.moneyType);
+      console.log(this.selectedGroup, this.addGroup, this.expenses, this.info, this.moneyType);
     },
   },
 };
