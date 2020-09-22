@@ -18,21 +18,23 @@
           aria-expanded="false"
           data-target="navbarBasicExample"
           v-on:click="burgerButton()"
-          :class="'is-active' && active "
+          :class="{ 'is-active': active }"
         >
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
         </a>
 
-        <div class="navbar-menu" :class="'is-active' && active">
+        <div class="navbar-menu" :class="{ 'is-active': active }">
           <span v-if="loggedIn">
             <router-link
+              click="burgerButton()"
               v-for="link in links"
               :key="link.name"
               :to="link.url"
-              >{{ link.name }}</router-link
             >
+              <a class="zero" @click="burgerButton()">{{ link.name }}</a>
+            </router-link>
             <a class="haze" @click="logout()">Sign Out {{ this.userName }}</a>
           </span>
 
@@ -169,17 +171,27 @@ img {
 
 .navbar-menu.is-active {
   position: absolute;
-  margin-top: 36em;
+  top: 148px;
   background: #f0875e;
 }
 
 .navbar-menu.is-active a {
   display: block;
-  padding: 1.5em 15em;
+  color: #fff;
+}
+
+.navbar-menu.is-active .haze {
+  color: #ed185b;
 }
 
 .navbar-menu {
   padding: 2em;
+}
+
+.zero {
+  width: 100%;
+  padding: 0.75em 6em;
+  margin: 0;
 }
 
 @media only screen and (max-width: 768px) {

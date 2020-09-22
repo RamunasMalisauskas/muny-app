@@ -144,7 +144,7 @@ button:hover {
 }
 
 .input {
-  color: #ef735f;
+  color: #eb6e56;
 }
 
 .input:hover {

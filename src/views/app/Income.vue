@@ -146,7 +146,7 @@ label {
 
 .input,
 textarea {
-  color: #ef735f;
+  color: #eb6e56;
 }
 
 textarea {

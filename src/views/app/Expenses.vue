@@ -217,12 +217,12 @@ label {
 }
 
 p {
-  color: #ef735f;
+  color: #eb6e56;
 }
 
 .input,
 textarea {
-  color: #ef735f;
+  color: #eb6e56;
 }
 
 textarea {
