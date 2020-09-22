@@ -125,8 +125,12 @@ export default {
 </script>
 
 <style scoped>
+.section {
+  padding: 1.5em;
+}
+
 form {
-  margin-top: 1em;
+  margin-top: 2em;
 }
 
 label {
