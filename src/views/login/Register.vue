@@ -24,20 +24,6 @@
             </div>
           </div>
 
-          ~~
-          <!-- <div class="field">
-            <label class="label">Your User Name</label>
-            <div class="control">
-              <input
-                class="input"
-                type="text"
-                placeholder="e.g John Jones"
-                v-model="name"
-                required
-              />
-            </div>
-          </div> -->
-
           <div class="field">
             <label class="label" for="email">Email</label>
             <input
@@ -62,8 +48,10 @@
             </div>
           </div>
 
-          <div class="control" :class="loading && `is-loading`">
-            <button class="button">Register</button>
+          <div class="control">
+            <button class="button" :class="loading && `is-loading`">
+              Register
+            </button>
           </div>
         </form>
       </div>
@@ -107,7 +95,7 @@ export default {
             .add({ home: this.home, email: this.email });
         })
         .then(() => {
-          // this.$router.push("/expenses");
+          this.$router.push("/expenses");
         })
         .catch(() => {
           this.loading = false;

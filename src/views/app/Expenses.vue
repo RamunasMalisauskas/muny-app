@@ -98,8 +98,10 @@
               :message="errorMessage"
             />
 
-            <div class="control" :class="loading && `is-loading`">
-              <button class="button">Add</button>
+            <div class="control">
+              <button class="button" :class="loading && `is-loading`">
+                Add
+              </button>
             </div>
           </form>
         </div>
@@ -109,6 +111,8 @@
 </template>
 
 <script>
+import firebase from "firebase/app";
+import "firebase/firestore";
 import Hero from "../../components/Hero";
 import Notification from "../../components/Notification";
 
@@ -131,10 +135,37 @@ export default {
   },
 
   methods: {
+    // test() {
+    //   console.log(firebase.firestore.FieldValue.serverTimestamp());
+    // },
+
     minus() {
-      console.log(this.selectedGroup, this.addGroup, this.expenses, this.info, this.moneyType);
+      this.loading = true;
+      const filteredGroup =
+        this.addGroup.length > 1 ? this.addGroup : this.selectedGroup;
+      firebase
+        .firestore()
+        .collection("expenses")
+        .add({
+          group: filteredGroup,
+          expenses: this.expenses,
+          moneyType: this.moneyType,
+          info: this.info,
+          date: firebase.firestore.FieldValue.serverTimestamp(),
+        })
+        .then(() => {
+          this.loading = false;
+          console.log("added");
+        })
+        .catch((error) => {
+          this.loading = false;
+          this.error = true;
+          this.errorMessage = "oops...  " + error.message;
+        });
     },
   },
+
+  beforeMount() {},
 };
 </script>
 

@@ -48,8 +48,10 @@
             :message="errorMessage"
           />
 
-          <div class="control" :class="loading && `is-loading`">
-            <button class="button">Login</button>
+          <div class="control">
+            <button class="button" :class="loading && `is-loading`">
+              Login
+            </button>
           </div>
         </form>
       </div>
@@ -87,8 +89,7 @@ export default {
         .auth()
         .signInWithEmailAndPassword(this.email, this.password)
         .then(() => {
-          // ?????????????? KODĖL META ERROR ???????????
-          // this.$router.push("/expenses");
+          this.$router.push("/expenses");
         })
         .catch((error) => {
           this.loading = false;
