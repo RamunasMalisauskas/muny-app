@@ -118,7 +118,7 @@ export default {
         })
         .then(() => {
           this.error = true;
-          this.errorMessage = `You have added ${this.income}eur to you income database`;
+          this.errorMessage = `You have added ${this.income}€ to you income database`;
           this.loading = false;
         })
         .catch((error) => {

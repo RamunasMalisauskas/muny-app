@@ -18,14 +18,14 @@
           aria-expanded="false"
           data-target="navbarBasicExample"
           v-on:click="burgerButton()"
-          :class="{ 'is-active': active }"
+          :class="'is-active' && active "
         >
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
         </a>
 
-        <div class="navbar-menu" :class="{ 'is-active': active }">
+        <div class="navbar-menu" :class="'is-active' && active">
           <span v-if="loggedIn">
             <router-link
               v-for="link in links"
@@ -78,7 +78,7 @@ export default {
     };
   },
 
-  // signout method
+  // signout method changes the if-else value
   methods: {
     logout() {
       firebase

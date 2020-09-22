@@ -165,7 +165,7 @@ export default {
         })
         .then(() => {
           this.error = true;
-          this.errorMessage = `You have added ${this.expenses}eur to you expenses database`;
+          this.errorMessage = `You have added ${this.expenses}€ to you expenses database`;
           this.loading = false;
         })
         .catch((error) => {

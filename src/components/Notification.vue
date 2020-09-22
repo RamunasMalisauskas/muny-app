@@ -22,6 +22,8 @@ export default {
 
 <style scoped>
 #notification {
+  display: flex;
+  justify-content: space-between;
   background: url("../assets/background.svg") no-repeat bottom center;
   background-size: cover;
   padding: 2em;
