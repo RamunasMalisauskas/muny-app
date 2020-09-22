@@ -4,12 +4,6 @@
       <div class="container">
         <Hero />
 
-        <Notification
-          v-if="error"
-          @close="error = false"
-          :message="errorMessage"
-        />
-
         <div class="container">
           <form name="expenses" v-on:submit.prevent="expenses">
             <div class="field">
@@ -63,7 +57,12 @@
               <div class="control moneyType columns">
                 <div class="column is-2">
                   <label class="radio">
-                    <input type="radio" name="moneyType" value="Cash" v-model="moneyType" />
+                    <input
+                      type="radio"
+                      name="moneyType"
+                      value="Cash"
+                      v-model="moneyType"
+                    />
                     Cash
                   </label>
                 </div>
@@ -94,6 +93,12 @@
                 ></textarea>
               </div>
             </div>
+
+            <Notification
+              v-if="error"
+              @close="error = false"
+              :message="errorMessage"
+            />
 
             <div class="control" :class="loading && `is-loading`">
               <button class="button">Add</button>
