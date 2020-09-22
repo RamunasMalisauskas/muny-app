@@ -5,7 +5,7 @@
         <Hero />
 
         <div class="container">
-          <form name="expenses" v-on:submit.prevent="expenses">
+          <form name="expenses" v-on:submit.prevent="minus">
             <div class="field">
               <label class="label">Where did you spend it?</label>
               <div class="columns">
@@ -48,7 +48,7 @@
                   class="input"
                   type="number"
                   placeholder="$"
-                  v-model="amount"
+                  v-model="expenses"
                 />
               </div>
             </div>
@@ -121,7 +121,7 @@ export default {
   data() {
     return {
       group: "",
-      amount: "",
+      expenses: "",
       moneyType: "",
       info: "",
       error: false,
@@ -131,7 +131,7 @@ export default {
   },
 
   methods: {
-    expenses() {
+    minus() {
       console.log(this.group, this.amount, this.info, this.moneyType);
     },
   },

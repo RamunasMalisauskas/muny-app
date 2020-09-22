@@ -5,7 +5,7 @@
         <Hero />
 
         <div class="container">
-          <form name="expenses" v-on:submit.prevent="income">
+          <form name="expenses" v-on:submit.prevent="plus">
             <div class="field">
               <label class="label">Income</label>
               <div class="control">
@@ -13,7 +13,7 @@
                   class="input"
                   type="number"
                   placeholder="$"
-                  v-model="amount"
+                  v-model="income"
                 />
               </div>
             </div>
@@ -84,14 +84,19 @@ export default {
   components: { Hero, Notification },
   data() {
     return {
-      group: "",
-      amount: "",
+      income: "",
       moneyType: "",
       info: "",
       error: false,
       errorMessage: "",
       loading: false,
     };
+  },
+
+  methods: {
+    plus() {
+      console.log(this.income, this.info, this.moneyType);
+    },
   },
 };
 </script>
