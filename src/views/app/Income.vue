@@ -4,73 +4,71 @@
       <div class="container">
         <Hero />
 
-        <div class="container">
-          <div class="column is-6-desktop">
-            <form name="expenses" v-on:submit.prevent="plus">
-              <div class="field">
-                <label class="label">Income</label>
-                <div class="control">
-                  <input
-                    class="input"
-                    type="number"
-                    placeholder="$"
-                    v-model="income"
-                  />
+        <div class="column is-6-desktop">
+          <form name="expenses" v-on:submit.prevent="plus">
+            <div class="field">
+              <label class="label">Income</label>
+              <div class="control">
+                <input
+                  class="input"
+                  type="number"
+                  placeholder="$"
+                  v-model="income"
+                />
+              </div>
+            </div>
+
+            <div class="field">
+              <div class="control moneyType columns">
+                <div class="column is-2">
+                  <label class="radio">
+                    <input
+                      type="radio"
+                      name="moneyType"
+                      value="Cash"
+                      v-model="moneyType"
+                    />
+                    Cash
+                  </label>
+                </div>
+
+                <div class="column">
+                  <label class="radio">
+                    <input
+                      type="radio"
+                      name="moneyType"
+                      value="Card"
+                      v-model="moneyType"
+                      checked
+                    />
+                    Card
+                  </label>
                 </div>
               </div>
+            </div>
 
-              <div class="field">
-                <div class="control moneyType columns">
-                  <div class="column is-2">
-                    <label class="radio">
-                      <input
-                        type="radio"
-                        name="moneyType"
-                        value="Cash"
-                        v-model="moneyType"
-                      />
-                      Cash
-                    </label>
-                  </div>
-
-                  <div class="column">
-                    <label class="radio">
-                      <input
-                        type="radio"
-                        name="moneyType"
-                        value="Card"
-                        v-model="moneyType"
-                        checked
-                      />
-                      Card
-                    </label>
-                  </div>
-                </div>
+            <div class="field">
+              <label class="label secondary">Additional info</label>
+              <div class="control">
+                <textarea
+                  class="textarea"
+                  placeholder="if needed"
+                  rows="1"
+                  v-model="info"
+                ></textarea>
               </div>
+            </div>
 
-              <div class="field">
-                <label class="label secondary">Additional info</label>
-                <div class="control">
-                  <textarea
-                    class="textarea"
-                    placeholder="if needed"
-                    rows="1"
-                    v-model="info"
-                  ></textarea>
-                </div>
-              </div>
+            <Notification
+              v-if="error"
+              @close="error = false"
+              :message="errorMessage"
+            />
 
-              <Notification
-                v-if="error"
-                @close="error = false"
-                :message="errorMessage"
-              />
-
-              <div class="control" :class="loading && `is-loading`">
-                <button class="button">Add</button>
-              </div>
-            </form>
-          </div>
+            <div class="control" :class="loading && `is-loading`">
+              <button class="button">Add</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
@@ -134,6 +132,7 @@ export default {
 </script>
 
 <style scoped>
+/* major styles */
 .section {
   padding: 1.5em;
 }
@@ -146,6 +145,7 @@ label {
   color: #ed185b;
 }
 
+/* input styles */
 .input,
 textarea {
   color: #eb6e56;
@@ -165,6 +165,7 @@ textarea:hover {
   margin: 1.5em 0;
 }
 
+/* button styles */
 button {
   color: #fff;
   background: #ed185b;

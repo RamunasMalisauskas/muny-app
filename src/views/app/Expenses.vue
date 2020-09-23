@@ -4,107 +4,105 @@
       <div class="container">
         <Hero />
 
-        <div class="container">
-          <div class="column is-6-desktop">
-            <form name="expenses" v-on:submit.prevent="minus">
-              <div class="field">
-                <label class="label">Where did you spend it?</label>
-                <div class="columns">
-                  <div class="column is-4">
-                    <label class="label secondary">select here:</label>
+        <div class="column is-6-desktop">
+          <form name="expenses" v-on:submit.prevent="minus">
+            <div class="field">
+              <label class="label">Where did you spend it?</label>
+              <div class="columns">
+                <div class="column is-4">
+                  <label class="label secondary">select here:</label>
+                  <div class="control">
+                    <div class="select">
+                      <select v-model="selectedGroup">
+                        <option v-for="group in groups" :key="group.id">{{
+                          group
+                        }}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="column">
+                  <div class="field">
+                    <label class="label secondary">or add here:</label>
                     <div class="control">
-                      <div class="select">
-                        <select v-model="selectedGroup">
-                          <option v-for="group in groups" :key="group.id">{{
-                            group
-                          }}</option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="column">
-                    <div class="field">
-                      <label class="label secondary">or add here:</label>
-                      <div class="control">
-                        <input
-                          class="input"
-                          type="text"
-                          placeholder="e.g. home"
-                          v-model="addGroup"
-                        />
-                      </div>
+                      <input
+                        class="input"
+                        type="text"
+                        placeholder="e.g. home"
+                        v-model="addGroup"
+                      />
                     </div>
                   </div>
                 </div>
               </div>
+            </div>
 
-              <div class="field">
-                <label class="label">How much?</label>
-                <div class="control">
-                  <input
-                    class="input"
-                    type="number"
-                    placeholder="$"
-                    v-model="expenses"
-                  />
-                </div>
-              </div>
-
-              <div class="field">
-                <div class="control moneyType columns">
-                  <div class="column is-2">
-                    <label class="radio">
-                      <input
-                        type="radio"
-                        name="moneyType"
-                        value="Cash"
-                        v-model="moneyType"
-                      />
-                      Cash
-                    </label>
-                  </div>
-
-                  <div class="column">
-                    <label class="radio">
-                      <input
-                        type="radio"
-                        name="moneyType"
-                        value="Card"
-                        v-model="moneyType"
-                        checked
-                      />
-                      Card
-                    </label>
-                  </div>
-                </div>
-              </div>
-
-              <div class="field">
-                <label class="label secondary">Additional info</label>
-                <div class="control">
-                  <textarea
-                    class="textarea"
-                    placeholder="if needed"
-                    rows="1"
-                    v-model="info"
-                  ></textarea>
-                </div>
-              </div>
-
-              <Notification
-                v-if="error"
-                @close="error = false"
-                :message="errorMessage"
-              />
-
+            <div class="field">
+              <label class="label">How much?</label>
               <div class="control">
-                <button class="button" :class="loading && `is-loading`">
-                  Add
-                </button>
+                <input
+                  class="input"
+                  type="number"
+                  placeholder="$"
+                  v-model="expenses"
+                />
               </div>
-            </form>
-          </div>
+            </div>
+
+            <div class="field">
+              <div class="control moneyType columns">
+                <div class="column is-2">
+                  <label class="radio">
+                    <input
+                      type="radio"
+                      name="moneyType"
+                      value="Cash"
+                      v-model="moneyType"
+                    />
+                    Cash
+                  </label>
+                </div>
+
+                <div class="column">
+                  <label class="radio">
+                    <input
+                      type="radio"
+                      name="moneyType"
+                      value="Card"
+                      v-model="moneyType"
+                      checked
+                    />
+                    Card
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="label secondary">Additional info</label>
+              <div class="control">
+                <textarea
+                  class="textarea"
+                  placeholder="if needed"
+                  rows="1"
+                  v-model="info"
+                ></textarea>
+              </div>
+            </div>
+
+            <Notification
+              v-if="error"
+              @close="error = false"
+              :message="errorMessage"
+            />
+
+            <div class="control">
+              <button class="button" :class="loading && `is-loading`">
+                Add
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
@@ -206,6 +204,7 @@ export default {
 </script>
 
 <style scoped>
+/* major styles */
 .section {
   padding: 1.5em;
 }
@@ -222,6 +221,7 @@ p {
   color: #eb6e56;
 }
 
+/* input styles */
 .input,
 textarea {
   color: #eb6e56;
@@ -241,6 +241,7 @@ textarea:hover {
   margin: 1.5em 0;
 }
 
+/* button styles */
 button {
   color: #fff;
   background: #ed185b;

@@ -119,10 +119,10 @@ export default {
 </script>
 
 <style scoped>
+/* major styles */
 .navbar-brand {
-  /* margin: 0 auto; */
-  padding: 0.5em 3em;
-  width: 100%;
+  padding: 0.5em 5em;
+  min-width: 100%;
   background: url("../assets/background.svg") no-repeat top center;
   background-size: cover;
   display: flex;
@@ -131,20 +131,16 @@ export default {
   position: relative;
 }
 
-.haze {
-  color: #ed185b;
-  background: #fff;
-}
-
-.haze:hover {
-  color: #fff;
-  background: #ed185b;
-}
-
 .navbar-menu {
   flex-grow: 0;
+  padding: 2em;
 }
 
+img {
+  min-height: 90px;
+}
+
+/* burger styles */
 .navbar-burger {
   color: #ed185b;
 }
@@ -154,6 +150,7 @@ export default {
   width: 50%;
 }
 
+/* link styles */
 a {
   color: #ed185b;
   padding: 0.8em;
@@ -169,10 +166,18 @@ a:hover {
   color: #fff;
 }
 
-img {
-  min-height: 90px;
+/* button styles */
+.haze {
+  color: #ed185b;
+  background: #fff;
 }
 
+.haze:hover {
+  color: #fff;
+  background: #ed185b;
+}
+
+/* responsive element style */
 .full {
   display: block;
 }
@@ -196,10 +201,6 @@ img {
 
 .navbar-menu.is-active .haze {
   color: #ed185b;
-}
-
-.navbar-menu {
-  padding: 2em;
 }
 
 @media only screen and (max-width: 1078px) {

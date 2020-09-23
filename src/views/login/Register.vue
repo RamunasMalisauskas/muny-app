@@ -4,11 +4,6 @@
       <div class="container">
         <Hero />
 
-        <Notification
-          v-if="error"
-          v-on:close="error = false"
-          :message="errorMessage"
-        />
         <div class="column is-6-desktop">
           <form name="login" v-on:submit.prevent="register">
             <div class="field">
@@ -47,6 +42,12 @@
                 />
               </div>
             </div>
+
+            <Notification
+              v-if="error"
+              v-on:close="error = false"
+              :message="errorMessage"
+            />
 
             <div class="control">
               <button class="button" :class="loading && `is-loading`">
@@ -114,9 +115,15 @@ export default {
 };
 </script>
 
+
 <style scoped>
+/* major styles */
 .section {
   padding: 1.5em;
+}
+
+.column {
+  padding: 0;
 }
 
 form {
@@ -127,6 +134,7 @@ label {
   color: #ed185b;
 }
 
+/* button style */
 button {
   color: #fff;
   background: #ed185b;
@@ -141,6 +149,7 @@ button:hover {
   background: #fff;
 }
 
+/* input styles */
 .input {
   color: #eb6e56;
 }

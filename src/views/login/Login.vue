@@ -119,6 +119,7 @@ export default {
 </script>
 
 <style scoped>
+/* major styles */
 .section {
   padding: 1.5em;
 }
@@ -135,6 +136,7 @@ label {
   color: #ed185b;
 }
 
+/* button style */
 button {
   color: #fff;
   background: #ed185b;
@@ -149,6 +151,7 @@ button:hover {
   background: #fff;
 }
 
+/* input styles */
 .input {
   color: #eb6e56;
 }
