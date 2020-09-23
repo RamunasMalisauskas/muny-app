@@ -27,14 +27,16 @@
 
         <div class="navbar-menu" :class="{ 'is-active': active }">
           <span v-if="loggedIn">
-            <router-link
-              click="burgerButton()"
-              v-for="link in links"
-              :key="link.name"
-              :to="link.url"
-            >
-              <a class="zero" @click="burgerButton()">{{ link.name }}</a>
-            </router-link>
+            <a @click="burgerButton()">
+              <router-link
+                v-for="link in links"
+                :key="link.name"
+                :to="link.url"
+              >
+                {{ link.name }}
+              </router-link>
+            </a>
+
             <a class="haze" @click="logout()">Sign Out {{ this.userName }}</a>
           </span>
 
@@ -171,7 +173,7 @@ img {
 
 .navbar-menu.is-active {
   position: absolute;
-  top: 148px;
+  top: 144px;
   background: #f0875e;
 }
 
@@ -188,20 +190,14 @@ img {
   padding: 2em;
 }
 
-.zero {
-  width: 100%;
-  padding: 0.75em 6em;
-  margin: 0;
-}
-
-@media only screen and (max-width: 768px) {
-  /* For mobile phones: */
+@media only screen and (max-width: 1200px) {
+  /* 1200px has been choosen acording to resposivnes of the menu bar and logo */
 
   img {
-    min-width: 80px;
+    min-width: 76px;
   }
 
-  /* toggle the class of two diferernt images for mobile/desktop */
+  /* toggle the class of two diferernt images for mobile/desktop logo */
   .full {
     display: none;
   }
