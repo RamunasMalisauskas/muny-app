@@ -46,6 +46,12 @@ export default {
     return {
       plusData: [],
       minusData: [],
+      plusTypeCash: [],
+      minusTypeCash: [],
+      plusTypeCard: [],
+      minusTypeCard: [],
+      plusCash: "",
+      plusCard: "",
       plusMinus: "",
       loading: false,
     };
@@ -53,17 +59,30 @@ export default {
 
   methods: {
     get() {
+      this.loading = true;
       // function for adding number in array (where they are given as string)
       const add = (x) => x.map(Number).reduce((a, v) => a + v);
       const result = add(this.plusData) - add(this.minusData);
+
+      // same function for type of income
+      const cash = add(this.plusTypeCash);
+      this.plusCash = cash;
+
+      const card = add(this.plusTypeCard);
+      this.plusCard = card;
+
+      console.log(this.plusCash, this.plusCard);
+
       // checking if number is positive or negative and returning positive number wih +
-      this.plusMinus = result[0] === "-" ? result + " €" : "+" + result  + " €";
+      this.plusMinus = result[0] === "-" ? result + " €" : "+" + result + " €";
+      this.loading = false;
     },
   },
 
   // getting informations from DB and making calculations which are been pushed to local arrays
   beforeMount() {
-    // geting expenses
+    
+    // getting expenses amount
     firebase
       .firestore()
       .collection("users")
@@ -78,20 +97,34 @@ export default {
         })
       );
 
-    // geting income
-    firebase
+    // getting income
+
+    //optimizing code for gettin' income info from DB
+    const plus = firebase
       .firestore()
       .collection("users")
       .doc(firebase.auth().currentUser.uid)
       .collection("income")
-      .get()
-      .then((snapshot) =>
-        // running through the document
-        snapshot.docs.forEach((item) => {
-          // fetching expenses and pushing it to plusData array
-          this.plusData.push(item.data().income);
-        })
-      );
+      .get();
+
+    // same logic as expenses
+    plus.then((snapshot) =>
+      snapshot.docs.forEach((item) => {
+        this.plusData.push(item.data().income);
+      })
+    );
+
+    // geting type of income
+    plus.then((snapshot) =>
+      snapshot.docs.forEach((item) => {
+        // checking the type of data and pushing it to accordin array
+        if (item.data().moneyType == "Cash") {
+          this.plusTypeCash.push(item.data().income);
+        } else {
+          this.plusTypeCard.push(item.data().income);
+        }
+      })
+    );
   },
 };
 </script>

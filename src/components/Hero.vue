@@ -25,9 +25,9 @@ export default {
 
 <style scoped>
 .hero {
-        background: url("../assets/background.svg") no-repeat center center;
-        background-size: cover;
-    }
+  background: url("../assets/background.svg") no-repeat center center;
+  background-size: cover;
+}
 
 h2 {
   color: #fff;
