@@ -27,7 +27,7 @@
 
         <div class="navbar-menu" :class="{ 'is-active': active }">
           <span v-if="loggedIn">
-            <a @click="burgerButton()">
+            <a @click="mobileNavToggle()">
               <router-link
                 v-for="link in links"
                 :key="link.name"
@@ -95,6 +95,11 @@ export default {
     burgerButton() {
       this.active = !this.active;
     },
+
+    //  function to always! close mobile navBar after link has been clicked
+    mobileNavToggle() {
+      this.active = false;
+    },
   },
 
   // function to determined if the user is already logged in and this show two diferent headers with if-else
@@ -115,12 +120,13 @@ export default {
 
 <style scoped>
 .navbar-brand {
-  padding: 0.5em 5em;
+  /* margin: 0 auto; */
+  padding: 0.5em 3em;
   width: 100%;
   background: url("../assets/background.svg") no-repeat top center;
   background-size: cover;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   position: relative;
 }
@@ -152,7 +158,11 @@ a {
   color: #ed185b;
   padding: 0.8em;
   border-radius: 0.8em;
-  margin-left: 0.5em;
+  margin-right: 0.5em;
+}
+
+a:last-child {
+  margin-right: 0;
 }
 
 a:hover {
@@ -174,6 +184,8 @@ img {
 .navbar-menu.is-active {
   position: absolute;
   top: 144px;
+  left: 0;
+  width: 100%;
   background: #f0875e;
 }
 
@@ -190,8 +202,8 @@ img {
   padding: 2em;
 }
 
-@media only screen and (max-width: 1200px) {
-  /* 1200px has been choosen acording to resposivnes of the menu bar and logo */
+@media only screen and (max-width: 1078px) {
+  /* 1078px has been choosen acording to resposivnes of the menu bar and logo */
 
   img {
     min-width: 76px;

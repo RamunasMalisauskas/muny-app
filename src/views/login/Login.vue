@@ -4,56 +4,58 @@
       <div class="container">
         <Hero />
 
-        <form name="login" v-on:submit.prevent="login">
-          <div class="field">
-            <div class="control">
-              <label class="label">Your Household Name</label>
-              <div class="select">
-                <select>
-                  <option v-for="home in homes" :key="home.name">{{
-                    home.name
-                  }}</option>
-                </select>
+        <div class="column is-6-desktop">
+          <form name="login" v-on:submit.prevent="login">
+            <div class="field">
+              <div class="control">
+                <label class="label">Your Household Name</label>
+                <div class="select">
+                  <select>
+                    <option v-for="home in homes" :key="home.name">{{
+                      home.name
+                    }}</option>
+                  </select>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class="field">
-            <label class="label">Your Email</label>
-            <input
-              class="input"
-              type="email"
-              placeholder="youremail@email.lt"
-              v-model="email"
-              required
-            />
-          </div>
-
-          <div class="field">
-            <label class="label">Your Password</label>
-            <div class="control">
+            <div class="field">
+              <label class="label">Your Email</label>
               <input
-                class="input"
-                type="password"
-                placeholder="****"
-                v-model="password"
+                class="input is-6-desktop"
+                type="email"
+                placeholder="youremail@email.lt"
+                v-model="email"
                 required
               />
             </div>
-          </div>
 
-          <Notification
-            v-if="error"
-            @close="error = false"
-            :message="errorMessage"
-          />
+            <div class="field">
+              <label class="label">Your Password</label>
+              <div class="control">
+                <input
+                  class="input"
+                  type="password"
+                  placeholder="****"
+                  v-model="password"
+                  required
+                />
+              </div>
+            </div>
 
-          <div class="control">
-            <button class="button" :class="loading && `is-loading`">
-              Login
-            </button>
-          </div>
-        </form>
+            <Notification
+              v-if="error"
+              @close="error = false"
+              :message="errorMessage"
+            />
+
+            <div class="control">
+              <button class="button" :class="loading && `is-loading`">
+                Login
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>
@@ -119,6 +121,10 @@ export default {
 <style scoped>
 .section {
   padding: 1.5em;
+}
+
+.column {
+  padding: 0;
 }
 
 form {
