@@ -16,19 +16,24 @@
               </button>
             </div>
 
-            <div class="card">
+            <div class="card" v-show="toggle">
               <div class="top">
-                <p class="subtitle">total</p>
-                <p class="title is-6-desktop">{{ this.plusMinus }}</p>
-                <div class="bottom columns">
-                  <div class="column">
-                    <p class="subtitle">cash</p>
-                    <div>{{ this.plusCash }}</div>
-                  </div>
-                  <div class="column">
-                    <p class="subtitle">card</p>
-                    <div>{{ this.plusCard }}</div>
-                  </div>
+                <div class="total">total</div>
+
+                <div class="total title is-6-desktop">{{ this.plusMinus }}</div>
+              </div>
+
+              <div class="columns">
+                <div class="column">
+                  <div class="bottom">cash</div>
+
+                  <div class="bottom">{{ this.plusCash }}</div>
+                </div>
+
+                <div class="column">
+                  <div class="bottom">card</div>
+
+                  <div class="bottom">{{ this.plusCard }}</div>
                 </div>
               </div>
             </div>
@@ -61,6 +66,7 @@ export default {
       plusCard: "",
       plusMinus: "",
       loading: false,
+      toggle: false
     };
   },
 
@@ -69,8 +75,9 @@ export default {
       this.loading = true;
       // function for adding number in array (where they are given as string)
       const add = (x) => x.map(Number).reduce((a, v) => a + v);
+
       const result = add(this.plusData) - add(this.minusData);
-      // checking if number is positive or negative and returning positive number wih +
+      // checking if number is positive or negative and returning positive number with (+) sign
       this.plusMinus = result[0] === "-" ? result + " €" : "+" + result + " €";
 
       // same function for type of income
@@ -80,9 +87,8 @@ export default {
       const card = add(this.plusTypeCard) - add(this.minusTypeCard);
       this.plusCard = card[0] === "-" ? card + " €" : "+" + card + " €";
 
-      console.log(this.plusCash, this.plusCard);
-
       this.loading = false;
+      this.toggle = !this.toggle
     },
   },
 
@@ -151,10 +157,37 @@ export default {
 /* major styles */
 .is-centered {
   text-align: center;
+  margin-top: 0.25em;
+}
+
+.toggle {
+  display: none;
+}
+
+.column {
+  margin: 0;
+  padding: 0;
 }
 
 .columns {
-  margin-top: 2em;
+  padding: 1em;
+}
+
+/* card style */
+
+.card {
+  padding: 0.75em;
+}
+.top {
+  padding-bottom: 1em;
+}
+.total {
+  color: #ed185b;
+  padding-bottom: 0.25em;
+}
+
+.bottom {
+  color: #eb6e56;
 }
 
 /* button style */
@@ -163,7 +196,8 @@ button {
   background: #ed185b;
   padding: 1.5em;
   border-radius: 0.8em;
-  margin-left: 0.5em;
+  margin-bottom: 1em;
+
 }
 
 button:hover {
