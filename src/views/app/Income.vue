@@ -5,70 +5,72 @@
         <Hero />
 
         <div class="container">
-          <form name="expenses" v-on:submit.prevent="plus">
-            <div class="field">
-              <label class="label">Income</label>
-              <div class="control">
-                <input
-                  class="input"
-                  type="number"
-                  placeholder="$"
-                  v-model="income"
-                />
-              </div>
-            </div>
-
-            <div class="field">
-              <div class="control moneyType columns">
-                <div class="column is-2">
-                  <label class="radio">
-                    <input
-                      type="radio"
-                      name="moneyType"
-                      value="Cash"
-                      v-model="moneyType"
-                    />
-                    Cash
-                  </label>
-                </div>
-
-                <div class="column">
-                  <label class="radio">
-                    <input
-                      type="radio"
-                      name="moneyType"
-                      value="Card"
-                      v-model="moneyType"
-                      checked
-                    />
-                    Card
-                  </label>
+          <div class="column is-6-desktop">
+            <form name="expenses" v-on:submit.prevent="plus">
+              <div class="field">
+                <label class="label">Income</label>
+                <div class="control">
+                  <input
+                    class="input"
+                    type="number"
+                    placeholder="$"
+                    v-model="income"
+                  />
                 </div>
               </div>
-            </div>
 
-            <div class="field">
-              <label class="label secondary">Additional info</label>
-              <div class="control">
-                <textarea
-                  class="textarea"
-                  placeholder="if needed"
-                  rows="1"
-                  v-model="info"
-                ></textarea>
+              <div class="field">
+                <div class="control moneyType columns">
+                  <div class="column is-2">
+                    <label class="radio">
+                      <input
+                        type="radio"
+                        name="moneyType"
+                        value="Cash"
+                        v-model="moneyType"
+                      />
+                      Cash
+                    </label>
+                  </div>
+
+                  <div class="column">
+                    <label class="radio">
+                      <input
+                        type="radio"
+                        name="moneyType"
+                        value="Card"
+                        v-model="moneyType"
+                        checked
+                      />
+                      Card
+                    </label>
+                  </div>
+                </div>
               </div>
-            </div>
 
-            <Notification
-              v-if="error"
-              @close="error = false"
-              :message="errorMessage"
-            />
+              <div class="field">
+                <label class="label secondary">Additional info</label>
+                <div class="control">
+                  <textarea
+                    class="textarea"
+                    placeholder="if needed"
+                    rows="1"
+                    v-model="info"
+                  ></textarea>
+                </div>
+              </div>
 
-            <div class="control" :class="loading && `is-loading`">
-              <button class="button">Add</button>
-            </div>
-          </form>
+              <Notification
+                v-if="error"
+                @close="error = false"
+                :message="errorMessage"
+              />
+
+              <div class="control" :class="loading && `is-loading`">
+                <button class="button">Add</button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>

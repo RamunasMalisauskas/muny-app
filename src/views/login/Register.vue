@@ -9,51 +9,52 @@
           v-on:close="error = false"
           :message="errorMessage"
         />
+        <div class="column is-6-desktop">
+          <form name="login" v-on:submit.prevent="register">
+            <div class="field">
+              <label class="label">Your Household Name</label>
+              <div class="control">
+                <input
+                  class="input"
+                  type="text"
+                  placeholder="e.g 742 Evergreen Terrace"
+                  v-model="home"
+                  required
+                />
+              </div>
+            </div>
 
-        <form name="login" v-on:submit.prevent="register">
-          <div class="field">
-            <label class="label">Your Household Name</label>
-            <div class="control">
+            <div class="field">
+              <label class="label" for="email">Email</label>
               <input
                 class="input"
-                type="text"
-                placeholder="e.g 742 Evergreen Terrace"
-                v-model="home"
+                type="email"
+                placeholder="youremail@email.lt"
+                v-model="email"
                 required
               />
             </div>
-          </div>
 
-          <div class="field">
-            <label class="label" for="email">Email</label>
-            <input
-              class="input"
-              type="email"
-              placeholder="youremail@email.lt"
-              v-model="email"
-              required
-            />
-          </div>
-
-          <div class="field">
-            <label class="label">Your Password</label>
-            <div class="control">
-              <input
-                class="input"
-                type="password"
-                placeholder="****"
-                v-model="password"
-                required
-              />
+            <div class="field">
+              <label class="label">Your Password</label>
+              <div class="control">
+                <input
+                  class="input"
+                  type="password"
+                  placeholder="****"
+                  v-model="password"
+                  required
+                />
+              </div>
             </div>
-          </div>
 
-          <div class="control">
-            <button class="button" :class="loading && `is-loading`">
-              Register
-            </button>
-          </div>
-        </form>
+            <div class="control">
+              <button class="button" :class="loading && `is-loading`">
+                Register
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>
