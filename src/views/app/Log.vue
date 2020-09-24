@@ -44,7 +44,6 @@
 
         <div class="mobile">
           <div class="card" v-for="transfer in transferData" :key="transfer.id">
-            <div class="top">date:</div>
             <div class="date">
               {{ new Date(transfer.date.seconds * 1000).toLocaleString("lt") }}
             </div>
@@ -95,6 +94,9 @@ export default {
       .collection("users")
       .doc(userId)
       .collection("expenses")
+      // selecting groups and all the other crap
+      // .where("group", "==", "home")
+      .orderBy("date", "desc")
       .get()
       .then((snapshot) => {
         snapshot.docs.forEach((item) => {
@@ -114,6 +116,7 @@ export default {
       .collection("users")
       .doc(userId)
       .collection("income")
+      .orderBy("date", "desc")
       .get()
       .then((snapshot) => {
         snapshot.docs.forEach((item) => {
@@ -146,6 +149,20 @@ export default {
 
 .mobile {
   display: none;
+}
+
+/* table style */
+
+.table thead th {
+  color: #ed185b;
+}
+
+td {
+  color: #eb6e56;
+}
+
+td:nth-child(2) {
+  color: #ed185b;
 }
 
 /* mobile styles */

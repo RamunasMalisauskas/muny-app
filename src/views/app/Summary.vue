@@ -74,21 +74,33 @@ export default {
     get() {
       this.loading = true;
       // function for adding number in array (where they are given as string)
-      const add = (x) => x.map(Number).reduce((a, v) => a + v);
+      const add = (x) => x.map(Number).reduce((a, v) => a + v, 0);
 
       const result = add(this.plusData) - add(this.minusData);
-      // checking if number is positive or negative and returning positive number with (+) sign
+      // checking if number is positive/ negative or zero and returning with correct sign
       this.plusMinus =
-        result.toString()[0] === "-" ? result + " €" : "+" + result + " €";
+        result.toString()[0] === "-"
+          ? result + " €"
+          : result.toString() == 0
+          ? 0
+          : "+" + result + " €";
 
       // same function for type of income
       const cash = add(this.plusTypeCash) - add(this.minusTypeCash);
       this.plusCash =
-        cash.toString()[0] === "-" ? cash + " €" : "+" + cash + " €";
+        cash.toString()[0] === "-"
+          ? cash + " €"
+          : result.toString() == 0
+          ? 0
+          : "+" + cash + " €";
 
       const card = add(this.plusTypeCard) - add(this.minusTypeCard);
       this.plusCard =
-        card.toString()[0] === "-" ? card + " €" : "+" + card + " €";
+        card.toString()[0] === "-"
+          ? card + " €"
+          : result.toString() == 0
+          ? 0
+          : "+" + card + " €";
 
       this.loading = false;
       this.toggle = !this.toggle;
