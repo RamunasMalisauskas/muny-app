@@ -4,40 +4,43 @@
       <div class="container">
         <Hero />
 
-        <div class="section">
-          <div class="container">
-            <table>
-              <thead>
-                <tr>
-                  <th>head1</th>
-                  <th>head2</th>
-                  <th>head3</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>data1</td>
-                  <td>data2</td>
-                  <td>data3</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>head1</th>
-                  <th>head2</th>
-                  <th>head3</th>
-                </tr>
-              </tfoot>
-            </table>
-          </div>
-        </div>
+        <table class="table is-striped is-fullwidth">
+          <thead>
+            <tr>
+              <th>date</th>
+              <th>+/-</th>
+              <th>type</th>
+              <th>details</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="transfer in transferData" :key="transfer.id">
+              <td>
+                {{
+                  new Date(transfer.date.seconds * 1000).toLocaleString("lt")
+                }}
+              </td>
+              <td>{{ transfer.plusMinus }}</td>
+              <td>{{ transfer.type }}</td>
+              <td>{{ transfer.info }}</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <th>date</th>
+              <th>+/-</th>
+              <th>type</th>
+              <th>details</th>
+            </tr>
+          </tfoot>
+        </table>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-// import firebase from "firebase/app";
+import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
 import Hero from "../../components/Hero";
@@ -45,11 +48,61 @@ import Hero from "../../components/Hero";
 export default {
   name: "Log",
   components: { Hero },
+
+  data() {
+    return {
+      transferData: [],
+    };
+  },
+  beforeMount() {
+    const userId = firebase.auth().currentUser.uid;
+
+    firebase
+      .firestore()
+      .collection("users")
+      .doc(userId)
+      .collection("expenses")
+      .get()
+      .then((snapshot) => {
+        snapshot.docs.forEach((item) => {
+          this.transferData.push({
+            id: item.id,
+            date: item.data().date,
+            plusMinus: "-" + item.data().expenses,
+            type: item.data().moneyType,
+            group: item.data().group,
+            info: item.data().info,
+          });
+        });
+      });
+
+       firebase
+      .firestore()
+      .collection("users")
+      .doc(userId)
+      .collection("income")
+      .get()
+      .then((snapshot) => {
+        snapshot.docs.forEach((item) => {
+          this.transferData.push({
+            id: item.id,
+            date: item.data().date,
+            plusMinus: "+" + item.data().income,
+            type: item.data().moneyType,
+            info: item.data().info,
+          });
+        });
+      });
+  },
 };
 </script>
 
 <style scoped>
 .section {
   padding: 1.5em;
+}
+
+.is-narrow {
+  padding: 0;
 }
 </style>

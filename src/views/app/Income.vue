@@ -14,6 +14,7 @@
                   type="number"
                   placeholder="$"
                   v-model="income"
+                  required
                 />
               </div>
             </div>
@@ -27,6 +28,7 @@
                       name="moneyType"
                       value="Cash"
                       v-model="moneyType"
+                      required
                     />
                     Cash
                   </label>
