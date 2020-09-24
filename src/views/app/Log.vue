@@ -4,11 +4,12 @@
       <div class="container">
         <Hero />
 
-        <table class="table is-striped is-fullwidth">
+        <table v-show="toggle" class="table is-striped is-fullwidth">
           <thead>
             <tr>
               <th>date</th>
               <th>+/-</th>
+              <th>group</th>
               <th>type</th>
               <th>details</th>
             </tr>
@@ -21,6 +22,7 @@
                 }}
               </td>
               <td>{{ transfer.plusMinus }}</td>
+              <td>{{ transfer.group }}</td>
               <td>{{ transfer.type }}</td>
               <td>{{ transfer.info }}</td>
             </tr>
@@ -29,11 +31,46 @@
             <tr>
               <th>date</th>
               <th>+/-</th>
+              <th>group</th>
               <th>type</th>
               <th>details</th>
             </tr>
           </tfoot>
         </table>
+
+        <div class="mobile-card">
+          <div
+            class="card"
+            v-show="toggle"
+            v-for="transfer in transferData"
+            :key="transfer.id"
+          >
+            <div class="top">date</div>
+            <div class="info">
+              {{ new Date(transfer.date.seconds * 1000).toLocaleString("lt") }}
+            </div>
+
+            <div class="top">+/-</div>
+            <div class="info">
+              {{ transfer.plusMinus }}
+            </div>
+
+            <div class="top">group</div>
+            <div class="info">
+              {{ transfer.group }}
+            </div>
+
+            <div class="top">type</div>
+            <div class="info">
+              {{ transfer.type }}
+            </div>
+
+            <div class="top">details</div>
+            <div class="info">
+              {{ transfer.info }}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -52,8 +89,10 @@ export default {
   data() {
     return {
       transferData: [],
+      toggle: true,
     };
   },
+
   beforeMount() {
     const userId = firebase.auth().currentUser.uid;
 
@@ -76,7 +115,7 @@ export default {
         });
       });
 
-       firebase
+    firebase
       .firestore()
       .collection("users")
       .doc(userId)
