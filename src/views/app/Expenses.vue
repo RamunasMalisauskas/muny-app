@@ -142,7 +142,7 @@ export default {
       // add spiner to button
       this.loading = true;
 
-      // getting user ID
+      // getting user ID and making it constant
       const userId = firebase.auth().currentUser.uid;
 
       // filer which group to be added to DB
@@ -152,28 +152,35 @@ export default {
           : this.selectedGroup;
 
       // adds data based by your user ID
-      firebase
-        .firestore()
-        .collection("users")
-        .doc(userId)
-        .collection("expenses")
-        .add({
-          group: filteredGroup.toLowerCase(),
-          expenses: this.expenses,
-          moneyType: this.moneyType,
-          info: this.info,
-          date: firebase.firestore.FieldValue.serverTimestamp(),
-        })
-        .then(() => {
-          this.error = true;
-          this.errorMessage = `You have added ${this.expenses}€ to you expenses database`;
-          this.loading = false;
-        })
-        .catch((error) => {
-          this.loading = false;
-          this.error = true;
-          this.errorMessage = "oops...  " + error.message;
-        });
+      //  checks if you have selected group beforehand
+      if (this.addGroup.length === 0 && this.selectedGroup.length === 0) {
+        this.error = true;
+        this.errorMessage = "please select group";
+        this.loading = false;
+      } else {
+        firebase
+          .firestore()
+          .collection("users")
+          .doc(userId)
+          .collection("expenses")
+          .add({
+            group: filteredGroup.toLowerCase(),
+            expenses: this.expenses,
+            moneyType: this.moneyType,
+            info: this.info,
+            date: firebase.firestore.FieldValue.serverTimestamp(),
+          })
+          .then(() => {
+            this.error = true;
+            this.errorMessage = `You have added ${this.expenses}€ to you expenses database`;
+            this.loading = false;
+          })
+          .catch((error) => {
+            this.loading = false;
+            this.error = true;
+            this.errorMessage = "oops...  " + error.message;
+          });
+      }
     },
   },
 
