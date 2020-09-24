@@ -66,7 +66,7 @@ export default {
       plusCard: "",
       plusMinus: "",
       loading: false,
-      toggle: false
+      toggle: false,
     };
   },
 
@@ -78,17 +78,20 @@ export default {
 
       const result = add(this.plusData) - add(this.minusData);
       // checking if number is positive or negative and returning positive number with (+) sign
-      this.plusMinus = result[0] === "-" ? result + " €" : "+" + result + " €";
+      this.plusMinus =
+        result.toString()[0] === "-" ? result + " €" : "+" + result + " €";
 
       // same function for type of income
       const cash = add(this.plusTypeCash) - add(this.minusTypeCash);
-      this.plusCash = cash[0] === "-" ? cash + " €" : "+" + cash + " €";
+      this.plusCash =
+        cash.toString()[0] === "-" ? cash + " €" : "+" + cash + " €";
 
       const card = add(this.plusTypeCard) - add(this.minusTypeCard);
-      this.plusCard = card[0] === "-" ? card + " €" : "+" + card + " €";
+      this.plusCard =
+        card.toString()[0] === "-" ? card + " €" : "+" + card + " €";
 
       this.loading = false;
-      this.toggle = !this.toggle
+      this.toggle = !this.toggle;
     },
   },
 
@@ -197,7 +200,6 @@ button {
   padding: 1.5em;
   border-radius: 0.8em;
   margin-bottom: 1em;
-
 }
 
 button:hover {
