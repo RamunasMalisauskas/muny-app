@@ -56,6 +56,15 @@ const routes = [
     },
   },
   {
+    path: "/infopage/:id",
+    name: "Info",
+    component: () =>
+      import(/* webpackChunkName: "log" */ "../views//app/InfoPage.vue"),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
     path: "/summary",
     name: "Summary",
     component: () =>

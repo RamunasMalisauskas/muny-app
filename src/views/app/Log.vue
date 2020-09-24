@@ -56,42 +56,12 @@
 
             <div class="info-main">{{ transfer.plusMinus }}</div>
 
-            <div class="dropdown" :class="active && `is-active`">
-              <div class="dropdown-trigger">
-                <button
-                  @click="toggle"
-                  class="button"
-                  aria-haspopup="true"
-                  aria-controls="dropdown-menu"
-                >
-                  <span>more info -></span>
-                </button>
-              </div>
-
-              <div class="dropdown-menu" id="dropdown-menu2" role="menu">
-                <div class="dropdown-content">
-                  <div class="dropdown-item">
-                    <div class="top">group:</div>
-                    <div class="info">
-                      {{ transfer.group }}
-                    </div>
-                  </div>
-                  <hr class="dropdown-divider" />
-                  <div class="dropdown-item">
-                    <div class="top">type:</div>
-                    <div class="info">
-                      {{ transfer.type }}
-                    </div>
-                  </div>
-                  <hr class="dropdown-divider" />
-                  <div class="dropdown-item">
-                    <div class="top">details:</div>
-                    <div class="info">
-                      {{ transfer.info }}
-                    </div>
-                  </div>
+            <div>
+              <router-link :to="/infopage/ + transfer.id">
+                <div class="control" :class="loading && `is-loading`">
+                  <button class="button">more info -></button>
                 </div>
-              </div>
+              </router-link>
             </div>
           </div>
         </div>
@@ -113,7 +83,7 @@ export default {
   data() {
     return {
       transferData: [],
-      active: true,
+      loading: false,
     };
   },
 
@@ -191,7 +161,7 @@ export default {
 }
 
 .top {
-  color: #eb6e56;
+  color: #ed185b;
 }
 
 .info {
@@ -200,13 +170,24 @@ export default {
 }
 
 .date {
+  color: #eb6e56;
   font-size: 1.25em;
 }
 
 .info-main {
   color: #ed185b;
   font-size: 2em;
-  padding: 1em 0;
+  padding: 0.75em 0;
+}
+
+/* button styles */
+
+button {
+  color: #ed185b;
+  border: 1px solid #ed185b;
+  background: #fff;
+  padding: 1.5em;
+  border-radius: 0.8em;
 }
 
 @media only screen and (max-width: 1078px) {

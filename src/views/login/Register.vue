@@ -115,7 +115,6 @@ export default {
 };
 </script>
 
-
 <style scoped>
 /* major styles */
 .section {
@@ -140,7 +139,6 @@ button {
   background: #ed185b;
   padding: 1.5em;
   border-radius: 0.8em;
-  margin-left: 0.5em;
 }
 
 button:hover {
