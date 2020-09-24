@@ -50,24 +50,44 @@
               {{ new Date(transfer.date.seconds * 1000).toLocaleString("lt") }}
             </div>
 
-            <div class="top">+/-</div>
+            <div class="top-main">+/-</div>
             <div class="info">
               {{ transfer.plusMinus }}
             </div>
 
-            <div class="top">group</div>
-            <div class="info">
-              {{ transfer.group }}
-            </div>
-
-            <div class="top">type</div>
-            <div class="info">
-              {{ transfer.type }}
-            </div>
-
-            <div class="top">details</div>
-            <div class="info">
-              {{ transfer.info }}
+            <div class="dropdown" :class="active && `is-active`">
+              <div class="dropdown-trigger">
+                <button
+                  @click="toggle"
+                  class="button"
+                  aria-haspopup="true"
+                  aria-controls="dropdown-menu2"
+                >
+                  <span>more info -></span>
+                </button>
+              </div>
+              <div class="dropdown-menu" id="dropdown-menu2" role="menu">
+                <div class="dropdown-content">
+                  <div class="dropdown-item">
+                    <div class="top">group</div>
+                    <div class="info">
+                      {{ transfer.group }}
+                    </div>
+                  </div>
+                  <hr class="dropdown-divider" />
+                  <div class="dropdown-item">
+                    <div class="top">type</div>
+                    <div class="info">
+                      {{ transfer.type }}
+                    </div>
+                  </div>
+                  <hr class="dropdown-divider" />
+                  <div class="top">details</div>
+                  <div class="info">
+                    {{ transfer.info }}
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -89,8 +109,14 @@ export default {
   data() {
     return {
       transferData: [],
-      toggle: true,
+      active: true,
     };
+  },
+
+  methods: {
+    toggle() {
+      this.active = !this.active;
+    },
   },
 
   beforeMount() {
@@ -137,11 +163,18 @@ export default {
 </script>
 
 <style scoped>
+/* major styles */
 .section {
   padding: 1.5em;
 }
 
 .is-narrow {
   padding: 0;
+}
+
+/* mobile styles */
+.card {
+  margin: 1em 0;
+  padding: 1em;
 }
 </style>
