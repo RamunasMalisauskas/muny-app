@@ -76,6 +76,8 @@ export default {
 
   data() {
     return {
+      // assign it to search button
+      // group: "home",
       transferData: [],
     };
   },
@@ -94,8 +96,8 @@ export default {
       .collection("users")
       .doc(userId)
       .collection("expenses")
-      // selecting groups and all the other crap
-      // .where("group", "==", "home")
+      // .where("group", "==", `${this.group}`)
+      // .where("type", "==", `${this.type}`)
       .orderBy("date", "desc")
       .get()
       .then((snapshot) => {

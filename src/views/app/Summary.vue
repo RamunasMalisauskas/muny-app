@@ -35,6 +35,12 @@
 
                   <div class="bottom">{{ this.plusCard }}</div>
                 </div>
+
+                <div class="total">expenses</div>
+                <div class="top" v-for="group in groups" :key="group.id">
+                  <div class="bottom">{{ group.name }}</div>
+                  <div class="bottom">{{ group.value }}</div>
+                </div>
               </div>
             </div>
           </div>
@@ -56,6 +62,10 @@ export default {
 
   data() {
     return {
+      groups: [
+        // { name: "home", value: 50 },
+        // { name: "travel", value: 138 },
+      ],
       plusData: [],
       minusData: [],
       plusTypeCash: [],
@@ -72,6 +82,8 @@ export default {
 
   methods: {
     get() {
+      console.log(this.groups);
+
       this.loading = true;
       // function for adding number in array (where they are given as string)
       const add = (x) => x.map(Number).reduce((a, v) => a + v, 0);
@@ -90,7 +102,7 @@ export default {
       this.plusCash =
         cash.toString()[0] === "-"
           ? cash + " €"
-          : result.toString() == 0
+          : cash.toString() == 0
           ? 0
           : "+" + cash + " €";
 
@@ -98,7 +110,7 @@ export default {
       this.plusCard =
         card.toString()[0] === "-"
           ? card + " €"
-          : result.toString() == 0
+          : card.toString() == 0
           ? 0
           : "+" + card + " €";
 
@@ -109,10 +121,13 @@ export default {
 
   // getting informations from DB and making calculations which are been pushed to local arrays
   beforeMount() {
+    // getting user ID
+    const userId = firebase.auth().currentUser.uid;
+
     const minus = firebase
       .firestore()
       .collection("users")
-      .doc(firebase.auth().currentUser.uid)
+      .doc(userId)
       .collection("expenses")
       .get();
 
@@ -143,7 +158,7 @@ export default {
     const plus = firebase
       .firestore()
       .collection("users")
-      .doc(firebase.auth().currentUser.uid)
+      .doc(userId)
       .collection("income")
       .get();
 
@@ -164,6 +179,28 @@ export default {
         }
       })
     );
+
+    // getting groups from user DB
+    // firebase
+    //   .firestore()
+    //   .collection("users")
+    //   .doc(userId)
+    //   .collection("expenses")
+    //   // selecting groups and all the other crap
+    //   .where("group", "==", `${this.group}`)
+    //   .get()
+    //   .then((snapshop) =>
+    //     snapshop.docs.forEach((item) => {
+    //       this.groups.push(item.data().group);
+    //     })
+    //   )
+    //   // filter unique groups from DB data
+    //   .then(() => {
+    //     const uniqueGroups = this.groups.filter(
+    //       (x, i) => this.groups.indexOf(x) === i
+    //     );
+    //     this.groups = uniqueGroups;
+    //   });
   },
 };
 </script>
