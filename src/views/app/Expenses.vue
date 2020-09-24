@@ -135,10 +135,6 @@ export default {
   },
 
   methods: {
-    // test() {
-    //   console.log(firebase.auth().currentUser.uid);
-    // },
-
     minus() {
       // add spiner to button
       this.loading = true;
@@ -241,6 +237,10 @@ textarea:hover {
   margin: 1.5em 0;
 }
 
+.secondary {
+  color: #f4bc53;
+}
+
 /* button styles */
 button {
   color: #fff;
@@ -257,10 +257,6 @@ button:hover {
 }
 
 .radio:hover {
-  color: #f4bc53;
-}
-
-.secondary {
   color: #f4bc53;
 }
 </style>

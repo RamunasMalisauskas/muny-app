@@ -165,6 +165,10 @@ textarea:hover {
   margin: 1.5em 0;
 }
 
+.secondary {
+  color: #f4bc53;
+}
+
 /* button styles */
 button {
   color: #fff;

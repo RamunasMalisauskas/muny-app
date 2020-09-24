@@ -12,7 +12,7 @@
                 @click="get()"
                 :class="loading && `is-loading`"
               >
-                Get info
+                Get summary
               </button>
             </div>
 
@@ -158,6 +158,10 @@ export default {
 
 <style scoped>
 /* major styles */
+.section {
+  padding: 1.5em;
+}
+
 .is-centered {
   text-align: center;
   margin-top: 0.25em;
