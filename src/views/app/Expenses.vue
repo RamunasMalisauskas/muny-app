@@ -14,6 +14,7 @@
                   <div class="control">
                     <div class="select">
                       <select v-model="selectedGroup">
+                        <option value="">choose one:</option>
                         <option v-for="group in groups" :key="group.id">{{
                           group
                         }}</option>
@@ -46,6 +47,7 @@
                   type="number"
                   placeholder="$"
                   v-model="expenses"
+                  required
                 />
               </div>
             </div>
@@ -59,6 +61,7 @@
                       name="moneyType"
                       value="Cash"
                       v-model="moneyType"
+                      required
                     />
                     Cash
                   </label>
@@ -144,7 +147,9 @@ export default {
 
       // filer which group to be added to DB
       const filteredGroup =
-        this.addGroup.length > 1 ? this.addGroup : this.selectedGroup;
+        this.addGroup.length > 2 && this.selectedGroup.length === 0
+          ? this.addGroup
+          : this.selectedGroup;
 
       // adds data based by your user ID
       firebase
@@ -153,7 +158,7 @@ export default {
         .doc(userId)
         .collection("expenses")
         .add({
-          group: filteredGroup,
+          group: filteredGroup.toLowerCase(),
           expenses: this.expenses,
           moneyType: this.moneyType,
           info: this.info,
