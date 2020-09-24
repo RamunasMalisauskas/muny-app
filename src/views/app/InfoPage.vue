@@ -1,29 +1,38 @@
 <template>
   <div id="info">
-    <Hero />
+    <div class="section">
+      <div class="container">
+        <Hero />
+        <div class="mobile">
+          <div class="card">
+            <div class="top">date:</div>
+            <div class="date">
+              {{ new Date(date.seconds * 1000).toLocaleString("lt") }}
+            </div>
 
-    <div class="mobile">
-      <div class="card">
-        <div class="top">date:</div>
-        <div class="date">
-          {{ new Date(date.seconds * 1000).toLocaleString("lt") }}
-        </div>
+            <div class="info-main">{{ plusMinus }}</div>
 
-        <div class="info-main">{{ plusMinus }}</div>
+            <div class="top">group:</div>
+            <div class="info">
+              {{ group }}
+            </div>
 
-        <div class="top">group:</div>
-        <div class="info">
-          {{ group }}
-        </div>
+            <div class="top">type:</div>
+            <div class="info">
+              {{ type }}
+            </div>
 
-        <div class="top">type:</div>
-        <div class="info">
-          {{ type }}
-        </div>
+            <div class="top">details:</div>
+            <div class="info">
+              {{ details }}
+            </div>
 
-        <div class="top">details:</div>
-        <div class="info">
-          {{ details }}
+            <router-link to="/log">
+              <div class="control">
+                <button class="button">← go back</button>
+              </div>
+            </router-link>
+          </div>
         </div>
       </div>
     </div>
@@ -73,6 +82,10 @@ export default {
 </script>
 
 <style scoped>
+.section {
+  padding: 1.5em;
+}
+
 .card {
   margin: 1em 0;
   padding: 1em;
@@ -97,5 +110,14 @@ export default {
   color: #ed185b;
   font-size: 2em;
   padding: 0.75em 0;
+}
+
+/* button styles */
+button {
+  color: #ed185b;
+  border: 1px solid #ed185b;
+  background: #fff;
+  padding: 1.5em;
+  border-radius: 0.8em;
 }
 </style>

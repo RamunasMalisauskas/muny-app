@@ -43,12 +43,7 @@
         </div>
 
         <div class="mobile">
-          <div
-            class="card"
-            v-show="toggle"
-            v-for="transfer in transferData"
-            :key="transfer.id"
-          >
+          <div class="card" v-for="transfer in transferData" :key="transfer.id">
             <div class="top">date:</div>
             <div class="date">
               {{ new Date(transfer.date.seconds * 1000).toLocaleString("lt") }}
@@ -58,8 +53,8 @@
 
             <div>
               <router-link :to="/infopage/ + transfer.id">
-                <div class="control" :class="loading && `is-loading`">
-                  <button class="button">more info -></button>
+                <div class="control">
+                  <button class="button">more info →</button>
                 </div>
               </router-link>
             </div>
@@ -83,7 +78,6 @@ export default {
   data() {
     return {
       transferData: [],
-      loading: false,
     };
   },
 
@@ -181,7 +175,6 @@ export default {
 }
 
 /* button styles */
-
 button {
   color: #ed185b;
   border: 1px solid #ed185b;
