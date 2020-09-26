@@ -89,8 +89,8 @@ export default {
       // assign it to search button
       // group: "home",
       // type: "Card",
-      // timeSort: "asc",
       // sort: "desc",
+      timeSort: "desc",
       transferData: [],
     };
   },
@@ -123,7 +123,7 @@ export default {
       // trying
       // .where("moneyType", "==", `${this.type}`)
       // .where("group", "==", `${this.group}`)
-      // .orderBy("date", `${this.timeSort}`)
+      .orderBy("date", `${this.timeSort}`)
       // .orderBy("expenses", `${this.sort}`)
       .get()
       .then((snapshot) => {

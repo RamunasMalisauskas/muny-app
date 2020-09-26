@@ -145,7 +145,7 @@ export default {
     minus.then((snapshot) =>
       snapshot.docs.forEach((item) => {
         // checking the type of data and pushing it to accordin array
-        if (item.data().moneyType == "Cash") {
+        if (item.data().moneyType == "cash") {
           this.minusTypeCash.push(item.data().expenses);
         } else {
           this.minusTypeCard.push(item.data().expenses);
@@ -173,7 +173,7 @@ export default {
     // geting type of income
     plus.then((snapshot) =>
       snapshot.docs.forEach((item) => {
-        if (item.data().moneyType == "Cash") {
+        if (item.data().moneyType == "cash") {
           this.plusTypeCash.push(item.data().income);
         } else {
           this.plusTypeCard.push(item.data().income);
