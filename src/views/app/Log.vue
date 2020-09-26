@@ -13,6 +13,7 @@
                 <th>group</th>
                 <th>type</th>
                 <th>details</th>
+                <th></th>
               </tr>
             </thead>
 
@@ -45,6 +46,7 @@
                 <th>group</th>
                 <th>type</th>
                 <th>details</th>
+                <th></th>
               </tr>
             </tfoot>
           </table>
@@ -99,13 +101,14 @@ export default {
     },
 
     remove(id) {
-      firebase
+      const user = firebase
         .firestore()
         .collection("users")
-        .doc(firebase.auth().currentUser.uid)
-        .collection("expenses")
-        .doc(id)
-        .delete();
+        .doc(firebase.auth().currentUser.uid);
+
+      user.collection("expenses").doc(id) == id
+        ? console.log("match")
+        : console.log("not");
     },
   },
 
@@ -233,6 +236,13 @@ button {
 .is-small {
   padding: 0.5em;
   border-radius: 0.8em;
+  color: #eb6e56;
+  border: 1px solid #eb6e56;
+}
+
+.is-small:hover {
+  background: #eb6e56;
+  color: #fff;
 }
 
 @media only screen and (max-width: 1078px) {

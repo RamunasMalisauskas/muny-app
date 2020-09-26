@@ -125,7 +125,7 @@ export default {
 
   data() {
     return {
-      groups: [],
+      groups: ["groceries", "travel", "car", "pets", "foodout"],
       selectedGroup: "",
       addGroup: "",
       expenses: "",
@@ -139,8 +139,6 @@ export default {
 
   methods: {
     minus() {
-      console.log(this.selectedGroup);
-
       // add spiner to button
       this.loading = true;
 

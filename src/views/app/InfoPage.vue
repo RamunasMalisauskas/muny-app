@@ -32,6 +32,10 @@
                 <button class="button">← go back</button>
               </div>
             </router-link>
+
+            <button class="button is-small" v-on:click="remove(transfer.id)">
+              Delete
+            </button>
           </div>
         </div>
       </div>
@@ -58,6 +62,18 @@ export default {
       type: "",
       details: "",
     };
+  },
+
+  methods: {
+    remove(id) {
+      firebase
+        .firestore()
+        .collection("users")
+        .doc(firebase.auth().currentUser.uid)
+        .collection("expenses")
+        .doc(id)
+        .delete();
+    },
   },
 
   beforeMount() {
@@ -119,5 +135,13 @@ button {
   background: #fff;
   padding: 1.5em;
   border-radius: 0.8em;
+}
+
+.is-small {
+  margin-top: 3em;
+  border-radius: 0.8em;
+  border: 0 solid;
+  background: #eb6e56;
+  color: #fff;
 }
 </style>
