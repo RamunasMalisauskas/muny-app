@@ -118,7 +118,7 @@ export default {
             .set({ home: this.home, email: this.email });
         })
         .then(() => {
-          this.$router.push("/expenses");
+          this.router.push("/expenses");
         })
         .catch(() => {
           this.loading = false;

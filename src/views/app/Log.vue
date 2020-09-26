@@ -13,7 +13,6 @@
                 <th>group</th>
                 <th>type</th>
                 <th>details</th>
-                <th></th>
               </tr>
             </thead>
 
@@ -28,14 +27,14 @@
                 <td>{{ transfer.group }}</td>
                 <td>{{ transfer.type }}</td>
                 <td>{{ transfer.info }}</td>
-                <td>
+                <!-- <td>
                   <button
                     class="button is-small"
                     v-on:click="remove(transfer.id)"
                   >
-                    edit
+                    delete
                   </button>
-                </td>
+                </td> -->
               </tr>
             </tbody>
 
@@ -46,7 +45,6 @@
                 <th>group</th>
                 <th>type</th>
                 <th>details</th>
-                <th></th>
               </tr>
             </tfoot>
           </table>
@@ -88,7 +86,7 @@ export default {
     return {
       // assign it to search button
       // group: "home",
-      // type: "Card",
+      // type: "card",
       // sort: "desc",
       timeSort: "desc",
       transferData: [],
@@ -123,8 +121,8 @@ export default {
       // trying
       // .where("moneyType", "==", `${this.type}`)
       // .where("group", "==", `${this.group}`)
-      .orderBy("date", `${this.timeSort}`)
       // .orderBy("expenses", `${this.sort}`)
+      .orderBy("date", `${this.timeSort}`)
       .get()
       .then((snapshot) => {
         snapshot.docs.forEach((item) => {
@@ -193,10 +191,11 @@ td:nth-child(2) {
   color: #ed185b;
 }
 
-td:last-child {
+/* // delete button style */
+/* td:last-child {
   padding: 0.5em 0;
   text-align: right;
-}
+} */
 
 /* mobile styles */
 .card {

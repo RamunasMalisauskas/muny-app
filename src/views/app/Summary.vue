@@ -35,12 +35,17 @@
 
                   <div class="bottom">{{ this.plusCard }}</div>
                 </div>
+              </div>
+            </div>
 
-                <div class="total">expenses</div>
-                <div class="top" v-for="group in groups" :key="group.id">
-                  <div class="bottom">{{ group.name }}</div>
-                  <div class="bottom">{{ group.value }}</div>
+            <div class="card" v-show="toggle">
+              <div class="total">expenses</div>
+
+              <div v-for="group in groups" :key="group.name">
+                <div>
+                  {{ group.name }}
                 </div>
+                <div>{{ group.value }}</div>
               </div>
             </div>
           </div>
@@ -63,8 +68,8 @@ export default {
   data() {
     return {
       groups: [
-        // { name: "home", value: 50 },
-        // { name: "travel", value: 138 },
+        { name: "home", value: "30" },
+        { name: "travel", value: "50" },
       ],
       plusData: [],
       minusData: [],
@@ -82,6 +87,7 @@ export default {
 
   methods: {
     get() {
+      console.log(this.groups.map((a) => a.value));
       this.loading = true;
       // function for adding number in array (where they are given as string)
       const add = (x) => x.map(Number).reduce((a, v) => a + v, 0);
@@ -104,7 +110,6 @@ export default {
           ? 0
           : "+" + cash + " €";
 
-
       const card = add(this.plusTypeCard) - add(this.minusTypeCard);
       this.plusCard =
         card.toString()[0] === "-"
@@ -112,8 +117,6 @@ export default {
           : card.toString() == 0
           ? 0
           : "+" + card + " €";
-
-          console.log(card)
 
       this.loading = false;
       this.toggle = !this.toggle;

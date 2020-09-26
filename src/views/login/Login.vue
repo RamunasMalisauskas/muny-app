@@ -91,7 +91,7 @@ export default {
         .auth()
         .signInWithEmailAndPassword(this.email, this.password)
         .then(() => {
-          this.$router.push("/expenses");
+          this.router.push("/expenses");
         })
         .catch((error) => {
           this.loading = false;

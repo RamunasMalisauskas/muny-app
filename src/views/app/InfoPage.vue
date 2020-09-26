@@ -33,9 +33,9 @@
               </div>
             </router-link>
 
-            <button class="button is-small" v-on:click="remove(transfer.id)">
+            <!-- <button class="button is-small" v-on:click="remove(transfer.id)">
               Delete
-            </button>
+            </button> -->
           </div>
         </div>
       </div>
