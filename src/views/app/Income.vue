@@ -26,7 +26,7 @@
                     <input
                       type="radio"
                       name="moneyType"
-                      value="Cash"
+                      value="cash"
                       v-model="moneyType"
                       required
                     />
@@ -39,7 +39,7 @@
                     <input
                       type="radio"
                       name="moneyType"
-                      value="Card"
+                      value="card"
                       v-model="moneyType"
                       checked
                     />

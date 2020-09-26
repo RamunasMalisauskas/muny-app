@@ -31,13 +31,26 @@
             </div>
 
             <div class="field">
-              <label class="label">Your Password</label>
+              <label class="label">Enter Password</label>
               <div class="control">
                 <input
                   class="input"
                   type="password"
                   placeholder="****"
                   v-model="password"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="label">Repeat Password</label>
+              <div class="control">
+                <input
+                  class="input"
+                  type="password"
+                  placeholder="****"
+                  v-model="passwordCheck"
                   required
                 />
               </div>
@@ -77,6 +90,7 @@ export default {
       home: "",
       email: "",
       password: "",
+      passwordCheck: "",
       error: false,
       errorMessage: "",
       loading: false,
@@ -84,6 +98,12 @@ export default {
   },
 
   methods: {
+    // test() {
+    //   this.password === this.passwordCheck
+    //     ? console.log("ok")
+    //     : console.log("not");
+    // },
+
     // creating user in with auth and creating another DB for user || so that couple users can be added to the same home
     register() {
       this.loading = true;
@@ -107,10 +127,6 @@ export default {
             "there has been a problem with registry try again";
         });
     },
-
-    // test() {
-    //   console.log(this.name, this.home, this.password);
-    // },
   },
 };
 </script>

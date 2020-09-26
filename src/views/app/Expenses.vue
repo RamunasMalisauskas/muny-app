@@ -15,6 +15,8 @@
                     <div class="select">
                       <select v-model="selectedGroup">
                         <option value="">choose one:</option>
+                        <option value="groceries">groceries</option>
+                        <option value="travel">travel</option>
                         <option v-for="group in groups" :key="group.id">{{
                           group
                         }}</option>
@@ -59,7 +61,7 @@
                     <input
                       type="radio"
                       name="moneyType"
-                      value="Cash"
+                      value="cash"
                       v-model="moneyType"
                       required
                     />
@@ -72,7 +74,7 @@
                     <input
                       type="radio"
                       name="moneyType"
-                      value="Card"
+                      value="card"
                       v-model="moneyType"
                       checked
                     />
@@ -139,6 +141,8 @@ export default {
 
   methods: {
     minus() {
+      console.log(this.selectedGroup);
+
       // add spiner to button
       this.loading = true;
 
@@ -172,7 +176,7 @@ export default {
           })
           .then(() => {
             this.error = true;
-            this.errorMessage = `You have added ${this.expenses}€ to you expenses database`;
+            this.errorMessage = `You have added ${this.expenses}€ to your expenses database`;
             this.loading = false;
           })
           .catch((error) => {

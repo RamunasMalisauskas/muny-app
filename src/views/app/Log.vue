@@ -78,6 +78,9 @@ export default {
     return {
       // assign it to search button
       // group: "home",
+      // type: "Card",
+      // timeSort: "asc",
+      // sort: "desc",
       transferData: [],
     };
   },
@@ -96,9 +99,11 @@ export default {
       .collection("users")
       .doc(userId)
       .collection("expenses")
+      // trying 
+      // .where("moneyType", "==", `${this.type}`)
       // .where("group", "==", `${this.group}`)
-      // .where("type", "==", `${this.type}`)
-      .orderBy("date", "desc")
+      // .orderBy("date", `${this.timeSort}`)
+      // .orderBy("expenses", `${this.sort}`)
       .get()
       .then((snapshot) => {
         snapshot.docs.forEach((item) => {
