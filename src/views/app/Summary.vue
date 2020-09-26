@@ -82,8 +82,6 @@ export default {
 
   methods: {
     get() {
-      console.log(this.groups);
-
       this.loading = true;
       // function for adding number in array (where they are given as string)
       const add = (x) => x.map(Number).reduce((a, v) => a + v, 0);
@@ -106,6 +104,7 @@ export default {
           ? 0
           : "+" + cash + " €";
 
+
       const card = add(this.plusTypeCard) - add(this.minusTypeCard);
       this.plusCard =
         card.toString()[0] === "-"
@@ -113,6 +112,8 @@ export default {
           : card.toString() == 0
           ? 0
           : "+" + card + " €";
+
+          console.log(card)
 
       this.loading = false;
       this.toggle = !this.toggle;

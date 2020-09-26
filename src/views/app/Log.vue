@@ -27,6 +27,14 @@
                 <td>{{ transfer.group }}</td>
                 <td>{{ transfer.type }}</td>
                 <td>{{ transfer.info }}</td>
+                <td>
+                  <button
+                    class="button is-small"
+                    v-on:click="remove(transfer.id)"
+                  >
+                    Delete
+                  </button>
+                </td>
               </tr>
             </tbody>
 
@@ -89,6 +97,16 @@ export default {
     toggle() {
       this.active = !this.active;
     },
+
+    remove(id) {
+      firebase
+        .firestore()
+        .collection("users")
+        .doc(firebase.auth().currentUser.uid)
+        .collection("expenses")
+        .doc(id)
+        .delete();
+    },
   },
 
   beforeMount() {
@@ -99,7 +117,7 @@ export default {
       .collection("users")
       .doc(userId)
       .collection("expenses")
-      // trying 
+      // trying
       // .where("moneyType", "==", `${this.type}`)
       // .where("group", "==", `${this.group}`)
       // .orderBy("date", `${this.timeSort}`)
@@ -172,6 +190,11 @@ td:nth-child(2) {
   color: #ed185b;
 }
 
+td:last-child {
+  padding: 0.5em 0;
+  text-align: right;
+}
+
 /* mobile styles */
 .card {
   margin: 1em 0;
@@ -204,6 +227,11 @@ button {
   border: 1px solid #ed185b;
   background: #fff;
   padding: 1.5em;
+  border-radius: 0.8em;
+}
+
+.is-small {
+  padding: 0.5em;
   border-radius: 0.8em;
 }
 

@@ -15,8 +15,6 @@
                     <div class="select">
                       <select v-model="selectedGroup">
                         <option value="">choose one:</option>
-                        <option value="groceries">groceries</option>
-                        <option value="travel">travel</option>
                         <option v-for="group in groups" :key="group.id">{{
                           group
                         }}</option>
