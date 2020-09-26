@@ -33,7 +33,7 @@
                     class="button is-small"
                     v-on:click="remove(transfer.id)"
                   >
-                    Delete
+                    edit
                   </button>
                 </td>
               </tr>
@@ -106,9 +106,9 @@ export default {
         .collection("users")
         .doc(firebase.auth().currentUser.uid);
 
-      user.collection("expenses").doc(id) == id
-        ? console.log("match")
-        : console.log("not");
+      console.log(
+        user.collection("expenses").doc(id) || user.collection("income").doc(id)
+      );
     },
   },
 
