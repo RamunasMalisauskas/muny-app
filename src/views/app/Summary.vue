@@ -67,10 +67,7 @@ export default {
 
   data() {
     return {
-      groups: [
-        { name: "home", value: "30" },
-        { name: "travel", value: "50" },
-      ],
+      groups: [],
       plusData: [],
       minusData: [],
       plusTypeCash: [],
@@ -87,7 +84,7 @@ export default {
 
   methods: {
     get() {
-      console.log(this.groups.map((a) => a.value));
+      // console.log(this.groups.map((a) => a.name));
       this.loading = true;
       // function for adding number in array (where they are given as string)
       const add = (x) => x.map(Number).reduce((a, v) => a + v, 0);
@@ -141,12 +138,8 @@ export default {
       snapshot.docs.forEach((item) => {
         // fetching expenses and pushing it to minusData array
         this.minusData.push(item.data().expenses);
-      })
-    );
 
-    // geting detailed info of expenses type
-    minus.then((snapshot) =>
-      snapshot.docs.forEach((item) => {
+        // geting detailed info of expenses type
         // checking the type of data and pushing it to accordin array
         if (item.data().moneyType == "cash") {
           this.minusTypeCash.push(item.data().expenses);
@@ -170,12 +163,8 @@ export default {
     plus.then((snapshot) =>
       snapshot.docs.forEach((item) => {
         this.plusData.push(item.data().income);
-      })
-    );
 
-    // geting type of income
-    plus.then((snapshot) =>
-      snapshot.docs.forEach((item) => {
+        // geting type of income
         if (item.data().moneyType == "cash") {
           this.plusTypeCash.push(item.data().income);
         } else {
@@ -184,27 +173,28 @@ export default {
       })
     );
 
-    // getting groups from user DB
-    // firebase
-    //   .firestore()
-    //   .collection("users")
-    //   .doc(userId)
-    //   .collection("expenses")
-    //   // selecting groups and all the other crap
-    //   .where("group", "==", `${this.group}`)
-    //   .get()
-    //   .then((snapshop) =>
-    //     snapshop.docs.forEach((item) => {
-    //       this.groups.push(item.data().group);
-    //     })
-    //   )
-    //   // filter unique groups from DB data
-    //   .then(() => {
-    //     const uniqueGroups = this.groups.filter(
-    //       (x, i) => this.groups.indexOf(x) === i
-    //     );
-    //     this.groups = uniqueGroups;
-    //   });
+    // getting group data from user DB
+    minus
+      .then((snapshop) =>
+        snapshop.docs.forEach((item) => {
+          this.groups.push({
+            id: item.id,
+            name: item.data().group,
+            value: item.data().expenses,
+          });
+        })
+      )
+      // filter unique groups from DB data
+      .then(() => {
+        const uniqueGroups = this.groups.filter(
+          (x, i) => this.groups.indexOf(x) === i
+        );
+        this.groups = uniqueGroups;
+      });
+
+    // getting group values
+
+    console.log(this.groups);
   },
 };
 </script>
@@ -237,6 +227,7 @@ export default {
 
 .card {
   padding: 0.75em;
+  margin-bottom: 0.75em;
 }
 .top {
   padding-bottom: 1em;
