@@ -5,6 +5,20 @@
         <Hero />
 
         <div class="desktop">
+          <!-- <div class="filterBlock">
+            <div class="filter byDate">
+              <button class="button" @click="sortByDate">sort by date</button>
+            </div>
+
+            <div class="filter byGroup">
+              <button class="button" @click="sortByGroup">sort by group</button>
+            </div>
+
+            <div class="filter byType">
+              <button class="button" @click="sortByType">sort by type</button>
+            </div>
+          </div> -->
+
           <table v-show="toggle" class="table is-striped is-fullwidth">
             <thead>
               <tr>
@@ -51,7 +65,11 @@
         </div>
 
         <div class="mobile">
-          <div class="card" v-for="transfer in transferData" :key="transfer.id">
+          <div
+            class="card"
+            v-for="transfer in filteredtransferData"
+            :key="transfer.id"
+          >
             <div class="date">
               {{ new Date(transfer.date.seconds * 1000).toLocaleString("lt") }}
             </div>
@@ -87,13 +105,30 @@ export default {
       // assign it to search button
       // group: "home",
       // type: "card",
-      // sort: "desc",
       timeSort: "desc",
       transferData: [],
+      filteredtransferData: [],
     };
   },
 
   methods: {
+    sortByDate() {
+      console.log(this.timeSort);
+      if (this.timeSort == "asc") {
+        this.timeSort = "desc";
+      } else {
+        this.timeSort = "asc";
+      }
+    },
+
+    sortByGroup() {
+      console.log("by group");
+    },
+
+    sortByType() {
+      console.log("by type");
+    },
+
     toggle() {
       this.active = !this.active;
     },
@@ -135,6 +170,14 @@ export default {
             info: item.data().info,
           });
         });
+      })
+      .then(() => {
+        this.filteredtransferData = this.transferData;
+      })
+      .catch((error) => {
+        this.error = true;
+        this.errorMessage = `Please refresh, if the error persists - contact the
+        administrator of the website. Error: ${error.message}`;
       });
 
     firebase
@@ -175,6 +218,16 @@ export default {
 
 .mobile {
   display: none;
+}
+
+/* Filter style */
+.filterBlock {
+  margin: 1em 0;
+  display: flex;
+}
+
+.filter {
+  padding-right: 1em;
 }
 
 /* table style */

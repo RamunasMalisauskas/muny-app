@@ -150,7 +150,6 @@ export default {
         this.addGroup.length > 2 && this.selectedGroup.length === 0
           ? this.addGroup
           : this.selectedGroup;
-
       // adds data based by your user ID
       //  checks if you have selected group beforehand
       if (this.addGroup.length === 0 && this.selectedGroup.length === 0) {

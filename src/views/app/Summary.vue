@@ -18,20 +18,20 @@
 
             <div class="card" v-show="toggle">
               <div class="top">
-                <div class="total">total</div>
+                <div class="total">balance</div>
 
                 <div class="total title is-6-desktop">{{ this.plusMinus }}</div>
               </div>
 
               <div class="columns">
                 <div class="column">
-                  <div class="bottom">cash</div>
+                  <div class="bottom">in cash:</div>
 
                   <div class="bottom">{{ this.plusCash }}</div>
                 </div>
 
                 <div class="column">
-                  <div class="bottom">card</div>
+                  <div class="bottom">in card:</div>
 
                   <div class="bottom">{{ this.plusCard }}</div>
                 </div>
