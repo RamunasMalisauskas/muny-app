@@ -174,23 +174,23 @@ export default {
     );
 
     // getting group data from user DB
-    minus
-      .then((snapshop) =>
-        snapshop.docs.forEach((item) => {
-          this.groups.push({
-            id: item.id,
-            name: item.data().group,
-            value: item.data().expenses,
-          });
-        })
-      )
-      // filter unique groups from DB data
-      .then(() => {
-        const uniqueGroups = this.groups.filter(
-          (x, i) => this.groups.indexOf(x) === i
-        );
-        this.groups = uniqueGroups;
-      });
+    // minus
+    //   .then((snapshop) =>
+    //     snapshop.docs.forEach((item) => {
+    //       this.groups.push({
+    //         id: item.id,
+    //         name: item.data().group,
+    //         value: item.data().expenses,
+    //       });
+    //     })
+    //   )
+    //   // filter unique groups from DB data
+    //   .then(() => {
+    //     const uniqueGroups = this.groups.filter(
+    //       (x, i) => this.groups.indexOf(x) === i
+    //     );
+    //     this.groups = uniqueGroups;
+    //   });
 
     // getting group values
 
