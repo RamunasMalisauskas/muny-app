@@ -38,7 +38,7 @@
               </div>
             </div>
 
-            <div class="card" v-show="toggle">
+            <!-- <div class="card" v-show="toggle">
               <div class="total">expenses</div>
 
               <div v-for="group in groups" :key="group.name">
@@ -47,7 +47,7 @@
                 </div>
                 <div>{{ group.value }}</div>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
@@ -150,28 +150,25 @@ export default {
     );
 
     // getting income
-
-    //optimizing code for gettin' income info from DB
-    const plus = firebase
+    // same logic as expenses
+    firebase
       .firestore()
       .collection("users")
       .doc(userId)
       .collection("income")
-      .get();
+      .get()
+      .then((snapshot) =>
+        snapshot.docs.forEach((item) => {
+          this.plusData.push(item.data().income);
 
-    // same logic as expenses
-    plus.then((snapshot) =>
-      snapshot.docs.forEach((item) => {
-        this.plusData.push(item.data().income);
-
-        // geting type of income
-        if (item.data().moneyType == "cash") {
-          this.plusTypeCash.push(item.data().income);
-        } else {
-          this.plusTypeCard.push(item.data().income);
-        }
-      })
-    );
+          // geting type of income
+          if (item.data().moneyType == "cash") {
+            this.plusTypeCash.push(item.data().income);
+          } else {
+            this.plusTypeCard.push(item.data().income);
+          }
+        })
+      );
 
     // getting group data from user DB
     // minus
