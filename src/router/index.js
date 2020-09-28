@@ -8,7 +8,7 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
-    redirect: "/login",
+    redirect: "/register",
   },
   {
     path: "/login",
@@ -85,7 +85,7 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   firebase.auth().onAuthStateChanged((user) => {
     if (!user && to.matched.some((route) => route.meta.requiresAuth)) {
-      next({ path: "/login" });
+      next({ path: "/register" });
     } else if (user && to.matched.some((route) => route.meta.requiresAnon)) {
       next({ path: "/expenses" });
     } else {
