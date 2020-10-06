@@ -125,37 +125,37 @@ export default {
     // getting user ID
     const userId = firebase.auth().currentUser.uid;
 
-    const minus = firebase
+    const get = firebase
       .firestore()
       .collection("users")
       .doc(userId)
-      .collection("expenses")
-      .get();
+      .collection("money");
 
-    // getting expenses amount
-    minus.then((snapshot) =>
-      // running through the document
-      snapshot.docs.forEach((item) => {
-        // fetching expenses and pushing it to minusData array
-        this.minusData.push(item.data().expenses);
 
-        // geting detailed info of expenses type
-        // checking the type of data and pushing it to accordin array
-        if (item.data().moneyType == "cash") {
-          this.minusTypeCash.push(item.data().expenses);
-        } else {
-          this.minusTypeCard.push(item.data().expenses);
-        }
-      })
-    );
+    // getting expenses amount by selectin' specific value in collection (in this case collection == expenses)
+    get
+      .where("collection", "==", "expenses")
+      .get()
+      .then((snapshot) =>
+        // running through the document
+        snapshot.docs.forEach((item) => {
+          // fetching expenses and pushing it to minusData array
+          this.minusData.push(item.data().expenses);
+
+          // geting detailed info of expenses type
+          // checking the type of data and pushing it to accordin array
+          if (item.data().moneyType == "cash") {
+            this.minusTypeCash.push(item.data().expenses);
+          } else {
+            this.minusTypeCard.push(item.data().expenses);
+          }
+        })
+      );
 
     // getting income
     // same logic as expenses
-    firebase
-      .firestore()
-      .collection("users")
-      .doc(userId)
-      .collection("income")
+    get
+      .where("collection", "==", "income")
       .get()
       .then((snapshot) =>
         snapshot.docs.forEach((item) => {
@@ -190,8 +190,6 @@ export default {
     //   });
 
     // getting group values
-
-    console.log(this.groups);
   },
 };
 </script>
