@@ -70,7 +70,7 @@ export default {
         .firestore()
         .collection("users")
         .doc(firebase.auth().currentUser.uid)
-        .collection("expenses")
+        .collection("money")
         .doc(id)
         .delete();
     },
@@ -83,12 +83,14 @@ export default {
       .firestore()
       .collection("users")
       .doc(userId)
-      .collection("expenses")
+      .collection("money")
       .doc(this.$route.params.id)
       .get()
       .then((item) => {
         this.date = item.data().date;
-        this.plusMinus = "-" + item.data().expenses + "€";
+        this.plusMinus = item.data().expenses
+          ? "-" + item.data().expenses + "€"
+          : "+" + item.data().income + "€";
         this.type = item.data().moneyType;
         this.group = item.data().group;
         this.details = item.data().info;
