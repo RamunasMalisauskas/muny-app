@@ -103,20 +103,19 @@ export default {
       // add spiner to button
       this.loading = true;
 
-      // getting user ID
-      const userId = firebase.auth().currentUser.uid;
-
       // adds data based by your user ID
       firebase
         .firestore()
         .collection("users")
-        .doc(userId)
-        .collection("income")
+        // getting user ID
+        .doc(firebase.auth().currentUser.uid)
+        .collection("money")
         .add({
-          income: this.income,
+          income: Number(this.income),
           moneyType: this.moneyType,
           info: this.info,
           date: firebase.firestore.FieldValue.serverTimestamp(),
+          collection: "income",
         })
         .then(() => {
           this.error = true;

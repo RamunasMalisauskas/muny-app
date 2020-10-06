@@ -161,13 +161,14 @@ export default {
           .firestore()
           .collection("users")
           .doc(userId)
-          .collection("expenses")
+          .collection("money")
           .add({
             group: filteredGroup.toLowerCase(),
-            expenses: this.expenses,
+            expenses: Number(this.expenses),
             moneyType: this.moneyType,
             info: this.info,
             date: firebase.firestore.FieldValue.serverTimestamp(),
+            collection: "expenses"
           })
           .then(() => {
             this.error = true;

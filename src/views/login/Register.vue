@@ -120,11 +120,11 @@ export default {
         .then(() => {
           this.router.push("/expenses");
         })
-        .catch(() => {
+        .catch((error) => {
           this.loading = false;
           this.error = true;
           this.errorMessage =
-            "there has been a problem with registry try again";
+            "there has been a problem with registry try again" + error.message;
         });
     },
   },
