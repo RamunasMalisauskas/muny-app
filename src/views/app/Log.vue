@@ -5,27 +5,13 @@
         <Hero />
 
         <div class="desktop">
-          <!-- <div class="filterBlock">
-            <div class="filter byDate">
-              <button class="button" @click="sortByDate">sort by date</button>
-            </div>
-
-            <div class="filter byGroup">
-              <button class="button" @click="sortByGroup">sort by group</button>
-            </div>
-
-            <div class="filter byType">
-              <button class="button" @click="sortByType">sort by type</button>
-            </div>
-          </div> -->
-
           <table v-show="toggle" class="table is-striped is-fullwidth">
             <thead>
               <tr>
                 <th>date</th>
                 <th>+/-</th>
-                <th>group</th>
                 <th>type</th>
+                <th>group</th>
                 <th>details</th>
               </tr>
             </thead>
@@ -38,8 +24,8 @@
                   }}
                 </td>
                 <td>{{ transfer.plusMinus }}</td>
-                <td>{{ transfer.group }}</td>
                 <td>{{ transfer.type }}</td>
+                <td>{{ transfer.group }}</td>
                 <td>{{ transfer.info }}</td>
                 <!-- <td>
                   <button
@@ -56,8 +42,8 @@
               <tr>
                 <th>date</th>
                 <th>+/-</th>
-                <th>group</th>
                 <th>type</th>
+                <th>group</th>
                 <th>details</th>
               </tr>
             </tfoot>
@@ -102,33 +88,12 @@ export default {
 
   data() {
     return {
-      // assign it to search button
-      // group: "home",
-      // type: "card",
-      timeSort: "desc",
       transferData: [],
       filteredtransferData: [],
     };
   },
 
   methods: {
-    sortByDate() {
-      console.log(this.timeSort);
-      if (this.timeSort == "asc") {
-        this.timeSort = "desc";
-      } else {
-        this.timeSort = "asc";
-      }
-    },
-
-    sortByGroup() {
-      console.log("by group");
-    },
-
-    sortByType() {
-      console.log("by type");
-    },
-
     toggle() {
       this.active = !this.active;
     },
@@ -152,19 +117,17 @@ export default {
       .firestore()
       .collection("users")
       .doc(userId)
-      .collection("expenses")
-      // trying
-      // .where("moneyType", "==", `${this.type}`)
-      // .where("group", "==", `${this.group}`)
-      // .orderBy("expenses", `${this.sort}`)
-      .orderBy("date", `${this.timeSort}`)
+      .collection("money")
+      .orderBy("date", "desc")
       .get()
       .then((snapshot) => {
         snapshot.docs.forEach((item) => {
           this.transferData.push({
             id: item.id,
             date: item.data().date,
-            plusMinus: "-" + item.data().expenses + "€",
+            plusMinus: item.data().expenses
+              ? "-" + item.data().expenses + "€"
+              : "+" + item.data().income + "€",
             type: item.data().moneyType,
             group: item.data().group,
             info: item.data().info,
@@ -178,25 +141,6 @@ export default {
         this.error = true;
         this.errorMessage = `Please refresh, if the error persists - contact the
         administrator of the website. Error: ${error.message}`;
-      });
-
-    firebase
-      .firestore()
-      .collection("users")
-      .doc(userId)
-      .collection("income")
-      .orderBy("date", "desc")
-      .get()
-      .then((snapshot) => {
-        snapshot.docs.forEach((item) => {
-          this.transferData.push({
-            id: item.id,
-            date: item.data().date,
-            plusMinus: "+" + item.data().income + "€",
-            type: item.data().moneyType,
-            info: item.data().info,
-          });
-        });
       });
   },
 };
