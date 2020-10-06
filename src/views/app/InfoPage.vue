@@ -33,17 +33,19 @@
               </div>
             </router-link>
 
-            <router-link :to="/editLog/ + id">
-              <button class="button is-small">
-                Edit
-              </button>
-            </router-link>
+            <div class="bottom-buttons">
+              <router-link to="/Log">
+                <button class="remove button is-small" v-on:click="remove(id)">
+                  Delete
+                </button>
+              </router-link>
 
-            <router-link to="/Log">
-              <button class="button is-small" v-on:click="remove(id)">
-                Delete
-              </button>
-            </router-link>
+              <router-link :to="/editLog/ + id">
+                <button class="button is-small">
+                  Edit
+                </button>
+              </router-link>
+            </div>
           </div>
         </div>
       </div>
@@ -154,5 +156,10 @@ button {
   border: 0 solid;
   background: #eb6e56;
   color: #fff;
+}
+
+.bottom-buttons {
+  display: flex;
+  justify-content: space-between;
 }
 </style>
