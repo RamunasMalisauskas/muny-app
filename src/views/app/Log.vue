@@ -13,6 +13,7 @@
                 <th>type</th>
                 <th>group</th>
                 <th>details</th>
+                <th></th>
               </tr>
             </thead>
 
@@ -27,14 +28,13 @@
                 <td>{{ transfer.type }}</td>
                 <td>{{ transfer.group }}</td>
                 <td>{{ transfer.info }}</td>
-                <!-- <td>
-                  <button
-                    class="button is-small"
-                    v-on:click="remove(transfer.id)"
-                  >
-                    delete
-                  </button>
-                </td> -->
+                <td>
+                  <router-link :to="/editLog/ + transfer.id">
+                    <button class="button is-small">
+                      Edit
+                    </button>
+                  </router-link>
+                </td>
               </tr>
             </tbody>
 
@@ -45,6 +45,7 @@
                 <th>type</th>
                 <th>group</th>
                 <th>details</th>
+                <th></th>
               </tr>
             </tfoot>
           </table>
