@@ -33,9 +33,17 @@
               </div>
             </router-link>
 
-            <!-- <button class="button is-small" v-on:click="remove(transfer.id)">
-              Delete
-            </button> -->
+            <router-link :to="/editLog/ + id">
+              <button class="button is-small">
+                Edit
+              </button>
+            </router-link>
+
+            <router-link to="/Log">
+              <button class="button is-small" v-on:click="remove(id)">
+                Delete
+              </button>
+            </router-link>
           </div>
         </div>
       </div>
@@ -56,6 +64,7 @@ export default {
 
   data() {
     return {
+      id: "",
       date: "",
       plusMinus: "",
       group: "",
@@ -77,16 +86,16 @@ export default {
   },
 
   beforeMount() {
-    const userId = firebase.auth().currentUser.uid;
-
     firebase
       .firestore()
       .collection("users")
-      .doc(userId)
+      .doc(firebase.auth().currentUser.uid)
       .collection("money")
       .doc(this.$route.params.id)
       .get()
       .then((item) => {
+        this.id = this.$route.params.id;
+
         this.date = item.data().date;
         this.plusMinus = item.data().expenses
           ? "-" + item.data().expenses + "€"
