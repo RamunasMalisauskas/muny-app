@@ -99,7 +99,7 @@
 
           <router-link to="/log">
             <button class="link button">
-              Go back ->
+             ← Go back
             </button>
           </router-link>
 

@@ -94,7 +94,7 @@ export default {
       this.plusMinus =
         result.toString()[0] === "-"
           ? result + " €"
-          : result.toString() == 0
+          : result == 0
           ? 0
           : "+" + result + " €";
 
@@ -103,7 +103,7 @@ export default {
       this.plusCash =
         cash.toString()[0] === "-"
           ? cash + " €"
-          : cash.toString() == 0
+          : cash == 0
           ? 0
           : "+" + cash + " €";
 
@@ -111,7 +111,7 @@ export default {
       this.plusCard =
         card.toString()[0] === "-"
           ? card + " €"
-          : card.toString() == 0
+          : card == 0
           ? 0
           : "+" + card + " €";
 
@@ -130,7 +130,6 @@ export default {
       .collection("users")
       .doc(userId)
       .collection("money");
-
 
     // getting expenses amount by selectin' specific value in collection (in this case collection == expenses)
     get

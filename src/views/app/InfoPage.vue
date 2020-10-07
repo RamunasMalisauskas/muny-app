@@ -29,7 +29,7 @@
 
             <router-link to="/log">
               <div class="control">
-                <button class="button">← go back</button>
+                <button class="button">← Go back</button>
               </div>
             </router-link>
 

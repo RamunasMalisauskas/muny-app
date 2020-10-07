@@ -4,8 +4,17 @@
       <div class="container">
         <Hero />
 
+        <!-- <div class="filter">
+          <h2 class="title is-5">select:</h2>
+          <select>
+            <option value="7">week</option>
+            <option value="30">month</option>
+            <option value="90">3 months</option>
+          </select>
+        </div> -->
+
         <div class="desktop">
-          <table v-show="toggle" class="table is-striped is-fullwidth">
+          <table class="table is-striped is-fullwidth">
             <thead>
               <tr>
                 <th>date</th>
@@ -52,11 +61,7 @@
         </div>
 
         <div class="mobile">
-          <div
-            class="card"
-            v-for="transfer in transferData"
-            :key="transfer.id"
-          >
+          <div class="card" v-for="transfer in transferData" :key="transfer.id">
             <div class="date">
               {{ new Date(transfer.date.seconds * 1000).toLocaleString("lt") }}
             </div>
@@ -66,7 +71,7 @@
             <div>
               <router-link :to="/infopage/ + transfer.id">
                 <div class="control">
-                  <button class="button">more info →</button>
+                  <button class="button">More info →</button>
                 </div>
               </router-link>
             </div>
@@ -90,13 +95,12 @@ export default {
   data() {
     return {
       transferData: [],
-      // filteredtransferData: [],
     };
   },
 
   methods: {
-    toggle() {
-      this.active = !this.active;
+    filter() {
+      this.transferData = [];
     },
   },
 
@@ -122,9 +126,6 @@ export default {
           });
         });
       })
-      // .then(() => {
-      //   this.filteredtransferData = this.transferData;
-      // })
       .catch((error) => {
         this.error = true;
         this.errorMessage = `Please refresh, if the error persists - contact the
