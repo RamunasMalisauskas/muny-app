@@ -105,7 +105,7 @@ export default {
       amount: "",
       moneyType: "",
       info: "",
-targete      error: false,
+      error: false,
       errorMessage: "",
       loading: false,
     };
