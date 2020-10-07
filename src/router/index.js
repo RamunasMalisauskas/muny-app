@@ -56,6 +56,15 @@ const routes = [
     },
   },
   {
+    path: "/editlog",
+    name: "EditLog",
+    component: () =>
+      import(/* webpackChunkName: "log" */ "../views//app/editLog.vue"),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
     path: "/infopage/:id",
     name: "Info",
     component: () =>
