@@ -14,7 +14,7 @@
 
             <div class="top">group:</div>
             <div class="info">
-              {{ group }}
+              {{ group || "income" }}  
             </div>
 
             <div class="top">type:</div>

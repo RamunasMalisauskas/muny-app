@@ -5,13 +5,26 @@
         <Hero />
 
         <div class="column is-6-desktop">
-          <form name="expenses" v-on:submit.prevent="edit">
-            <div class="field">
-              <div class="columns"></div>
+          <form name="expenses" v-on:submit.prevent="update">
+            <label class="label secondary">select type of transfer:</label>
+            <div class="control">
+              <div class="select">
+                <select v-model="newTransferType">
+                  <!-- disabled transfer value is as a referense of the current one and for display -->
+                  <option disabled value="">
+                    current: {{ transferType }}
+                  </option>
+                  <option>
+                    <!-- returning oposite value of current -->
+                    {{ transferType === "income" ? "expense" : "income" }}
+                  </option>
+                  <option> {{ transferType }} </option>
+                </select>
+              </div>
             </div>
 
             <div class="field">
-              <label class="label">Change your input:</label>
+              <label class="label">change amount:</label>
               <div class="control">
                 <input
                   class="input"
@@ -72,13 +85,17 @@
             />
 
             <div class="control">
-              <button class="button" :class="loading && `is-loading`">
+              <button
+                class="button"
+                @click="update"
+                :class="loading && `is-loading`"
+              >
                 Update
               </button>
             </div>
 
             <router-link to="/Log">
-              <button class="remove button" v-on:click="remove(id)">
+              <button class="remove button" @click="remove(id)">
                 Delete
               </button>
             </router-link>
@@ -102,6 +119,8 @@ export default {
 
   data() {
     return {
+      transferType: "",
+      newTransferType: "",
       amount: "",
       moneyType: "",
       info: "",
@@ -112,6 +131,12 @@ export default {
   },
 
   methods: {
+    update() {
+      this.loading = true;
+      console.log("test");
+      this.loading = false;
+    },
+
     remove(id) {
       firebase
         .firestore()
@@ -129,12 +154,17 @@ export default {
       .collection("users")
       .doc(firebase.auth().currentUser.uid)
       .collection("money")
+      // getting document id from route.params
       .doc(`${this.$route.params.id}`)
       .get()
-      .then((doc) => {
-        this.amount = doc.data().income || doc.data().expenses;
-        this.moneyType = doc.data().moneyType;
-        this.info = doc.data().info;
+      .then((item) => {
+        // getting data accordingly if it exist as expesense or income
+        this.amount = item.data().expenses
+          ? item.data().expenses
+          : item.data().income;
+        this.moneyType = item.data().moneyType;
+        this.info = item.data().info;
+        this.transferType = item.data().collection;
       });
   },
 };
