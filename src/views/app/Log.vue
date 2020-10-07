@@ -19,8 +19,8 @@
               <tr>
                 <th>date</th>
                 <th>+/-</th>
-                <th>type</th>
                 <th>group</th>
+                <th>type</th>
                 <th>details</th>
                 <th></th>
               </tr>
@@ -34,8 +34,9 @@
                   }}
                 </td>
                 <td>{{ transfer.plusMinus }}</td>
+                <!-- adding static string if there is no group in data (only applies for income collection) -->
+                <td>{{ transfer.group || "income" }}</td>
                 <td>{{ transfer.type }}</td>
-                <td>{{ transfer.group }}</td>
                 <td>{{ transfer.info }}</td>
                 <td>
                   <router-link :to="/editLog/ + transfer.id">
@@ -51,8 +52,8 @@
               <tr>
                 <th>date</th>
                 <th>+/-</th>
-                <th>type</th>
                 <th>group</th>
+                <th>type</th>
                 <th>details</th>
                 <th></th>
               </tr>
@@ -154,18 +155,14 @@ export default {
 }
 
 /* Filter style */
-.filterBlock {
-  margin: 1em 0;
-  display: flex;
-}
-
-.filter {
-  padding-right: 1em;
-}
 
 /* table style */
 
 .table thead th {
+  color: #eb6e56;
+}
+
+.table tfoot th {
   color: #ed185b;
 }
 

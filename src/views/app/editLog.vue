@@ -93,15 +93,19 @@
             </div>
           </form>
 
-          <button class="remove button" @click="toggle">
-            Delete
-          </button>
-
-          <router-link to="/log">
-            <button class="link button">
-             ← Go back
+          <div class="control">
+            <button class="remove button" @click="toggle">
+              Delete
             </button>
-          </router-link>
+          </div>
+
+          <div class="control">
+            <router-link to="/log">
+              <button class="link button">
+                ← Go back
+              </button>
+            </router-link>
+          </div>
 
           <div class="modal" :class="{ 'is-active': active }">
             <div class="modal-background" v-on:click="toggle"></div>
