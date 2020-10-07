@@ -54,7 +54,7 @@
         <div class="mobile">
           <div
             class="card"
-            v-for="transfer in filteredtransferData"
+            v-for="transfer in transferData"
             :key="transfer.id"
           >
             <div class="date">
@@ -90,7 +90,7 @@ export default {
   data() {
     return {
       transferData: [],
-      filteredtransferData: [],
+      // filteredtransferData: [],
     };
   },
 
@@ -122,9 +122,9 @@ export default {
           });
         });
       })
-      .then(() => {
-        this.filteredtransferData = this.transferData;
-      })
+      // .then(() => {
+      //   this.filteredtransferData = this.transferData;
+      // })
       .catch((error) => {
         this.error = true;
         this.errorMessage = `Please refresh, if the error persists - contact the

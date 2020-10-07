@@ -17,7 +17,7 @@
                   class="input"
                   type="number"
                   placeholder="$"
-                  v-model="expenses"
+                  v-model="amount"
                   required
                 />
               </div>
@@ -101,7 +101,11 @@ export default {
   components: { Hero, Notification },
 
   data() {
-    return {};
+    return {
+      amount: "",
+      moneyType: "",
+      info: "",
+    };
   },
 
   methods: {
@@ -114,6 +118,13 @@ export default {
         .doc(id)
         .delete();
     },
+  },
+
+  beforeMount() {
+    firebase
+      .firestore()
+      .collection("users")
+      .doc(firebase.auth().currentUser.uid);
   },
 };
 </script>
