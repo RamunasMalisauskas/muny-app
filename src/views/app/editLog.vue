@@ -6,20 +6,22 @@
 
         <div class="column is-6-desktop">
           <form name="expenses" v-on:submit.prevent="update">
-            <label class="label secondary">select type of transfer:</label>
-            <div class="control">
-              <div class="select">
-                <select v-model="newTransferType">
-                  <!-- disabled transfer value is as a referense of the current one and for display -->
-                  <option disabled value="">
-                    current: {{ transferType }}
-                  </option>
-                  <option>
-                    <!-- returning oposite value of current -->
-                    {{ transferType === "income" ? "expense" : "income" }}
-                  </option>
-                  <option> {{ transferType }} </option>
-                </select>
+            <div class="field">
+              <label class="label">select type of transfer:</label>
+              <div class="control">
+                <div class="select">
+                  <select v-model="newTransferType">
+                    <!-- disabled transfer value is as a referense of the current one and for display -->
+                    <option disabled value="">
+                      current: {{ transferType }}
+                    </option>
+                    <option>
+                      <!-- returning oposite value of current -->
+                      {{ transferType === "income" ? "expense" : "income" }}
+                    </option>
+                    <option> {{ transferType }} </option>
+                  </select>
+                </div>
               </div>
             </div>
 
@@ -67,7 +69,7 @@
             </div>
 
             <div class="field">
-              <label class="label secondary">Additional info</label>
+              <label class="label secondary">Additional info:</label>
               <div class="control">
                 <textarea
                   class="textarea"
@@ -179,7 +181,6 @@ export default {
             this.errorMessage = "oops...  " + error.message;
           });
       }
-      this.loading = false;
     },
 
     remove(id) {
@@ -193,6 +194,7 @@ export default {
     },
   },
 
+  // fetching  the data by id and inserting it to the form
   beforeMount() {
     firebase
       .firestore()
@@ -215,4 +217,58 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+/* major styles */
+.section {
+  padding: 1.5em;
+}
+
+form {
+  margin-top: 2em;
+}
+
+label {
+  color: #ed185b;
+}
+
+p {
+  color: #eb6e56;
+}
+
+/* input styles */
+.input,
+textarea {
+  color: #eb6e56;
+}
+
+.input:hover,
+textarea:hover {
+  border-color: #f4bc53;
+}
+
+.moneyType {
+  margin: 1em 0;
+}
+
+.secondary {
+  color: #f4bc53;
+}
+
+/* button styles */
+button {
+  color: #fff;
+  background: #ed185b;
+  padding: 1.5em;
+  border-radius: 0.8em;
+}
+
+button:hover {
+  color: #ed185b;
+  border: 1px solid #ed185b;
+  background: #fff;
+}
+
+.radio:hover {
+  color: #f4bc53;
+}
+</style>

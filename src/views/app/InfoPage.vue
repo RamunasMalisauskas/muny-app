@@ -14,7 +14,7 @@
 
             <div class="top">group:</div>
             <div class="info">
-              {{ group || "income" }}  
+              {{ group || "income" }}
             </div>
 
             <div class="top">type:</div>
@@ -114,6 +114,10 @@ export default {
 
 .top {
   color: #ed185b;
+}
+
+.select {
+  margin-bottom: 1em;
 }
 
 .info {

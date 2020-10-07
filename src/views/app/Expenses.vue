@@ -83,7 +83,7 @@
             </div>
 
             <div class="field">
-              <label class="label secondary">Additional info</label>
+              <label class="label secondary">Additional info:</label>
               <div class="control">
                 <textarea
                   class="textarea"
@@ -235,10 +235,6 @@ textarea {
   color: #eb6e56;
 }
 
-textarea {
-  max-width: 66%;
-  min-width: 50%;
-}
 
 .input:hover,
 textarea:hover {

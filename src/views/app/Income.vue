@@ -152,11 +152,6 @@ textarea {
   color: #eb6e56;
 }
 
-textarea {
-  max-width: 66%;
-  min-width: 50%;
-}
-
 .input:hover,
 textarea:hover {
   border-color: #f4bc53;
