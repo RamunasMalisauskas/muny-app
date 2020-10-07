@@ -98,26 +98,13 @@ export default {
     toggle() {
       this.active = !this.active;
     },
-
-    remove(id) {
-      const user = firebase
-        .firestore()
-        .collection("users")
-        .doc(firebase.auth().currentUser.uid);
-
-      console.log(
-        user.collection("expenses").doc(id) || user.collection("income").doc(id)
-      );
-    },
   },
 
   beforeMount() {
-    const userId = firebase.auth().currentUser.uid;
-
     firebase
       .firestore()
       .collection("users")
-      .doc(userId)
+      .doc(firebase.auth().currentUser.uid)
       .collection("money")
       .orderBy("date", "desc")
       .get()
