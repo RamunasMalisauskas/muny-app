@@ -85,11 +85,7 @@
             />
 
             <div class="control">
-              <button
-                class="button"
-                @click="update"
-                :class="loading && `is-loading`"
-              >
+              <button class="button" :class="loading && `is-loading`">
                 Update
               </button>
             </div>
@@ -133,7 +129,56 @@ export default {
   methods: {
     update() {
       this.loading = true;
-      console.log("test");
+
+      const setFn = firebase
+        .firestore()
+        .collection("users")
+        .doc(firebase.auth().currentUser.uid)
+        .collection("money")
+        // getting document id from route.params
+        .doc(`${this.$route.params.id}`);
+
+      // checking into which collection new data to be added
+      if (this.newTransferType === "income" || this.transferType === "income") {
+        setFn
+          .set({
+            // setting collection by the new transfer type, if it's empty (not selected) by the old (one from the beforeMount)
+            collection: this.newTransferType || this.transferType,
+            date: firebase.firestore.FieldValue.serverTimestamp(),
+            income: this.amount,
+            moneyType: this.moneyType,
+            info: this.info,
+          })
+          .then(() => {
+            this.error = true;
+            this.errorMessage = `You have added ${this.amount}€ to your income database`;
+            this.loading = false;
+          })
+          .catch((error) => {
+            this.loading = false;
+            this.error = true;
+            this.errorMessage = "oops...  " + error.message;
+          });
+      } else {
+        setFn
+          .set({
+            collection: this.newTransferType || this.transferType,
+            date: firebase.firestore.FieldValue.serverTimestamp(),
+            expenses: this.amount,
+            moneyType: this.moneyType,
+            info: this.info,
+          })
+          .then(() => {
+            this.error = true;
+            this.errorMessage = `You have added ${this.amount}€ to your expenses database`;
+            this.loading = false;
+          })
+          .catch((error) => {
+            this.loading = false;
+            this.error = true;
+            this.errorMessage = "oops...  " + error.message;
+          });
+      }
       this.loading = false;
     },
 
