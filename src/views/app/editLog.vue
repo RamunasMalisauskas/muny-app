@@ -86,18 +86,46 @@
               :message="errorMessage"
             />
 
-            <div class="control">
+            <div class="control" @click="update">
               <button class="button" :class="loading && `is-loading`">
                 Update
               </button>
             </div>
-
-            <router-link to="/Log">
-              <button class="remove button" @click="remove(id)">
-                Delete
-              </button>
-            </router-link>
           </form>
+
+          <button class="remove button" @click="toggle">
+            Delete
+          </button>
+
+          <router-link to="/log">
+            <button class="link button">
+              Go back ->
+            </button>
+          </router-link>
+
+          <div class="modal" :class="{ 'is-active': active }">
+            <div class="modal-background" v-on:click="toggle"></div>
+            <div class="modal-content">
+              <h2 class="subtitle">Are you sure?</h2>
+
+              <div class="modal-buttons">
+                <router-link to="/log">
+                  <button class="button" @click="remove">
+                    Delete
+                  </button>
+                </router-link>
+
+                <button class="remove-modal button" @click="toggle">
+                  No
+                </button>
+              </div>
+            </div>
+            <button
+              class="modal-close is-large"
+              aria-label="close"
+              @click="toggle"
+            ></button>
+          </div>
         </div>
       </div>
     </div>
@@ -125,6 +153,7 @@ export default {
       error: false,
       errorMessage: "",
       loading: false,
+      active: false,
     };
   },
 
@@ -183,13 +212,17 @@ export default {
       }
     },
 
-    remove(id) {
+    toggle() {
+      this.active = !this.active;
+    },
+
+    remove() {
       firebase
         .firestore()
         .collection("users")
         .doc(firebase.auth().currentUser.uid)
         .collection("money")
-        .doc(id)
+        .doc(`${this.$route.params.id}`)
         .delete();
     },
   },
@@ -219,6 +252,7 @@ export default {
 
 <style scoped>
 /* major styles */
+
 .section {
   padding: 1.5em;
 }
@@ -256,10 +290,25 @@ textarea:hover {
 
 /* button styles */
 button {
+  margin-top: 0.5em;
   color: #fff;
+  border: 0;
   background: #ed185b;
   padding: 1.5em;
   border-radius: 0.8em;
+}
+
+.remove {
+  margin-top: 1.5em;
+  color: #fff;
+  background: #eb6e56;
+}
+
+.link {
+  margin-top: 1.5em;
+  color: #ed185b;
+  border: 1px solid #ed185b;
+  background: #fff;
 }
 
 button:hover {
@@ -268,7 +317,42 @@ button:hover {
   background: #fff;
 }
 
+.remove:hover,
+.remove-modal:hover {
+  color: #fff;
+  border: 1px solid #ed185b;
+  background: #ed185b;
+}
+
 .radio:hover {
   color: #f4bc53;
+}
+
+/* modal style */
+h2 {
+  color: #ed185b;
+}
+.modal-background {
+  background: #f4bc53;
+  opacity: 0.8;
+}
+
+.modal-content {
+  background: #f4bc53;
+  padding: 2em;
+  border-radius: 0.8em;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.remove-modal {
+  color: #ed185b;
+  border: 1px solid #ed185b;
+  background: #fff;
+  padding: 1.5em;
+  border-radius: 0.8em;
 }
 </style>

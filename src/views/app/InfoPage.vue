@@ -34,7 +34,7 @@
             </router-link>
 
             <router-link :to="/editLog/ + id">
-              <button class="button is-small">
+              <button class="button edit">
                 Edit
               </button>
             </router-link>
@@ -146,11 +146,11 @@ button {
   border-radius: 0.8em;
 }
 
-.is-small {
-  margin-top: 3em;
-  border-radius: 0.8em;
-  border: 0 solid;
-  background: #eb6e56;
+.edit {
+  margin-top: 1.5em;
   color: #fff;
+  background: #ed185b;
+  padding: 1.5em;
+  border-radius: 0.8em;
 }
 </style>
