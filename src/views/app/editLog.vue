@@ -105,6 +105,9 @@ export default {
       amount: "",
       moneyType: "",
       info: "",
+targete      error: false,
+      errorMessage: "",
+      loading: false,
     };
   },
 
@@ -124,7 +127,15 @@ export default {
     firebase
       .firestore()
       .collection("users")
-      .doc(firebase.auth().currentUser.uid);
+      .doc(firebase.auth().currentUser.uid)
+      .collection("money")
+      .doc(`${this.$route.params.id}`)
+      .get()
+      .then((doc) => {
+        this.amount = doc.data().income || doc.data().expenses;
+        this.moneyType = doc.data().moneyType;
+        this.info = doc.data().info;
+      });
   },
 };
 </script>
