@@ -57,7 +57,7 @@ const routes = [
   },
   {
     path: "/editlog/:id",
-    name: "EditLog",
+    name: "Edit",
     component: () =>
       import(/* webpackChunkName: "log" */ "../views//app/editLog.vue"),
     meta: {
