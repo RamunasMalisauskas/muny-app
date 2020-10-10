@@ -26,6 +26,20 @@
             </div>
 
             <div class="field">
+              <div class="field">
+                <label class="label secondary">add group for expenses</label>
+                <div class="control">
+                  <input
+                    class="input"
+                    type="text"
+                    placeholder="e.g. home"
+                    v-model="group"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="field">
               <label class="label">change amount:</label>
               <div class="control">
                 <input
@@ -154,6 +168,7 @@ export default {
       amount: "",
       moneyType: "",
       info: "",
+      group: "",
       error: false,
       errorMessage: "",
       loading: false,
@@ -181,6 +196,7 @@ export default {
             collection: this.newTransferType || this.transferType,
             date: firebase.firestore.FieldValue.serverTimestamp(),
             income: this.amount,
+            group: "income",
             moneyType: this.moneyType,
             info: this.info,
           })
@@ -200,6 +216,7 @@ export default {
             collection: this.newTransferType || this.transferType,
             date: firebase.firestore.FieldValue.serverTimestamp(),
             expenses: this.amount,
+            group: this.group,
             moneyType: this.moneyType,
             info: this.info,
           })
