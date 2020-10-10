@@ -14,7 +14,7 @@
                   <div class="control">
                     <div class="select">
                       <select v-model="selectedGroup">
-                        <option value="">choose one:</option>
+                        <option disabled value="">choose one:</option>
                         <option v-for="group in groups" :key="group.id">{{
                           group
                         }}</option>
@@ -125,7 +125,7 @@ export default {
 
   data() {
     return {
-      groups: ["groceries", "travel", "car", "pets", "foodout"],
+      groups: ["groceries", "pets", "foodout", "car"],
       selectedGroup: "",
       addGroup: "",
       expenses: "",
@@ -142,14 +142,12 @@ export default {
       // add spiner to button
       this.loading = true;
 
-      // getting user ID and making it constant
-      const userId = firebase.auth().currentUser.uid;
-
       // filer which group to be added to DB
       const filteredGroup =
         this.addGroup.length > 2 && this.selectedGroup.length === 0
           ? this.addGroup
           : this.selectedGroup;
+
       // adds data based by your user ID
       //  checks if you have selected group beforehand
       if (this.addGroup.length === 0 && this.selectedGroup.length === 0) {
@@ -160,17 +158,18 @@ export default {
         firebase
           .firestore()
           .collection("users")
-          .doc(userId)
+          .doc(firebase.auth().currentUser.uid)
           .collection("money")
           .add({
+            collection: "expenses",
             group: filteredGroup.toLowerCase(),
             expenses: Number(this.expenses),
             moneyType: this.moneyType,
             info: this.info,
             date: firebase.firestore.FieldValue.serverTimestamp(),
-            collection: "expenses"
           })
           .then(() => {
+            console.log(this.filteredGroup);
             this.error = true;
             this.errorMessage = `You have added ${this.expenses}€ to your expenses database`;
             this.loading = false;
@@ -185,19 +184,16 @@ export default {
   },
 
   beforeMount() {
-    // getting user ID
-    const userId = firebase.auth().currentUser.uid;
-
     // getting groups from user DB
     firebase
       .firestore()
       .collection("users")
-      .doc(userId)
-      .collection("expenses")
+      .doc(firebase.auth().currentUser.uid)
+      .collection("money")
       .get()
       .then((snapshop) =>
         snapshop.docs.forEach((item) => {
-          this.groups.push(item.data().group);
+          item.data().group ? this.groups.push(item.data().group) : "";
         })
       )
       // filter unique groups from DB data
@@ -234,7 +230,6 @@ p {
 textarea {
   color: #eb6e56;
 }
-
 
 .input:hover,
 textarea:hover {
