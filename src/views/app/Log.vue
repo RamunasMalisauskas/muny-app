@@ -4,14 +4,17 @@
       <div class="container">
         <Hero />
 
-        <!-- <div class="filter">
-          <h2 class="title is-5">select:</h2>
-          <select>
-            <option value="7">week</option>
-            <option value="30">month</option>
-            <option value="90">3 months</option>
-          </select>
-        </div> -->
+        <h2 class="title is-5">select:</h2>
+        <select v-model="filter">
+          <option value="7">week</option>
+          <option value="30">month</option>
+          <option value="90">3 months</option>
+          <option value="365">1 Year</option>
+        </select>
+
+        <div class="control">
+          <button @click="test" class="button">Filter</button>
+        </div>
 
         <div class="desktop">
           <table class="table is-striped is-fullwidth">
@@ -95,13 +98,20 @@ export default {
 
   data() {
     return {
+      filter: "",
+      fiteredData: [],
       transferData: [],
     };
   },
 
   methods: {
-    filter() {
-      this.transferData = [];
+    test() {
+      const time = new Date().getTime() / 1000;
+      console.log(
+        this.transferData.filter(
+          (transfer) => time - transfer.date.seconds < this.filter * 86400
+        )
+      );
     },
   },
 
