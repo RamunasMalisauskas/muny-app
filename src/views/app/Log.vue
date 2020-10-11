@@ -5,13 +5,17 @@
         <Hero />
 
         <form v-on:submit.prevent="search">
-          <h2 class="title is-5">select:</h2>
-          <select v-model="filter">
-            <option value="7">week</option>
-            <option value="30">month</option>
-            <option value="90">3 months</option>
-            <option value="365">1 Year</option>
-          </select>
+          <h2 class="title is-5">select transfer period:</h2>
+          <div class="select">
+            <select v-model="filter">
+              <option value="1">yesterday</option>
+              <option value="7">last week</option>
+              <option value="30">last month</option>
+              <option value="90">last quarter</option>
+              <option value="365">last year</option>
+              <option value="3065">all-time</option>
+            </select>
+          </div>
 
           <div class="control">
             <button type="submit" class="button">Filter</button>
@@ -110,11 +114,6 @@ export default {
     search() {
       // gettin current time in seconds
       const time = new Date().getTime() / 1000;
-      // console.log(
-      //   this.transferData.filter(
-      //     (transfer) => time - transfer.date.seconds < this.filter * 86400
-      //   )
-      // );
 
       // filtering array
       this.filteredData = this.transferData.filter(
@@ -178,6 +177,19 @@ export default {
 
 /* Filter style */
 
+.title {
+  color: #eb6e56;
+  margin-bottom: 0;
+}
+
+form {
+  padding: 1em 0;
+  max-width: 768px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 /* table style */
 
 .table thead th {
@@ -196,13 +208,7 @@ td:nth-child(2) {
   color: #ed185b;
 }
 
-/* // delete button style */
-/* td:last-child {
-  padding: 0.5em 0;
-  text-align: right;
-} */
-
-/* mobile styles */
+/* mobile card styles */
 .card {
   margin: 1em 0;
   padding: 1em;
@@ -256,6 +262,14 @@ button {
 
   .mobile {
     display: block;
+  }
+
+  form {
+    display: block;
+  }
+
+  .select {
+    margin: 1em 0;
   }
 }
 </style>
