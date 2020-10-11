@@ -4,17 +4,19 @@
       <div class="container">
         <Hero />
 
-        <h2 class="title is-5">select:</h2>
-        <select v-model="filter">
-          <option value="7">week</option>
-          <option value="30">month</option>
-          <option value="90">3 months</option>
-          <option value="365">1 Year</option>
-        </select>
+        <form v-on:submit.prevent="search">
+          <h2 class="title is-5">select:</h2>
+          <select v-model="filter">
+            <option value="7">week</option>
+            <option value="30">month</option>
+            <option value="90">3 months</option>
+            <option value="365">1 Year</option>
+          </select>
 
-        <div class="control">
-          <button @click="test" class="button">Filter</button>
-        </div>
+          <div class="control">
+            <button type="submit" class="button">Filter</button>
+          </div>
+        </form>
 
         <div class="desktop">
           <table class="table is-striped is-fullwidth">
@@ -30,7 +32,7 @@
             </thead>
 
             <tbody>
-              <tr v-for="transfer in transferData" :key="transfer.id">
+              <tr v-for="transfer in filteredData" :key="transfer.id">
                 <td>
                   {{
                     new Date(transfer.date.seconds * 1000).toLocaleString("lt")
@@ -99,18 +101,24 @@ export default {
   data() {
     return {
       filter: "",
-      fiteredData: [],
+      filteredData: [],
       transferData: [],
     };
   },
 
   methods: {
-    test() {
+    search() {
+      // gettin current time in seconds
       const time = new Date().getTime() / 1000;
-      console.log(
-        this.transferData.filter(
-          (transfer) => time - transfer.date.seconds < this.filter * 86400
-        )
+      // console.log(
+      //   this.transferData.filter(
+      //     (transfer) => time - transfer.date.seconds < this.filter * 86400
+      //   )
+      // );
+
+      // filtering array
+      this.filteredData = this.transferData.filter(
+        (transfer) => time - transfer.date.seconds < this.filter * 86400
       );
     },
   },
@@ -125,6 +133,7 @@ export default {
       .get()
       .then((snapshot) => {
         snapshot.docs.forEach((item) => {
+          //pushing all data to transfer array
           this.transferData.push({
             id: item.id,
             date: item.data().date,
@@ -136,6 +145,9 @@ export default {
             info: item.data().info,
           });
         });
+      })
+      .then(() => {
+        this.filteredData = this.transferData;
       })
       .catch((error) => {
         this.error = true;
