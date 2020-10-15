@@ -115,7 +115,7 @@ export default {
       // gettin current time in seconds
       const time = new Date().getTime() / 1000;
 
-      // filtering array
+      // filtering array by substracting transfer data from current time stamp and checking if it's lower given filter value converted to seconds
       this.filteredData = this.transferData.filter(
         (transfer) => time - transfer.date.seconds < this.filter * 86400
       );
@@ -146,6 +146,7 @@ export default {
         });
       })
       .then(() => {
+        // copy the recieved data to filter array, which is use in for loop in table & later used in filer method
         this.filteredData = this.transferData;
       })
       .catch((error) => {

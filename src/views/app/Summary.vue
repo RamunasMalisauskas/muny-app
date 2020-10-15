@@ -38,16 +38,16 @@
               </div>
             </div>
 
-            <!-- <div class="card" v-show="toggle">
+            <div class="card" v-show="toggle">
               <div class="total">expenses</div>
 
-              <div v-for="group in groups" :key="group.name">
+              <div v-for="group in groups" :key="group.id">
                 <div>
                   {{ group.name }}
                 </div>
                 <div>{{ group.value }}</div>
               </div>
-            </div> -->
+            </div>
           </div>
         </div>
       </div>
@@ -68,6 +68,7 @@ export default {
   data() {
     return {
       groups: [],
+      groupName: "",
       plusData: [],
       minusData: [],
       plusTypeCash: [],
@@ -122,13 +123,10 @@ export default {
 
   // getting informations from DB and making calculations which are been pushed to local arrays
   beforeMount() {
-    // getting user ID
-    const userId = firebase.auth().currentUser.uid;
-
     const get = firebase
       .firestore()
       .collection("users")
-      .doc(userId)
+      .doc(firebase.auth().currentUser.uid)
       .collection("money");
 
     // getting expenses amount by selectin' specific value in collection (in this case collection == expenses)
@@ -170,23 +168,30 @@ export default {
       );
 
     // getting group data from user DB
-    // minus
-    //   .then((snapshop) =>
-    //     snapshop.docs.forEach((item) => {
-    //       this.groups.push({
-    //         id: item.id,
-    //         name: item.data().group,
-    //         value: item.data().expenses,
-    //       });
-    //     })
-    //   )
-    //   // filter unique groups from DB data
-    //   .then(() => {
-    //     const uniqueGroups = this.groups.filter(
-    //       (x, i) => this.groups.indexOf(x) === i
-    //     );
-    //     this.groups = uniqueGroups;
-    //   });
+    get
+      .where("collection", "==", "expenses")
+      .get()
+      .then((snapshop) =>
+        snapshop.docs.forEach((item) => {
+          this.groups.push({
+            id: item.id,
+            name: item.data().group,
+            value: item.data().expenses,
+          });
+        })
+      )
+
+      // how to get the value of expenses????
+      .then(() => {
+        // getting array of all names
+        const name = this.groups.map((i) =>
+          i.name == i.name ? "treu" : "false"
+        );
+
+        // filtering unique arrays
+        this.groupName = name.filter((x, i) => name.indexOf(x) === i);
+        console.log(this.groups, this.groupName);
+      });
 
     // getting group values
   },
