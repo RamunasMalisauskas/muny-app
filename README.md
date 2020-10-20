@@ -13,7 +13,10 @@
 
 🧿 Starter pack 🧿
 
-  🪁 Demo version login:
+  🪁 Demo version here -> 
+  <add url>
+  
+  Demo version login:
   
     email: test@test.com
     password: test123
