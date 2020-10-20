@@ -13,8 +13,9 @@
 
 🧿 Starter pack 🧿
 
-  🪁 Demo version here -> 
-  <add url>
+  🪁 Demo version 
+  here -> 
+  http://localhost:8080/expenses
   
   Demo version login:
   
