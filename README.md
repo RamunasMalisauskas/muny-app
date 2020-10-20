@@ -14,6 +14,7 @@
 🧿 Starter pack 🧿
 
   🪁 Demo version login:
+  
     email: test@test.com
     password: test123
   
@@ -21,13 +22,16 @@
   💾 Installation on your device:
   
   - Clone the reposiory 
-    -> git clone https://github.com/RamunasMalisauskas/muny-app.git
+   
+         -> git clone https://github.com/RamunasMalisauskas/muny-app.git
     
   - Install NPM packages 
-    -> npm i
+    
+         -> npm i
     
   - Create new Firebase web project and and copy the SDK config into project
-    -> src/services/firebase-prod.js
+    
+         -> src/services/firebase-prod.js
     
   - In your new Firebase project enable authentification by email and password and google
   
