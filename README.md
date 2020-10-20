@@ -1,19 +1,19 @@
 ⚜️ Muny-app ⚜️
 
-  / Muny-app is created for you to track your expenses and income  
+  / Muny-app is created for you to track your expenses and income;
 
   ⚙️ Built With:
-  / Used VUE.js framework
-  / Firebase Auth for user DB validation and managment
-  / Firebase Firestore for the general database
-  / Bulma.css for the project grid and components
+  / Used VUE.js framework;
+  / Firebase Auth for user DB validation and managment;
+  / Firebase Firestore for the general database;
+  / Bulma.css for the project grid and components;
   
 
 🧿 Starter pack 🧿
 
   🪁 Demo version login:
-  / email: test@test.com 
-  / password: test123
+  / email: test@test.com ;
+  / password: test123 ;
 
   💾 Installation on your device:
   / Clone the reposiory 
