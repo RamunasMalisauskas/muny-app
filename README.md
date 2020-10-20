@@ -14,8 +14,8 @@
 🧿 Starter pack 🧿
 
   🪁 Demo version login:
-    -> email: test@test.com
-    -> password: test123
+    email: test@test.com
+    password: test123
   
 
   💾 Installation on your device:
@@ -37,16 +37,16 @@
 
 ⚡️ Usage ⚡️
 
-  - Register your income
-   -> you can choose type of income (card/cash) and add short description for later
+  Register your income
+   - you can choose type of income (card/cash) and add short description for later
     
-  - Add your expenses 
-   -> inputs are same as the income plus you select group of spending for in depth tracking
+  Add your expenses 
+   - inputs are same as the income plus you select group of spending for in depth tracking
    
-  - Track your transfers in Log page
-   -> you can select transfer period
-   -> you can edit/delete every entry
+  Track your transfers in Log page
+   - you can select transfer period
+   - you can edit/delete every entry
     
-  - Get summary
-   -> you can get your overall balance
-   -> currently working on expenses group precental visualisations
+  Get summary
+   - you can get your overall balance
+   - currently working on expenses group precental visualisations
