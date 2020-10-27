@@ -82,7 +82,8 @@
               </div>
 
               <div>
-                {{ this.groupSix + "% on other" }}
+                <!-- validating last group by pushing it under 1% -->
+                {{ this.groupSix >= 0.99 ? this.groupSix + "% on other" : "" }}
               </div>
             </div>
           </div>
