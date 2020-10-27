@@ -7,19 +7,6 @@
         <div class="column is-6-desktop">
           <form name="login" v-on:submit.prevent="login">
             <div class="field">
-              <div class="control">
-                <label class="label">Your Household Name</label>
-                <div class="select">
-                  <select>
-                    <option v-for="home in homes" :key="home.name">{{
-                      home.name
-                    }}</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-
-            <div class="field">
               <label class="label">Your Email</label>
               <input
                 class="input is-6-desktop"
@@ -74,7 +61,6 @@ export default {
 
   data() {
     return {
-      homes: [],
       email: "",
       password: "",
       error: false,
@@ -99,21 +85,6 @@ export default {
           this.errorMessage = "oops...  " + error.message;
         });
     },
-  },
-
-  // looks for all the available houses in DB, pushes it to array and it's used as select option input
-  beforeMount() {
-    firebase
-      .firestore()
-      .collection("users")
-      .get()
-      .then((snapshop) =>
-        snapshop.docs.forEach((doc) => {
-          this.homes.push({
-            name: doc.data().home,
-          });
-        })
-      );
   },
 };
 </script>
