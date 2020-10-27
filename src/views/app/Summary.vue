@@ -40,7 +40,9 @@
 
             <div class="card" v-show="toggle">
               <div class="total">expenses</div>
-              <div>{{ groupOne[0] }} on {{ groupOne[1].name }}</div>
+              <div>
+                {{ groupOne[0] }} on {{ groupOne.map((x) => x.name)[1] }}
+              </div>
             </div>
           </div>
         </div>
