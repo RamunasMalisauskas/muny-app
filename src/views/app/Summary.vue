@@ -195,13 +195,14 @@ export default {
       );
 
       //  adding all expenses from groups and substracting it from 100%
-      this.groupSix =
+      this.groupSix = (
         100 -
         (Number(this.groupOne[0].slice(0, -1)) +
           Number(this.groupTwo[0].slice(0, -1)) +
           Number(this.groupThree[0].slice(0, -1)) +
           Number(this.groupFour[0].slice(0, -1)) +
-          Number(this.groupFive[0].slice(0, -1)));
+          Number(this.groupFive[0].slice(0, -1)))
+      ).toFixed(2);
 
       this.loading = false;
       this.toggle = !this.toggle;
@@ -243,42 +244,33 @@ export default {
           this.groups = uniqueGroups;
 
           // getting data by group (from group array) and pushing it as object into designated group array
-          // adding validation by group name
-          if (this.groups[0])
-            if (item.data().group == this.groups[0]) {
-              this.groupOne.push({
-                name: this.groups[0],
-                minus: item.data().expenses,
-              });
-            } else if (this.groups[1]) {
-              if (item.data().group == this.groups[1]) {
-                this.groupTwo.push({
-                  name: this.groups[1],
-                  minus: item.data().expenses,
-                });
-              }
-            } else if (this.group[2]) {
-              if (item.data().group == this.groups[2]) {
-                this.groupThree.push({
-                  name: this.groups[2],
-                  minus: item.data().expenses,
-                });
-              }
-            } else if (this.groups[3]) {
-              if (item.data().group == this.groups[3]) {
-                this.groupFour.push({
-                  name: this.groups[3],
-                  minus: item.data().expenses,
-                });
-              }
-            } else if (this.groups[4]) {
-              if (item.data().group == this.groups[4]) {
-                this.groupFive.push({
-                  name: this.groups[4],
-                  minus: item.data().expenses,
-                });
-              }
-            }
+
+          if (item.data().group == this.groups[0]) {
+            this.groupOne.push({
+              name: this.groups[0],
+              minus: item.data().expenses,
+            });
+          } else if (item.data().group == this.groups[1]) {
+            this.groupTwo.push({
+              name: this.groups[1],
+              minus: item.data().expenses,
+            });
+          } else if (item.data().group == this.groups[2]) {
+            this.groupThree.push({
+              name: this.groups[2],
+              minus: item.data().expenses,
+            });
+          } else if (item.data().group == this.groups[3]) {
+            this.groupFour.push({
+              name: this.groups[3],
+              minus: item.data().expenses,
+            });
+          } else if (item.data().group == this.groups[4]) {
+            this.groupFive.push({
+              name: this.groups[4],
+              minus: item.data().expenses,
+            });
+          }
         })
       );
 
