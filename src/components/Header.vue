@@ -138,6 +138,7 @@ export default {
 
 img {
   min-height: 90px;
+  min-width: 175px;
 }
 
 /* burger styles */

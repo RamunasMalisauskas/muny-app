@@ -40,13 +40,7 @@
 
             <div class="card" v-show="toggle">
               <div class="total">expenses</div>
-
-              <div v-for="group in groups" :key="group.id">
-                <div>
-                  {{ group.name }}
-                </div>
-                <div>{{ group.value }}</div>
-              </div>
+              <div>{{ groupOne[0] }} on {{ groupOne[1].name }}</div>
             </div>
           </div>
         </div>
@@ -68,7 +62,13 @@ export default {
   data() {
     return {
       groups: [],
-      groupName: "",
+      expenses: [],
+      groupOne: [],
+      groupTwo: [],
+      groupThree: [],
+      groupFour: [],
+      groupFive: [],
+      groupSix: [],
       plusData: [],
       minusData: [],
       plusTypeCash: [],
@@ -85,7 +85,6 @@ export default {
 
   methods: {
     get() {
-      // console.log(this.groups.map((a) => a.name));
       this.loading = true;
       // function for adding number in array (where they are given as string)
       const add = (x) => x.map(Number).reduce((a, v) => a + v, 0);
@@ -115,6 +114,14 @@ export default {
           : card == 0
           ? 0
           : "+" + card + " €";
+
+      // calculating % of expenses and adding name and pushing to front of arrayS
+      this.groupOne.unshift(
+        (
+          (add(this.groupOne.map((x) => x.minus)) * 100) /
+          add(this.minusData)
+        ).toFixed(2) + "%"
+      );
 
       this.loading = false;
       this.toggle = !this.toggle;
@@ -146,6 +153,57 @@ export default {
           } else {
             this.minusTypeCard.push(item.data().expenses);
           }
+
+          // pushing fetched data to array
+          this.groups.push(item.data().group);
+          //filtering array from duplicates
+          const uniqueGroups = this.groups.filter(
+            (x, i) => this.groups.indexOf(x) === i
+          );
+          this.groups = uniqueGroups;
+
+          // getting data by group (from group array) and pushing it as object into designated group array
+          // adding validation by group name
+          if (this.groups[0])
+            if (item.data().group == this.groups[0]) {
+              this.groupOne.push({
+                name: this.groups[0],
+                minus: item.data().expenses,
+              });
+            } else if (this.groups[1]) {
+              if (item.data().group == this.groups[1]) {
+                this.groupTwo.push({
+                  name: this.groups[1],
+                  minus: item.data().expenses,
+                });
+              }
+            } else if (this.group[2]) {
+              if (item.data().group == this.groups[2]) {
+                this.groupThree.push({
+                  name: this.groups[2],
+                  minus: item.data().expenses,
+                });
+              }
+            } else if (this.groups[3]) {
+              if (item.data().group == this.groups[3]) {
+                this.groupFour.push({
+                  name: this.groups[3],
+                  minus: item.data().expenses,
+                });
+              }
+            } else if (this.groups[4]) {
+              if (item.data().group == this.groups[4]) {
+                this.groupFive.push({
+                  name: this.groups[4],
+                  minus: item.data().expenses,
+                });
+              }
+            } else {
+              this.groupSix.push({
+                name: "other",
+                minus: item.data().expenses,
+              });
+            }
         })
       );
 
@@ -166,34 +224,6 @@ export default {
           }
         })
       );
-
-    // getting group data from user DB
-    get
-      .where("collection", "==", "expenses")
-      .get()
-      .then((snapshop) =>
-        snapshop.docs.forEach((item) => {
-          this.groups.push({
-            id: item.id,
-            name: item.data().group,
-            value: item.data().expenses,
-          });
-        })
-      )
-
-      // how to get the value of expenses????
-      .then(() => {
-        // getting array of all names
-        const name = this.groups.map((i) =>
-          i.name == i.name ? "treu" : "false"
-        );
-
-        // filtering unique arrays
-        this.groupName = name.filter((x, i) => name.indexOf(x) === i);
-        console.log(this.groups, this.groupName);
-      });
-
-    // getting group values
   },
 };
 </script>
