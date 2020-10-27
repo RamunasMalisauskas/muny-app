@@ -41,7 +41,48 @@
             <div class="card" v-show="toggle">
               <div class="total">expenses</div>
               <div>
-                {{ groupOne[0] }} on {{ groupOne.map((x) => x.name)[1] }}
+                <!-- getting upshifted calculated % and getting name of the group by maping and returning second value (first is %) -->
+                {{
+                  groupOne[0] !== "0.00%"
+                    ? groupOne[0] + " on " + groupOne.map((x) => x.name)[1]
+                    : ""
+                }}
+              </div>
+
+              <div>
+                {{
+                  groupTwo[0] !== "0.00%"
+                    ? groupTwo[0] + " on " + groupTwo.map((x) => x.name)[1]
+                    : ""
+                }}
+              </div>
+
+              <div>
+                {{
+                  groupThree[0] !== "0.00%"
+                    ? groupThree[0] + " on " + groupThree.map((x) => x.name)[1]
+                    : ""
+                }}
+              </div>
+
+              <div>
+                {{
+                  groupFour[0] !== "0.00%"
+                    ? groupFour[0] + " on " + groupFour.map((x) => x.name)[1]
+                    : ""
+                }}
+              </div>
+
+              <div>
+                {{
+                  groupFive[0] !== "0.00%"
+                    ? groupFive[0] + " on " + groupFive.map((x) => x.name)[1]
+                    : ""
+                }}
+              </div>
+
+              <div>
+                {{ this.groupSix + "% on other" }}
               </div>
             </div>
           </div>
@@ -70,7 +111,7 @@ export default {
       groupThree: [],
       groupFour: [],
       groupFive: [],
-      groupSix: [],
+      groupSix: "",
       plusData: [],
       minusData: [],
       plusTypeCash: [],
@@ -124,6 +165,43 @@ export default {
           add(this.minusData)
         ).toFixed(2) + "%"
       );
+
+      this.groupTwo.unshift(
+        (
+          (add(this.groupTwo.map((x) => x.minus)) * 100) /
+          add(this.minusData)
+        ).toFixed(2) + "%"
+      );
+
+      this.groupThree.unshift(
+        (
+          (add(this.groupThree.map((x) => x.minus)) * 100) /
+          add(this.minusData)
+        ).toFixed(2) + "%"
+      );
+
+      this.groupFour.unshift(
+        (
+          (add(this.groupFour.map((x) => x.minus)) * 100) /
+          add(this.minusData)
+        ).toFixed(2) + "%"
+      );
+
+      this.groupFive.unshift(
+        (
+          (add(this.groupFive.map((x) => x.minus)) * 100) /
+          add(this.minusData)
+        ).toFixed(2) + "%"
+      );
+
+      //  adding all expenses from groups and substracting it from 100%
+      this.groupSix =
+        100 -
+        (Number(this.groupOne[0].slice(0, -1)) +
+          Number(this.groupTwo[0].slice(0, -1)) +
+          Number(this.groupThree[0].slice(0, -1)) +
+          Number(this.groupFour[0].slice(0, -1)) +
+          Number(this.groupFive[0].slice(0, -1)));
 
       this.loading = false;
       this.toggle = !this.toggle;
@@ -200,11 +278,6 @@ export default {
                   minus: item.data().expenses,
                 });
               }
-            } else {
-              this.groupSix.push({
-                name: "other",
-                minus: item.data().expenses,
-              });
             }
         })
       );
