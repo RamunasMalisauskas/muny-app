@@ -18,7 +18,7 @@
 
             <div class="card" v-show="toggle">
               <div class="top">
-                <div class="total">balance</div>
+                <div class="total">Balance:</div>
 
                 <div class="total title is-6-desktop">{{ this.plusMinus }}</div>
               </div>
@@ -39,51 +39,56 @@
             </div>
 
             <div class="card" v-show="toggle">
-              <div class="total">expenses</div>
-              <div>
-                <!-- getting upshifted calculated % and getting name of the group by maping and returning second value (first is %) -->
-                {{
-                  groupOne[0] !== "0.00%"
-                    ? groupOne[0] + " on " + groupOne.map((x) => x.name)[1]
-                    : ""
-                }}
+              <div class="total">Expenses:</div>
+
+              <!-- getting upshifted calculated % and getting name of the group by maping and returning second value (first is %) -->
+              <div class="column">
+                <div>{{ "on " + groupOne.map((x) => x.name)[1] + ":" }}</div>
+
+                <div class="expence">
+                  {{ groupOne[0] !== "0.00%" ? groupOne[0] : "" }}
+                </div>
               </div>
 
-              <div>
-                {{
-                  groupTwo[0] !== "0.00%"
-                    ? groupTwo[0] + " on " + groupTwo.map((x) => x.name)[1]
-                    : ""
-                }}
+              <div class="column">
+                <div>{{ "on " + groupTwo.map((x) => x.name)[1] + ":" }}</div>
+
+                <div class="expence">
+                  {{ groupTwo[0] !== "0.00%" ? groupTwo[0] : "" }}
+                </div>
               </div>
 
-              <div>
-                {{
-                  groupThree[0] !== "0.00%"
-                    ? groupThree[0] + " on " + groupThree.map((x) => x.name)[1]
-                    : ""
-                }}
+              <div class="column">
+                <div>{{ "on " + groupThree.map((x) => x.name)[1] + ":" }}</div>
+
+                <div class="expence">
+                  {{ groupThree[0] !== "0.00%" ? groupThree[0] : "" }}
+                </div>
               </div>
 
-              <div>
-                {{
-                  groupFour[0] !== "0.00%"
-                    ? groupFour[0] + " on " + groupFour.map((x) => x.name)[1]
-                    : ""
-                }}
+              <div class="column">
+                <div>{{ "on " + groupFour.map((x) => x.name)[1] + ":" }}</div>
+
+                <div class="expence">
+                  {{ groupFour[0] !== "0.00%" ? groupFour[0] : "" }}
+                </div>
               </div>
 
-              <div>
-                {{
-                  groupFive[0] !== "0.00%"
-                    ? groupFive[0] + " on " + groupFive.map((x) => x.name)[1]
-                    : ""
-                }}
+              <div class="column">
+                <div>{{ "on " + groupFive.map((x) => x.name)[1] + ":" }}</div>
+
+                <div class="expence">
+                  {{ groupFive[0] !== "0.00%" ? groupFive[0] : "" }}
+                </div>
               </div>
 
-              <div>
-                <!-- validating last group by pushing it under 1% -->
-                {{ this.groupSix >= 0.99 ? this.groupSix + "% on other" : "" }}
+              <div class="column">
+                <div>on other:</div>
+
+                <div class="expence">
+                  <!-- validating last group by pushing it under 1% -->
+                  {{ this.groupSix >= 0.99 ? this.groupSix + "%" : "" }}
+                </div>
               </div>
             </div>
           </div>
@@ -314,6 +319,8 @@ export default {
 .column {
   margin: 0;
   padding: 0;
+  color: #eb6e56;
+  margin-bottom: 1em;
 }
 
 .columns {
@@ -326,9 +333,11 @@ export default {
   padding: 0.75em;
   margin-bottom: 0.75em;
 }
+
 .top {
   padding-bottom: 1em;
 }
+
 .total {
   color: #ed185b;
   padding-bottom: 0.25em;
@@ -336,6 +345,11 @@ export default {
 
 .bottom {
   color: #eb6e56;
+}
+
+.expence {
+  color: #ed185b;
+  font-size: 1.25em;
 }
 
 /* button style */
