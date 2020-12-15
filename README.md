@@ -57,4 +57,4 @@
     
   Get summary
    - you can get your overall balance
-   - currently working on expenses group precental visualisations
+   - and expenses group precental visualisations
