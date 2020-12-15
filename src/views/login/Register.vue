@@ -98,34 +98,37 @@ export default {
   },
 
   methods: {
-    // test() {
-    //   this.password === this.passwordCheck
-    //     ? console.log("ok")
-    //     : console.log("not");
-    // },
-
     // creating user in with auth and creating another DB for user || so that couple users can be added to the same home
     register() {
       this.loading = true;
-      firebase
-        .auth()
-        .createUserWithEmailAndPassword(this.email, this.password)
-        .then(() => {
-          firebase
-            .firestore()
-            .collection("users")
-            .doc(firebase.auth().currentUser.uid)
-            .set({ home: this.home, email: this.email });
-        })
-        .then(() => {
-          this.router.push("/expenses");
-        })
-        .catch((error) => {
-          this.loading = false;
-          this.error = true;
-          this.errorMessage =
-            "there has been a problem with registry try again" + error.message;
-        });
+
+      // validating repeated password
+      if (this.password !== this.passwordCheck) {
+        this.error = true;
+        this.errorMessage = "repeat password correctly";
+        this.loading = false;
+      } else {
+        firebase
+          .auth()
+          .createUserWithEmailAndPassword(this.email, this.password)
+          .then(() => {
+            firebase
+              .firestore()
+              .collection("users")
+              .doc(firebase.auth().currentUser.uid)
+              .set({ home: this.home, email: this.email });
+          })
+          .then(() => {
+            this.router.push("/expenses");
+          })
+          .catch((error) => {
+            this.loading = false;
+            this.error = true;
+            this.errorMessage =
+              "there has been a problem with registry try again " +
+              error.message;
+          });
+      }
     },
   },
 };
