@@ -35,7 +35,7 @@
     
   - Create new Firebase web project and and copy the SDK config into project
     
-         -> src/services/firebase-prod.js
+         -> src/services/firebase_prod.js
     
   - In your new Firebase project enable authentification by email and password and google
   
