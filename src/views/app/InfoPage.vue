@@ -144,6 +144,7 @@ button {
   background: #fff;
   padding: 1.5em;
   border-radius: 0.8em;
+  line-height: 0;
 }
 
 .edit {

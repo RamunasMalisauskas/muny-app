@@ -174,6 +174,7 @@ a:hover {
 .haze {
   color: #ed185b;
   background: #fff;
+  line-height: 0;
 }
 
 .haze:hover {

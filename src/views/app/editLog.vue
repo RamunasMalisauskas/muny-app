@@ -317,6 +317,7 @@ button {
   background: #ed185b;
   padding: 1.5em;
   border-radius: 0.8em;
+  line-height: 0;
 }
 
 .remove {
