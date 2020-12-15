@@ -359,6 +359,7 @@ button {
   padding: 1.5em;
   border-radius: 0.8em;
   margin-bottom: 1em;
+  line-height: 0;
 }
 
 button:hover {
