@@ -113,6 +113,9 @@ button {
   background: #ed185b;
   padding: 1.5em;
   border-radius: 0.8em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 button:hover {
