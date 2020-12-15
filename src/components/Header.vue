@@ -3,10 +3,10 @@
     <nav class="navbar" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
         <a href="/expenses">
-          <img class="full" src="../assets/muny-logo.svg" alt="logo" />
+          <img class="full" src="../assets/muny-logo.png" alt="logo" />
           <img
             class="mobile"
-            src="../assets/muny-logo-mobile.svg"
+            src="../assets/muny-logo-mobile.png"
             alt="mobile-logo"
           />
         </a>
@@ -140,8 +140,8 @@ export default {
 }
 
 img {
-  min-height: 90px;
-  min-width: 175px;
+  max-height: 90px;
+  max-width: 175px;
 }
 
 /* burger styles */
