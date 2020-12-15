@@ -1,10 +1,10 @@
+# general
 .DS_Store
 node_modules
 /dist
-src/servises/
 
 # firebase connection data
-firebase_dev.js
+src/servises/firebase_dev.js
 
 
 # local env files
