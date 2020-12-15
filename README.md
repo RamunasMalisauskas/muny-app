@@ -15,7 +15,7 @@
 
   🪁 Demo version 
   
-  here ->  http://localhost:8080/expenses
+  here -> https://muny-app.web.app/
   
   Demo version login:
   
