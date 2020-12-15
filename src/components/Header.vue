@@ -41,8 +41,12 @@
           </span>
 
           <span v-else>
-            <router-link to="/register">Register</router-link>
-            <router-link class="haze" to="/login">Login</router-link>
+            <a @click="mobileNavToggle()">
+              <router-link to="/register">Register</router-link>
+            </a>
+            <a @click="mobileNavToggle()">
+              <router-link class="haze" to="/login">Login</router-link>
+            </a>
           </span>
         </div>
       </div>
